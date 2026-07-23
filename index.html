@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>7/14 新版本发布 · 日活影响分析</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --line: #2a3140;
+      --text: #e8eaed;
+      --muted: #9aa3b2;
+      --accent: #3b82f6;
+      --good: #22c55e;
+      --warn: #f59e0b;
+      --info: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 48px; }
+    h1 { font-size: 28px; margin: 0 0 8px; font-weight: 650; letter-spacing: -0.02em; }
+    h2 { font-size: 18px; margin: 0 0 12px; font-weight: 600; }
+    .sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,.15);
+      color: #93c5fd;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .callout {
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(34,197,94,.28);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+    }
+    .callout strong { color: var(--good); display: block; margin-bottom: 4px; }
+    .callout p { margin: 0; color: #d1d5db; font-size: 14px; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .stat .v { font-size: 24px; font-weight: 650; color: var(--good); }
+    .stat .v.info { color: var(--info); }
+    .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .hint { color: var(--muted); font-size: 12px; margin: 0 0 20px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px 12px;
+      margin-bottom: 16px;
+    }
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 8px;
+      gap: 12px;
+    }
+    .card-head h2 { margin: 0; }
+    .card-head span { font-size: 12px; color: var(--muted); }
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    canvas { width: 100% !important; max-height: 300px; cursor: pointer; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th, td {
+      text-align: left;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; }
+    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr:hover td { background: rgba(255,255,255,.02); }
+    tr.clickable { cursor: pointer; }
+    tr.clickable.active td { background: rgba(59,130,246,.12); }
+    .dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      margin-right: 8px;
+      background: #64748b;
+    }
+    .dot.info { background: var(--info); }
+    .dot.ok { background: var(--good); }
+    .dot.warn { background: var(--warn); }
+    .note-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .note-card h3 { margin: 0 0 8px; font-size: 14px; }
+    .note-card li { color: #cbd5e1; font-size: 13px; margin: 0 0 6px; }
+    .foot { margin-top: 20px; color: #6b7280; font-size: 12px; }
+    .detail {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255,255,255,.02);
+    }
+    .detail h3 { margin: 0 0 10px; font-size: 14px; }
+    @media (max-width: 960px) {
+      .stats, .grid2, .grid3, .grid4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .stats, .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
+      h1 { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>7/14 新版本发布 · 日活影响分析<span class="pill">日活 DAU</span></h1>
+    <p class="sub">数据源：工作簿1.xlsx · 走势图 2026-06-01 至 2026-07-22 · 发布日 2026-07-14 · 点击曲线或表格行查看单日明细</p>
+
+    <div class="callout">
+      <strong>核心结论</strong>
+      <p>发布后 9 个有效观测日（7/14–7/22，含补齐的 7/17）日活均值 35,430，相对发布前 7 天 +5.2%，相对发布前 14 天 +5.9%；周同比（7/14–7/20）约 +6.8%，同比约 +18.8%，上月同期约 +4.2%。7/17 达窗口峰值 39,845，其后 7/21–7/22 回落。</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="v">35,430</div><div class="l">发布后日均 DAU</div></div>
+      <div class="stat"><div class="v">+5.2%</div><div class="l">vs 发布前 7 天</div></div>
+      <div class="stat"><div class="v">+6.8%</div><div class="l">vs 上周同日 (WoW)</div></div>
+      <div class="stat"><div class="v info">+18.8%</div><div class="l">vs 去年同日 (YoY)</div></div>
+      <div class="stat"><div class="v info">+4.2%</div><div class="l">vs 上月同期</div></div>
+    </div>
+    <p class="hint">WoW 均值取 7/14–7/20；不含 7/21–7/22。上月同期 = 发布后各日对 6/14–6/22 窗口日均对比。YoY 为 9 个可比日平均。</p>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>日活走势（6/1–7/22）</h2>
+        <span>点击数据点 · 图例可开关系列 · 参考线=发布前7日均</span>
+      </div>
+      <canvas id="dailyChart" height="120"></canvas>
+      <div class="detail" id="dayDetail">
+        <h3 id="detailTitle">7/14 明细</h3>
+        <div class="grid4" id="detailStats"></div>
+        <p class="hint" id="detailNote" style="margin:10px 0 0"></p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h2>周均日活（5 月–7 月）</h2><span>人/周 · 可点击</span></div>
+        <canvas id="weekChart" height="160"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>发布后逐日周同比</h2><span>% · 可点击</span></div>
+        <canvas id="wowChart" height="160"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>发布后逐日明细（含上月同期）</h2></div>
+      <table>
+        <thead>
+          <tr>
+            <th>日期</th><th class="num">日活</th><th class="num">周同比</th>
+            <th class="num">年同比</th><th class="num">上月同期</th><th>备注</th>
+          </tr>
+        </thead>
+        <tbody id="postTable"></tbody>
+      </table>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h2>窗口对比</h2></div>
+        <table>
+          <thead><tr><th>窗口</th><th class="num">日均</th><th class="num">相对发布后</th></tr></thead>
+          <tbody>
+            <tr><td>发布后 7/14–7/22</td><td class="num">35,430</td><td class="num">基准</td></tr>
+            <tr><td>发布前 7 天</td><td class="num">33,695</td><td class="num">+5.2%</td></tr>
+            <tr><td>发布前 14 天</td><td class="num">33,461</td><td class="num">+5.9%</td></tr>
+            <tr><td>上月同期 6/14–6/22</td><td class="num">33,986</td><td class="num">+4.2%</td></tr>
+            <tr><td>2026 年 6 月</td><td class="num">32,777</td><td class="num">+8.1%</td></tr>
+            <tr><td>去年同期同日均</td><td class="num">29,889</td><td class="num">+18.5%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-head"><h2>2026 年月均趋势</h2><span>7月*仅 1–22 日</span></div>
+        <canvas id="monthChart" height="160"></canvas>
+      </div>
+    </div>
+
+    <h2 style="margin-top:8px">解读与注意</h2>
+    <div class="grid3">
+      <div class="note-card">
+        <h3>正面信号</h3>
+        <ul>
+          <li>发布后日均高于前窗约 5–6%</li>
+          <li>7/14–7/20 周同比均值约 +6.8%</li>
+          <li>同比约 +18.8%；上月同期约 +4.2%</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>需观察</h3>
+        <ul>
+          <li>7/17 冲高至 39,845 后，7/21–7/22 回落</li>
+          <li>7/16 上月同期为负，因 6/16 异常高峰抬高基数</li>
+          <li>难剥离运营/季节等因素</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>建议下一步</h3>
+        <ul>
+          <li>补齐发布后 14/28 日数据</li>
+          <li>叠版本渗透率与留存归因</li>
+          <li>核对 7/17 冲高是否含活动/异常流量</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="foot">方法说明：环比用等长日历窗；WoW/YoY/上月同期分别为同星期、同日历日、上月同日历日。7/21–7/22 WoW 未计入 +6.8% 均值。</p>
+  </div>
+
+  <script>
+    const RELEASE_IDX = 43;
+    const PRE7_MEAN = 33695;
+    const dailyLabels = ["6/1","6/2","6/3","6/4","6/5","6/6","6/7","6/8","6/9","6/10","6/11","6/12","6/13","6/14","6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2","7/3","7/4","7/5","7/6","7/7","7/8","7/9","7/10","7/11","7/12","7/13","7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"];
+    const dailyDau = [32282,30878,30835,31642,32376,33394,36599,34360,31012,31310,30343,31638,32837,30953,34306,39996,34028,34885,35171,32010,31516,33006,31852,31380,31599,32122,31360,30998,34671,33956,31735,31623,35309,33333,32496,34138,35298,32521,32655,35578,33784,32762,33265,35543,35637,35128,39845,35491,33453,36677,33575,33518];
+    const dailyMom = [32564,31113,32563,31009,30852,31645,31339,36106,33076,30542,33220,30890,29921,30223,32349,30418,30804,31643,30361,31845,31100,33384,30830,30570,31644,30307,35674,32056,32744,31326,32282,30878,30835,31642,32376,33394,36599,34360,31012,31310,30343,31638,32837,30953,34306,39996,34028,34885,35171,32010,31516,33006];
+
+    const postDetails = [
+      { label:"7/14", weekday:"周二", dau:35543, mom:30953, wow:"+0.7%", yoy:"+22.8%", momPct:"+14.8%", note:"发布日", tone:"info" },
+      { label:"7/15", weekday:"周三", dau:35637, mom:34306, wow:"+9.6%", yoy:"+15.5%", momPct:"+3.9%", note:"", tone:"" },
+      { label:"7/16", weekday:"周四", dau:35128, mom:39996, wow:"+7.6%", yoy:"+22.6%", momPct:"-12.2%", note:"上月基数含异常高峰", tone:"" },
+      { label:"7/17", weekday:"周五", dau:39845, mom:34028, wow:"+12.0%", yoy:"+40.6%", momPct:"+17.1%", note:"窗口峰值", tone:"ok" },
+      { label:"7/18", weekday:"周六", dau:35491, mom:34885, wow:"+5.1%", yoy:"+16.8%", momPct:"+1.7%", note:"", tone:"" },
+      { label:"7/19", weekday:"周日", dau:33453, mom:35171, wow:"+2.1%", yoy:"+14.5%", momPct:"-4.9%", note:"窗口低点", tone:"warn" },
+      { label:"7/20", weekday:"周一", dau:36677, mom:32010, wow:"+10.3%", yoy:"+12.4%", momPct:"+14.6%", note:"", tone:"" },
+      { label:"7/21", weekday:"周二", dau:33575, mom:31516, wow:"-5.5%", yoy:"+9.9%", momPct:"+6.5%", note:"回落", tone:"warn" },
+      { label:"7/22", weekday:"周三", dau:33518, mom:33006, wow:"-5.9%", yoy:"+14.0%", momPct:"+1.6%", note:"回落", tone:"warn" },
+    ];
+
+    const fmt = (n) => n.toLocaleString("en-US");
+    const tick = { color: "#94a3b8", font: { size: 10 } };
+    Chart.defaults.color = "#94a3b8";
+    Chart.defaults.borderColor = "rgba(148,163,184,.12)";
+    Chart.defaults.font.family = '"PingFang SC","Helvetica Neue",Arial,sans-serif';
+
+    function renderDetail(idx) {
+      const label = dailyLabels[idx];
+      const dau = dailyDau[idx];
+      const mom = dailyMom[idx];
+      const momPct = ((dau - mom) / mom) * 100;
+      const post = postDetails.find((d) => d.label === label);
+      document.getElementById("detailTitle").textContent = `${label} 明细`;
+      document.getElementById("detailStats").innerHTML = `
+        <div class="stat"><div class="v">${fmt(dau)}</div><div class="l">当日日活</div></div>
+        <div class="stat"><div class="v info">${fmt(mom)}</div><div class="l">上月同日</div></div>
+        <div class="stat"><div class="v ${momPct >= 0 ? "" : ""}" style="color:${momPct >= 0 ? "var(--good)" : "var(--warn)"}">${momPct >= 0 ? "+" : ""}${momPct.toFixed(1)}%</div><div class="l">上月同期</div></div>
+        <div class="stat"><div class="v info">${idx >= RELEASE_IDX ? "发布后" : "发布前"}</div><div class="l">阶段</div></div>
+      `;
+      document.getElementById("detailNote").textContent = post
+        ? `周同比 ${post.wow} · 年同比 ${post.yoy}${post.note ? " · " + post.note : ""}`
+        : (label === "6/16" ? "异常高峰 39,996（与本次发布无关）" : "点击曲线任意日期查看明细；虚线为发布前 7 日均值。");
+
+      document.querySelectorAll("#postTable tr").forEach((tr) => {
+        tr.classList.toggle("active", tr.dataset.label === label);
+      });
+    }
+
+    const dailyChart = new Chart(document.getElementById("dailyChart"), {
+      type: "line",
+      data: {
+        labels: dailyLabels,
+        datasets: [
+          {
+            label: "本期日活",
+            data: dailyDau,
+            borderColor: "#3b82f6",
+            backgroundColor: "rgba(59,130,246,.15)",
+            fill: true,
+            tension: 0.25,
+            pointRadius: 3,
+            pointHoverRadius: 6,
+            borderWidth: 2,
+          },
+          {
+            label: "上月同期",
+            data: dailyMom,
+            borderColor: "#94a3b8",
+            backgroundColor: "transparent",
+            fill: false,
+            tension: 0.25,
+            pointRadius: 2,
+            pointHoverRadius: 5,
+            borderWidth: 1.5,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: "index", intersect: false },
+        onClick: (_evt, elements) => {
+          if (elements.length) renderDetail(elements[0].index);
+        },
+        plugins: {
+          legend: { display: true, labels: { boxWidth: 12, color: "#94a3b8" } },
+          tooltip: {
+            callbacks: {
+              footer: () => "点击查看明细",
+            },
+          },
+        },
+        scales: {
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 16 }, grid: { display: false } },
+          y: { min: 29000, max: 41000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+        },
+      },
+      plugins: [{
+        id: "refLine",
+        afterDraw(chart) {
+          const y = chart.scales.y.getPixelForValue(PRE7_MEAN);
+          const xRel = chart.scales.x.getPixelForValue(RELEASE_IDX);
+          const { left, right, top, bottom } = chart.chartArea;
+          const ctx = chart.ctx;
+          ctx.save();
+          ctx.strokeStyle = "rgba(148,163,184,.7)";
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.moveTo(left, y);
+          ctx.lineTo(right, y);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(xRel, top);
+          ctx.lineTo(xRel, bottom);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillStyle = "#94a3b8";
+          ctx.font = "11px sans-serif";
+          ctx.fillText("发布前7日均 33,695", right - 120, y - 6);
+          ctx.fillText("7/14 发布", xRel + 4, top + 12);
+          ctx.restore();
+        },
+      }],
+    });
+
+    new Chart(document.getElementById("weekChart"), {
+      type: "bar",
+      data: {
+        labels: ["5/4","5/11","5/18","5/25","6/1","6/8","6/15","6/22","6/29","7/6","7/13","7/20"],
+        datasets: [{
+          label: "周均 DAU",
+          data: [32081,31118,31390,32281,32572,31779,34559,31760,33303,33819,35480,34590],
+          backgroundColor: "rgba(56,189,248,.65)",
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        onClick: (_e, els) => {
+          if (!els.length) return;
+          const labels = ["5/4","5/11","5/18","5/25","6/1","6/8","6/15","6/22","6/29","7/6","7/13","7/20"];
+          const vals = [32081,31118,31390,32281,32572,31779,34559,31760,33303,33819,35480,34590];
+          const i = els[0].index;
+          alert(`${labels[i]} 周均日活：${vals[i].toLocaleString()}`);
+        },
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { min: 30000, max: 36000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("wowChart"), {
+      type: "bar",
+      data: {
+        labels: ["7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"],
+        datasets: [{
+          label: "WoW %",
+          data: [0.7, 9.6, 7.6, 12.0, 5.1, 2.1, 10.3, -5.5, -5.9],
+          backgroundColor: (ctx) => (ctx.raw >= 0 ? "rgba(34,197,94,.7)" : "rgba(245,158,11,.75)"),
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        onClick: (_e, els) => {
+          if (!els.length) return;
+          const i = els[0].index;
+          const label = ["7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"][i];
+          const idx = dailyLabels.indexOf(label);
+          if (idx >= 0) renderDetail(idx);
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: (c) => `${c.parsed.y}%` } },
+        },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { ticks: { ...tick, callback: (v) => v + "%" }, grid: { color: "rgba(148,163,184,.12)" } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("monthChart"), {
+      type: "bar",
+      data: {
+        labels: ["1月","2月","3月","4月","5月","6月","7月*"],
+        datasets: [{
+          label: "月均 DAU",
+          data: [31439,34817,32477,31976,31753,32777,34244],
+          backgroundColor: "rgba(59,130,246,.65)",
+          borderRadius: 4,
+        }],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { min: 30000, max: 36000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+        },
+      },
+    });
+
+    const tbody = document.getElementById("postTable");
+    postDetails.forEach((d) => {
+      const tr = document.createElement("tr");
+      tr.className = "clickable";
+      tr.dataset.label = d.label;
+      const tone = d.tone === "ok" ? "ok" : d.tone === "warn" ? "warn" : d.tone === "info" ? "info" : "";
+      tr.innerHTML = `
+        <td><span class="dot ${tone}"></span>${d.label} ${d.weekday}</td>
+        <td class="num">${fmt(d.dau)}</td>
+        <td class="num">${d.wow}</td>
+        <td class="num">${d.yoy}</td>
+        <td class="num">${d.momPct}</td>
+        <td>${d.note}</td>`;
+      tr.addEventListener("click", () => {
+        const idx = dailyLabels.indexOf(d.label);
+        renderDetail(idx);
+        dailyChart.setActiveElements([{ datasetIndex: 0, index: idx }]);
+        dailyChart.tooltip.setActiveElements([{ datasetIndex: 0, index: idx }], { x: 0, y: 0 });
+        dailyChart.update();
+        document.getElementById("dayDetail").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+      tbody.appendChild(tr);
+    });
+
+    renderDetail(RELEASE_IDX);
+  </script>
+</body>
+</html>
