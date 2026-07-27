@@ -15,6 +15,7 @@
       --accent: #3b82f6;
       --good: #22c55e;
       --warn: #f59e0b;
+      --bad: #ef4444;
       --info: #38bdf8;
     }
     * { box-sizing: border-box; }
@@ -39,11 +40,11 @@
       color: #93c5fd; margin-left: 8px; vertical-align: middle;
     }
     .callout {
-      background: rgba(34,197,94,.08);
-      border: 1px solid rgba(34,197,94,.28);
+      background: rgba(245,158,11,.08);
+      border: 1px solid rgba(245,158,11,.32);
       border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
     }
-    .callout strong { color: var(--good); display: block; margin-bottom: 4px; }
+    .callout strong { color: var(--warn); display: block; margin-bottom: 4px; }
     .callout p { margin: 0; color: #d1d5db; font-size: 14px; }
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
     .stats.c3 { grid-template-columns: repeat(3, 1fr); }
@@ -51,9 +52,10 @@
       background: var(--panel); border: 1px solid var(--line);
       border-radius: 10px; padding: 14px 16px;
     }
-    .stat .v { font-size: 24px; font-weight: 650; color: var(--good); }
+    .stat .v { font-size: 22px; font-weight: 650; color: var(--good); }
     .stat .v.info { color: var(--info); }
     .stat .v.warn { color: var(--warn); }
+    .stat .v.bad { color: var(--bad); }
     .stat .v.plain { color: var(--text); }
     .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
     .hint { color: var(--muted); font-size: 12px; margin: 6px 0 16px; }
@@ -77,7 +79,7 @@
     tr:hover td { background: rgba(255,255,255,.02); }
     .scrollbox { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
     .lift-hi { color: var(--good); font-weight: 600; }
-    .lift-new { color: var(--info); font-weight: 600; }
+    .lift-down { color: var(--warn); font-weight: 600; }
     .note-card {
       background: var(--panel); border: 1px solid var(--line);
       border-radius: 10px; padding: 14px;
@@ -91,62 +93,62 @@
 <body>
   <div class="wrap">
     <h1>小万出行 · 7 月新版本发布数据分析<span class="pill">日活 / 启动 / 功能埋点</span></h1>
-    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活数据至 7/26 · 启动次数剔除 7/27 非整日 · 埋点窗口 6/27–7/26</p>
+    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活数据至 7/26 · 启动次数剔除 7/27 非整日 · 埋点窗口 6/27–7/26 · 功能清单已按评审剔除运营活动及非版本相关埋点</p>
 
     <div class="callout">
       <strong>核心结论</strong>
-      <p>7/14 双端发布后总日活日均 35,488（较发布前 7 天 +5.3%，同比 +17.7%），其中鸿蒙 +8.2% 提升最大、安卓 +3.9%。7/23 iOS 发布后 4 天 iOS 日活 +7.7%，且 iOS 启动次数从日均约 5.1 万跃升至 7.4 万（+45%），人均启动强度显著抬升。功能侧：新增「导航路线页」为两端最大增量入口；Android 有 24 个埋点提升超 10%，iOS 有 55 个（观测窗口仅 4 天，数据尚需巩固）。</p>
+      <p>7/14 安卓与鸿蒙发布带来的日活提升是「脉冲式」的：首周（7/14–7/20）安卓 +7.1%、鸿蒙 +11.1%，但次周快速回落，至 7/25–7/26 两端均已基本回到发布前水平（安卓 +0.7%、鸿蒙 +0.6%），本次发布对安卓/鸿蒙日活<b>无可持续拉动</b>。总日活后段仍偏高，主要由 7/23 iOS 发布带动（iOS 末 2 日 +13.7%），iOS 效果是否可持续需观察满 14 天。启动次数侧：Android 同样脉冲后回落（次周已低于发布前 -4.6%），iOS 发布后跳升 +45%。功能侧经筛选后：Android 版本相关提升集中在导航路线页（4 项）；iOS 有 18 项，集中在导航与直播链路。</p>
     </div>
 
     <h2>一、日活分析</h2>
     <div class="stats">
-      <div class="stat"><div class="v">35,488</div><div class="l">总日活（7/14 后日均）</div></div>
-      <div class="stat"><div class="v">+5.3%</div><div class="l">总日活 vs 发布前 7 天</div></div>
-      <div class="stat"><div class="v info">+17.7%</div><div class="l">总日活 同比去年同期</div></div>
-      <div class="stat"><div class="v">+7.7%</div><div class="l">iOS 日活（7/23 后 vs 前 7 天）</div></div>
+      <div class="stat"><div class="v warn">+6.7% → +3.7%</div><div class="l">总日活 首周 → 次周（vs 发布前 7 天）</div></div>
+      <div class="stat"><div class="v warn">+7.1% → +0.7%</div><div class="l">安卓 首周 → 末 2 日（已回落）</div></div>
+      <div class="stat"><div class="v warn">+11.1% → +0.6%</div><div class="l">鸿蒙 首周 → 末 2 日（已回落）</div></div>
+      <div class="stat"><div class="v">+13.7%</div><div class="l">iOS 末 2 日（7/23 发布带动）</div></div>
     </div>
 
     <div class="card">
       <div class="card-head"><h3>总日活走势（6/15–7/26）</h3><span>人 · 竖虚线=发布节点 · 横虚线=7/14 前 7 日均</span></div>
       <canvas id="dauTotalChart" height="110"></canvas>
-      <p class="hint">7/14 起 Android+鸿蒙新版；7/23 起 iOS 新版。6/16 与 7/17 为异常高峰日。发布后未再回落到发布前 7 日均线以下。</p>
+      <p class="hint">7/14–7/20 冲高后于 7/21–7/22 回落至 3.35 万，7/23 后再度抬升由 iOS 发布贡献。6/16 与 7/17 为异常高峰日。</p>
     </div>
 
     <div class="card">
       <div class="card-head"><h3>各端日活走势（6/15–7/26）</h3><span>人 · 图例可点击开关</span></div>
       <canvas id="dauPlatformChart" height="120"></canvas>
-      <p class="hint">7/23 后 iOS 明显抬升（7/24–7/26 站上 1.6 万+）；鸿蒙自 7/14 后中枢上移；安卓发布日冲高后温和抬升。当前占比约 iOS 45% / 安卓 35% / 鸿蒙 20%。</p>
+      <p class="hint">安卓与鸿蒙在 7/14 后冲高、7/21 起回落，7/25–7/26 基本回到发布前水平；iOS 自 7/23 发布后连续 3 天站上 1.6 万+。当前占比约 iOS 45% / 安卓 35% / 鸿蒙 20%。</p>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>各端窗口对比（vs 各自发布节点）</h3></div>
+        <div class="card-head"><h3>各端分周对比（vs 各自发布前 7 日均）</h3></div>
         <table>
-          <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">发布后日均</th><th class="num">变化</th><th class="num">vs 前14天</th></tr></thead>
+          <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">首周日均</th><th class="num">次周日均</th><th class="num">末2日(7/25-26)</th></tr></thead>
           <tbody>
-            <tr><td>总体（7/14）</td><td class="num">33,695</td><td class="num">35,488</td><td class="num lift-hi">+5.3%</td><td class="num">+6.1%</td></tr>
-            <tr><td>安卓（7/14）</td><td class="num">12,482</td><td class="num">12,970</td><td class="num lift-hi">+3.9%</td><td class="num">+4.1%</td></tr>
-            <tr><td>鸿蒙（7/14）</td><td class="num">6,906</td><td class="num">7,470</td><td class="num lift-hi">+8.2%</td><td class="num">+10.2%</td></tr>
-            <tr><td>iOS（7/23）</td><td class="num">14,697</td><td class="num">15,826</td><td class="num lift-hi">+7.7%</td><td class="num">+8.9%</td></tr>
+            <tr><td>总体</td><td class="num">33,695</td><td class="num lift-hi">35,968 (+6.7%)</td><td class="num">34,928 (+3.7%)</td><td class="num">35,784 (+6.2%)</td></tr>
+            <tr><td>安卓</td><td class="num">12,482</td><td class="num lift-hi">13,371 (+7.1%)</td><td class="num lift-down">12,502 (+0.2%)</td><td class="num lift-down">12,575 (+0.7%)</td></tr>
+            <tr><td>鸿蒙</td><td class="num">6,906</td><td class="num lift-hi">7,670 (+11.1%)</td><td class="num lift-down">7,238 (+4.8%)</td><td class="num lift-down">6,946 (+0.6%)</td></tr>
+            <tr><td>iOS</td><td class="num">14,307</td><td class="num">14,927 (+4.3%)</td><td class="num lift-hi">15,188 (+6.2%)</td><td class="num lift-hi">16,264 (+13.7%)</td></tr>
           </tbody>
         </table>
-        <p class="hint">iOS 发布后窗口仅 7/23–7/26 共 4 天；总体/安卓/鸿蒙为 7/14–7/26 共 13 天。</p>
+        <p class="hint">首周 = 7/14–7/20；次周 = 7/21–7/26。iOS 次周与末 2 日的抬升来自其自身 7/23 发布，与 7/14 版本无关。</p>
       </div>
       <div class="note-card">
         <h3>解读</h3>
         <ul>
-          <li>鸿蒙提升幅度最大（+8.2%），与 7/14 新版本投放和设备渗透同步抬升。</li>
-          <li>iOS 在 7/23 发布前已受整体热度带动，发布后 3 天连续站上 1.6 万，为近期新高区间。</li>
-          <li>安卓提升相对温和（+3.9%），发布日冲高后维持在略高于前期的中枢。</li>
-          <li>7/17 总日活 39,845 为异常冲高日，或与运营活动（节日活动埋点同期暴涨）相关，建议与运营日历核对。</li>
+          <li><b>安卓/鸿蒙：脉冲式提升，无持续性。</b>发布后首周冲高（合计 +8.5%），次周回落到 +1.8%，末 2 日仅 +0.7%，基本回到发布前水平。</li>
+          <li>总日活次周仍高于发布前，容易造成「有增长」的错觉——拆端后可见增量几乎全部来自 iOS 7/23 发布。</li>
+          <li>iOS 发布后 4 天 +7.7%（末 2 日 +13.7%），但参考安卓/鸿蒙的回落节奏，需满 14 天再判断可持续性。</li>
+          <li>7/17 总日活 39,845 为异常冲高日，或与运营活动相关，建议与运营日历核对。</li>
         </ul>
       </div>
     </div>
 
     <h2>二、启动次数分析</h2>
     <div class="stats">
-      <div class="stat"><div class="v plain">45,780</div><div class="l">Android 日均（7/14 后）</div></div>
-      <div class="stat"><div class="v warn">+1.2%</div><div class="l">Android vs 发布前 7 天</div></div>
+      <div class="stat"><div class="v warn">+6.1% → -4.6%</div><div class="l">Android 首周 → 次周（vs 发布前 7 天）</div></div>
+      <div class="stat"><div class="v bad">-9.0%</div><div class="l">Android 同比去年同期</div></div>
       <div class="stat"><div class="v">73,527</div><div class="l">iOS 日均（7/23 后）</div></div>
       <div class="stat"><div class="v">+45.3%</div><div class="l">iOS vs 发布前 7 天</div></div>
     </div>
@@ -155,7 +157,7 @@
       <div class="card">
         <div class="card-head"><h3>Android 启动次数</h3><span>次 · 发布日 7/14</span></div>
         <canvas id="launchAndroidChart" height="150"></canvas>
-        <p class="hint">发布日冲至 51,688（WoW +10%）后逐步回落，7/21 起低于发布前中枢（WoW 转负，-5%～-18%）。整窗仅 +1.2%，且同比 -9%，需关注启动黏性。</p>
+        <p class="hint">与日活同样呈脉冲：发布日冲至 51,688（WoW +10%）后回落，首周 +6.1%，次周 43,173 已低于发布前（-4.6%），同比 -9%。启动黏性问题比日活更明显。</p>
       </div>
       <div class="card">
         <div class="card-head"><h3>iOS 启动次数</h3><span>次 · 发布日 7/23</span></div>
@@ -167,36 +169,33 @@
     <div class="card">
       <div class="card-head"><h3>启动次数窗口对比</h3></div>
       <table>
-        <thead><tr><th>端</th><th>发布节点</th><th class="num">发布前7日均</th><th class="num">发布后日均</th><th class="num">变化</th><th class="num">同比去年同期</th></tr></thead>
+        <thead><tr><th>端</th><th>发布节点</th><th class="num">发布前7日均</th><th class="num">首周日均</th><th class="num">次周日均</th><th class="num">同比去年同期</th></tr></thead>
         <tbody>
-          <tr><td>Android</td><td>7/14</td><td class="num">45,252</td><td class="num">45,780</td><td class="num">+1.2%</td><td class="num" style="color:var(--warn)">-9.0%</td></tr>
-          <tr><td>iOS</td><td>7/23</td><td class="num">50,617</td><td class="num">73,527</td><td class="num lift-hi">+45.3%</td><td class="num lift-hi">+49.6%</td></tr>
-          <tr><td>iOS（参考：自 7/14 起整窗）</td><td>7/14</td><td class="num">50,520</td><td class="num">57,767</td><td class="num lift-hi">+14.3%</td><td class="num lift-hi">+21.0%</td></tr>
+          <tr><td>Android</td><td>7/14</td><td class="num">45,252</td><td class="num lift-hi">48,014 (+6.1%)</td><td class="num lift-down">43,173 (-4.6%)</td><td class="num" style="color:var(--bad)">-9.0%</td></tr>
+          <tr><td>iOS</td><td>7/23</td><td class="num">50,617</td><td class="num lift-hi">73,527 (+45.3%)（仅4天）</td><td class="num">—</td><td class="num lift-hi">+49.6%</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h2>三、功能使用分析（提升超 10% 的埋点，全部陈列）</h2>
-    <p class="hint">口径：按事件对比发布前后「日均独立用户数」。Android：发布前 6/27–7/13（17 天）vs 发布后 7/14–7/26（13 天）；iOS：发布前 6/27–7/22（26 天）vs 发布后 7/23–7/26（4 天）。发布前无数据的事件标记为「新增」。</p>
+    <h2>三、功能使用分析（提升超 10% 的埋点，经筛选后全部陈列）</h2>
+    <p class="hint">口径：按事件对比发布前后「日均独立用户数」。Android：发布前 6/27–7/13（17 天）vs 发布后 7/14–7/26（13 天）；iOS：发布前 6/27–7/22（26 天）vs 发布后 7/23–7/26（4 天）。已按评审剔除运营活动（节日活动系列）及与版本无关的埋点。</p>
 
     <div class="stats c3">
-      <div class="stat"><div class="v">24 个</div><div class="l">Android 提升&gt;10% 埋点</div></div>
-      <div class="stat"><div class="v">55 个</div><div class="l">iOS 提升&gt;10% 埋点</div></div>
-      <div class="stat"><div class="v info">导航路线页</div><div class="l">两端共同最大增量入口</div></div>
+      <div class="stat"><div class="v">4 个</div><div class="l">Android 版本相关提升埋点</div></div>
+      <div class="stat"><div class="v">18 个</div><div class="l">iOS 版本相关提升埋点</div></div>
+      <div class="stat"><div class="v info">导航 + 直播</div><div class="l">两端共同增量方向</div></div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>Android（发布日 7/14）</h3><span>共 24 项 + 2 项新增 · 按提升幅度降序</span></div>
-      <div class="scrollbox">
-        <table id="androidEventTable">
-          <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
+      <div class="card-head"><h3>Android（发布日 7/14）</h3><span>共 4 项 · 按提升幅度降序</span></div>
+      <table id="androidEventTable">
+        <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
+        <tbody></tbody>
+      </table>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>iOS（发布日 7/23，观测仅 4 天）</h3><span>共 55 项 + 1 项新增 · 按提升幅度降序</span></div>
+      <div class="card-head"><h3>iOS（发布日 7/23，观测仅 4 天）</h3><span>共 18 项 · 按提升幅度降序</span></div>
       <div class="scrollbox">
         <table id="iosEventTable">
           <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
@@ -209,30 +208,30 @@
       <div class="note-card">
         <h3>功能侧要点</h3>
         <ul>
-          <li>「导航路线页曝光/点击直播」为本次版本新主推功能，两端均从近零基数跃升为日常主入口（Android 581 人/日、iOS 1,729 人/日）。</li>
-          <li>iOS 直播链路全面走强：紧急时刻点直播 +482%、直播页播放 +182%、AR 开关 +247%。</li>
-          <li>停车/导航链路（停车记录、车辆位置导航、停车详情导航）两端一致上涨 14%～54%。</li>
+          <li>「导航路线页」为本次版本核心新功能，两端均从近零基数跃升（Android 581 人/日、iOS 1,729 人/日），是版本最确定的增量。</li>
+          <li>iOS 直播链路全面走强：紧急时刻点直播 +482%、直播页播放 +182%、AR 开关 +247%、一键寻车 +146%。</li>
+          <li>iOS 停车链路（车况页停车记录 +54%、停车记录页曝光 +32%）与前台活跃（sys-run +39%）同步上涨。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>归因注意</h3>
         <ul>
-          <li>「节日活动」系列（曝光/下单/支付）两端暴涨，更可能由运营活动驱动，不宜计入版本收益。</li>
+          <li>运营活动类（节日活动系列）及非版本相关埋点已按评审从清单剔除，不计入版本收益。</li>
           <li>iOS 发布后仅 4 天且含周末，涨幅可能被放大，建议满 14 天复核。</li>
-          <li>iOS sys-run/sys-suspend 与启动次数同步上涨，需排查新版是否改变了启动/前台统计口径。</li>
+          <li>iOS sys-run 与启动次数同步上涨，需排查新版是否改变了启动/前台统计口径。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>建议下一步</h3>
         <ul>
-          <li>iOS 满 14 天后复算日活、启动与埋点提升，确认可持续性。</li>
-          <li>对导航路线页做留存与转化漏斗（曝光→点直播→播放）专项分析。</li>
-          <li>Android 启动次数同比 -9%，建议单独排查启动场景（推送、桌面组件）的变化。</li>
+          <li>安卓/鸿蒙日活脉冲后回落，建议排查新功能触达与留存：导航页有曝光但是否形成复访。</li>
+          <li>iOS 满 14 天后复算日活、启动与埋点提升，警惕同样的脉冲回落。</li>
+          <li>Android 启动次数次周已低于发布前且同比 -9%，优先排查启动场景（推送、桌面组件）变化。</li>
         </ul>
       </div>
     </div>
 
-    <p class="foot">方法说明：日活与启动次数环比均用「发布后整窗日均 vs 发布前 7/14 天日均」；同比为去年同日历日均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户。数据源：小万出行数据看板（日活）、友盟启动次数明细、事件列表 20260627–20260726。</p>
+    <p class="foot">方法说明：首周 = 发布后第 1–7 天，次周 = 第 8 天起至 7/26；环比基准为发布前 7 天日均；同比为去年同日历日均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户。数据源：小万出行数据看板（日活）、启动次数明细、事件列表 20260627–20260726。</p>
   </div>
 
   <script>
@@ -252,28 +251,6 @@
       ["导航路线页点击直播","nav-choose-live","+252倍","0.1","29.8"],
       ["导航页面曝光","nav-show","+26倍","0.4","9.5"],
       ["导航页面点击直播","nav-live","+13倍","0.1","0.8"],
-      ["节日活动--支付成功","Festivalactivities-Paymentsucceeded","+1203.0%","1.6","21.5"],
-      ["节日活动--提交订单","Festivalactivities-order","+834.2%","6.5","61.0"],
-      ["节日活动-曝光","Festivalactivities-show","+608.4%","97.0","687.2"],
-      ["车况页-点击通知","CK-notification","+465.7%","13.9","78.5"],
-      ["设备信息-点击违停提示","Device-NPR","+292.3%","0.1","0.2"],
-      ["云相册页-VIP入口点击","Cloudalbum-vipclick","+21.4%","1.6","2.0"],
-      ["服务页-点击安装教程","SP-insttutorial","+17.0%","31.8","37.2"],
-      ["车况页-功能区-点击ETC消费账单","CK-FA-ETCfee","+16.0%","4.2","4.8"],
-      ["车况页-点击停车记录","CK-parkingrecord","+15.5%","6.5","7.5"],
-      ["服务页-点击停车记录","SP-parkingrecord","+15.4%","159.9","184.5"],
-      ["车辆位置页-点击导航","Vehiclelocation-navigate","+15.3%","221.6","255.4"],
-      ["电子围栏页-曝光","Electronicfence-show","+15.1%","56.1","64.6"],
-      ["服务页-点击电子围栏","SP-electronicfence","+15.1%","56.1","64.6"],
-      ["门店洗车-点击门店","Carwash-goods","+14.6%","7.1","8.2"],
-      ["停车详情页-点击导航按钮","Parkdetails-nav","+14.3%","78.7","90.0"],
-      ["服务页-点击一键加油","SP-refuel","+14.3%","26.1","29.8"],
-      ["广告页-点击广告","ads-POPclick","+13.8%","147.0","167.3"],
-      ["车况页-点击小金条","CK-privilegebar","+13.3%","59.4","67.3"],
-      ["免流量看车页-直播页曝光","Freedatatraffic-live-show","+12.2%","76.8","86.2"],
-      ["服务页-点击驾驶数据","SP-drivingdata","+10.9%","133.4","147.8"],
-      ["车况页-下拉地图","CK-Pulldownthemap","新增","—","0.2"],
-      ["抓拍分享列表页面-AI总结次数上限弹窗","Snap-AI-popclick","新增","—","0.1"],
     ];
 
     const iosLifts = [
@@ -281,58 +258,20 @@
       ["导航路线页点击直播","nav-choose-live","+131倍","1.8","240.0"],
       ["导航页面曝光","nav-show","+63倍","1.6","104.2"],
       ["紧急时刻列表页-点击直播","EMoment-liveclick","+481.6%","471.2","2740.5"],
-      ["车况页-点击顶部跑马灯","CK-notification","+414.6%","34.5","177.8"],
       ["导航页面点击直播","nav-live","+387.5%","0.6","3.0"],
-      ["节日活动--提交订单","Festivalactivities-order","+331.7%","20.3","87.5"],
-      ["节日活动-曝光","Festivalactivities-show","+299.3%","287.8","1149.5"],
-      ["节日活动--支付成功","Festivalactivities-Paymentsucceeded","+296.2%","13.0","51.5"],
       ["直播页面-打开AR开关","live-open-AR","+246.8%","57.3","198.8"],
       ["车辆直播页面-点击播放","Live-show-play","+181.9%","1155.7","3257.8"],
       ["车辆直播页面-点击一键寻车","Live-nav","+146.0%","61.9","152.2"],
       ["车辆直播页面-点击实时拍照","Live-photo","+100.5%","66.3","133.0"],
-      ["服务页-点击紧急救援","SP-emergencyrescue","+62.5%","4.6","7.5"],
-      ["云相册页-VIP入口点击","Cloudalbum-vipclick","+62.5%","0.8","1.2"],
       ["车辆直播页面-点击实时录像","Live-video","+60.4%","115.7","185.5"],
       ["车辆位置页-点击导航","Vehiclelocation-navigate","+60.1%","224.8","360.0"],
-      ["服务页-点击特惠洗车","SP-carwash","+58.5%","9.5","15.0"],
       ["车况页-点击停车记录","CK-parkingrecord","+53.7%","3147.8","4837.0"],
-      ["电子围栏页-曝光","Electronicfence-show","+50.0%","29.5","44.2"],
-      ["服务页-点击电子围栏","SP-electronicfence","+45.9%","30.5","44.5"],
-      ["车况页--ETC账单-点击更多","CK-ETCfee-more","+43.9%","5.0","7.2"],
-      ["服务页-点击VIP专属权益","SP-VIPbenefits","+42.8%","38.0","54.2"],
       ["车辆直播页面曝光","Live-show","+40.3%","3994.3","5603.8"],
       ["系统-前台运行","sys-run","+39.0%","6056.2","8418.5"],
-      ["服务页-点击预约安装","SP-apptforinst","+39.0%","11.7","16.2"],
-      ["云相册页-VIP弹窗点击","Cloudalbum-POPclick","+36.7%","199.8","273.0"],
-      ["服务页-点击停车记录","SP-parkingrecord","+34.3%","106.8","143.5"],
-      ["服务页-点击驾驶数据","SP-drivingdata","+33.7%","88.3","118.0"],
       ["停车记录页-曝光","Parkingrecord-show","+31.9%","4373.6","5770.2"],
-      ["服务页-点击VIP充值","SP-VIPrecharge","+29.3%","36.2","46.8"],
-      ["紧急救援页-曝光","Emergencyrescue-show","+26.1%","139.2","175.5"],
       ["停车记录页-点击停车详情","Parkingrecord-parkdetails","+23.2%","1510.6","1860.5"],
       ["停车详情页-点击查看照片","Parkdetails-picture","+21.8%","656.5","799.5"],
       ["驾驶数据页-曝光","DDP-show","+21.1%","873.9","1058.8"],
-      ["车况页-功能区-点击VIP充值","CK-FA-VIPrecharge","+21.1%","67.9","82.2"],
-      ["停车详情页-点击导航按钮","Parkdetails-nav","+20.8%","38.5","46.5"],
-      ["服务页-点击ETC消费账单","SP-ETCfee","+20.7%","111.9","135.0"],
-      ["车况页-点击驾驶数据","CK-drivingdata","+20.6%","810.3","977.0"],
-      ["云相册页-VIP弹窗曝光","Cloudalbum-POPshow","+20.3%","17.0","20.5"],
-      ["驾驶数据页-点击历史轨迹","DDP-historicaltrajectory","+19.3%","115.7","138.0"],
-      ["系统-后台暂停","sys-suspend","+16.8%","9188.6","10731.8"],
-      ["车况页-功能区-点击特惠洗车","CK-FA-carwash","+16.4%","48.8","56.8"],
-      ["免流量看车页-点击链接WiFi","Freedatatraffic-wificlick","+16.3%","62.3","72.5"],
-      ["车况页-功能区-点击免流量看车","CK-FA-freedatatraffic","+15.8%","199.5","231.0"],
-      ["车况页-点击小金条","CK-privilegebar","+15.0%","47.8","55.0"],
-      ["抓拍分享列表页面-点击操作视频","Snap-show-opvideo","+15.0%","49.1","56.5"],
-      ["抓拍分享列表页面-点击生成AI内容","Snap-GAIclick","+14.8%","12.2","14.0"],
-      ["门店洗车-点击门店","Carwash-goods","+14.1%","5.0","5.8"],
-      ["抓拍分享列表页面-点击图片视频","Snap-picturevideo","+13.9%","144.2","164.2"],
-      ["紧急时刻列表页面-点击分享","EMoment-share","+12.1%","16.7","18.8"],
-      ["车况页-点击地图","CK-Expandthemap","+11.3%","4.3","4.8"],
-      ["抓拍分享列表页面-点击解说","Snap-Introductionclick","+11.1%","6.1","6.8"],
-      ["车况页-功能区-点击云相册","CK-FA-cloudalbum","+10.3%","274.3","302.5"],
-      ["云相册页-曝光","Cloudalbum-show","+10.2%","274.5","302.5"],
-      ["设备信息-点击违停提示","Device-NPR","新增","—","0.2"],
     ];
 
     const tick = { color: "#94a3b8", font: { size: 10 } };
@@ -462,8 +401,7 @@
       const tbody = document.querySelector(`#${id} tbody`);
       rows.forEach(([name, eid, lift, pre, post]) => {
         const tr = document.createElement("tr");
-        const cls = lift === "新增" ? "lift-new" : "lift-hi";
-        tr.innerHTML = `<td>${name}</td><td style="color:var(--muted)">${eid}</td><td class="num ${cls}">${lift}</td><td class="num">${pre}</td><td class="num">${post}</td>`;
+        tr.innerHTML = `<td>${name}</td><td style="color:var(--muted)">${eid}</td><td class="num lift-hi">${lift}</td><td class="num">${pre}</td><td class="num">${post}</td>`;
         tbody.appendChild(tr);
       });
     }
