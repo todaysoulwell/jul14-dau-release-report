@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>7/14 新版本发布 · 日活影响分析</title>
+  <title>小万出行 · 7 月新版本发布数据分析</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
@@ -25,465 +25,450 @@
       color: var(--text);
       line-height: 1.5;
     }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 48px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 28px 20px 48px; }
     h1 { font-size: 28px; margin: 0 0 8px; font-weight: 650; letter-spacing: -0.02em; }
-    h2 { font-size: 18px; margin: 0 0 12px; font-weight: 600; }
+    h2 {
+      font-size: 20px; margin: 34px 0 14px; font-weight: 650;
+      padding-left: 10px; border-left: 3px solid var(--accent);
+    }
+    h3 { font-size: 15px; margin: 0 0 10px; font-weight: 600; }
     .sub { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
     .pill {
-      display: inline-block;
-      font-size: 12px;
-      padding: 2px 10px;
-      border-radius: 999px;
-      background: rgba(59,130,246,.15);
-      color: #93c5fd;
-      margin-left: 8px;
-      vertical-align: middle;
+      display: inline-block; font-size: 12px; padding: 2px 10px;
+      border-radius: 999px; background: rgba(59,130,246,.15);
+      color: #93c5fd; margin-left: 8px; vertical-align: middle;
     }
     .callout {
       background: rgba(34,197,94,.08);
       border: 1px solid rgba(34,197,94,.28);
-      border-radius: 10px;
-      padding: 14px 16px;
-      margin-bottom: 20px;
+      border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
     }
     .callout strong { color: var(--good); display: block; margin-bottom: 4px; }
     .callout p { margin: 0; color: #d1d5db; font-size: 14px; }
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-bottom: 8px;
-    }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+    .stats.c3 { grid-template-columns: repeat(3, 1fr); }
     .stat {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 14px 16px;
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px 16px;
     }
     .stat .v { font-size: 24px; font-weight: 650; color: var(--good); }
     .stat .v.info { color: var(--info); }
+    .stat .v.warn { color: var(--warn); }
+    .stat .v.plain { color: var(--text); }
     .stat .l { font-size: 12px; color: var(--muted); margin-top: 4px; }
-    .hint { color: var(--muted); font-size: 12px; margin: 0 0 20px; }
+    .hint { color: var(--muted); font-size: 12px; margin: 6px 0 16px; }
     .card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 16px 18px 12px;
-      margin-bottom: 16px;
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 12px; padding: 16px 18px 12px; margin-bottom: 16px;
     }
     .card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 8px;
-      gap: 12px;
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-bottom: 8px; gap: 12px;
     }
-    .card-head h2 { margin: 0; }
+    .card-head h3 { margin: 0; font-size: 16px; }
     .card-head span { font-size: 12px; color: var(--muted); }
-    .grid2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .grid3 {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-    .grid4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    canvas { width: 100% !important; max-height: 300px; cursor: pointer; }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    th, td {
-      text-align: left;
-      padding: 9px 10px;
-      border-bottom: 1px solid var(--line);
-    }
-    th { color: var(--muted); font-weight: 500; font-size: 12px; }
-    td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+    canvas { width: 100% !important; max-height: 320px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 500; font-size: 12px; position: sticky; top: 0; background: var(--panel); }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
     tr:hover td { background: rgba(255,255,255,.02); }
-    tr.clickable { cursor: pointer; }
-    tr.clickable.active td { background: rgba(59,130,246,.12); }
-    .dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      margin-right: 8px;
-      background: #64748b;
-    }
-    .dot.info { background: var(--info); }
-    .dot.ok { background: var(--good); }
-    .dot.warn { background: var(--warn); }
+    .scrollbox { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
+    .lift-hi { color: var(--good); font-weight: 600; }
+    .lift-new { color: var(--info); font-weight: 600; }
     .note-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 14px;
+      background: var(--panel); border: 1px solid var(--line);
+      border-radius: 10px; padding: 14px;
     }
-    .note-card h3 { margin: 0 0 8px; font-size: 14px; }
     .note-card li { color: #cbd5e1; font-size: 13px; margin: 0 0 6px; }
-    .foot { margin-top: 20px; color: #6b7280; font-size: 12px; }
-    .detail {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      background: rgba(255,255,255,.02);
-    }
-    .detail h3 { margin: 0 0 10px; font-size: 14px; }
-    @media (max-width: 960px) {
-      .stats, .grid2, .grid3, .grid4 { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 640px) {
-      .stats, .grid2, .grid3, .grid4 { grid-template-columns: 1fr; }
-      h1 { font-size: 22px; }
-    }
+    .foot { margin-top: 24px; color: #6b7280; font-size: 12px; }
+    @media (max-width: 960px) { .stats, .grid2, .grid3 { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .stats, .grid2, .grid3 { grid-template-columns: 1fr; } h1 { font-size: 22px; } }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>7/14 新版本发布 · 日活影响分析<span class="pill">日活 DAU</span></h1>
-    <p class="sub">数据源：工作簿1.xlsx · 走势图 2026-06-01 至 2026-07-22 · 发布日 2026-07-14 · 点击曲线或表格行查看单日明细</p>
+    <h1>小万出行 · 7 月新版本发布数据分析<span class="pill">日活 / 启动 / 功能埋点</span></h1>
+    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活数据至 7/26 · 启动次数剔除 7/27 非整日 · 埋点窗口 6/27–7/26</p>
 
     <div class="callout">
       <strong>核心结论</strong>
-      <p>发布后 9 个有效观测日（7/14–7/22，含补齐的 7/17）日活均值 35,430，相对发布前 7 天 +5.2%，相对发布前 14 天 +5.9%；周同比（7/14–7/20）约 +6.8%，同比约 +18.8%，上月同期约 +4.2%。7/17 达窗口峰值 39,845，其后 7/21–7/22 回落。</p>
+      <p>7/14 双端发布后总日活日均 35,488（较发布前 7 天 +5.3%，同比 +17.7%），其中鸿蒙 +8.2% 提升最大、安卓 +3.9%。7/23 iOS 发布后 4 天 iOS 日活 +7.7%，且 iOS 启动次数从日均约 5.1 万跃升至 7.4 万（+45%），人均启动强度显著抬升。功能侧：新增「导航路线页」为两端最大增量入口；Android 有 24 个埋点提升超 10%，iOS 有 55 个（观测窗口仅 4 天，数据尚需巩固）。</p>
     </div>
 
+    <h2>一、日活分析</h2>
     <div class="stats">
-      <div class="stat"><div class="v">35,430</div><div class="l">发布后日均 DAU</div></div>
-      <div class="stat"><div class="v">+5.2%</div><div class="l">vs 发布前 7 天</div></div>
-      <div class="stat"><div class="v">+6.8%</div><div class="l">vs 上周同日 (WoW)</div></div>
-      <div class="stat"><div class="v info">+18.8%</div><div class="l">vs 去年同日 (YoY)</div></div>
-      <div class="stat"><div class="v info">+4.2%</div><div class="l">vs 上月同期</div></div>
+      <div class="stat"><div class="v">35,488</div><div class="l">总日活（7/14 后日均）</div></div>
+      <div class="stat"><div class="v">+5.3%</div><div class="l">总日活 vs 发布前 7 天</div></div>
+      <div class="stat"><div class="v info">+17.7%</div><div class="l">总日活 同比去年同期</div></div>
+      <div class="stat"><div class="v">+7.7%</div><div class="l">iOS 日活（7/23 后 vs 前 7 天）</div></div>
     </div>
-    <p class="hint">WoW 均值取 7/14–7/20；不含 7/21–7/22。上月同期 = 发布后各日对 6/14–6/22 窗口日均对比。YoY 为 9 个可比日平均。</p>
 
     <div class="card">
-      <div class="card-head">
-        <h2>日活走势（6/1–7/22）</h2>
-        <span>点击数据点 · 图例可开关系列 · 参考线=发布前7日均</span>
-      </div>
-      <canvas id="dailyChart" height="120"></canvas>
-      <div class="detail" id="dayDetail">
-        <h3 id="detailTitle">7/14 明细</h3>
-        <div class="grid4" id="detailStats"></div>
-        <p class="hint" id="detailNote" style="margin:10px 0 0"></p>
-      </div>
+      <div class="card-head"><h3>总日活走势（6/15–7/26）</h3><span>人 · 竖虚线=发布节点 · 横虚线=7/14 前 7 日均</span></div>
+      <canvas id="dauTotalChart" height="110"></canvas>
+      <p class="hint">7/14 起 Android+鸿蒙新版；7/23 起 iOS 新版。6/16 与 7/17 为异常高峰日。发布后未再回落到发布前 7 日均线以下。</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>各端日活走势（6/15–7/26）</h3><span>人 · 图例可点击开关</span></div>
+      <canvas id="dauPlatformChart" height="120"></canvas>
+      <p class="hint">7/23 后 iOS 明显抬升（7/24–7/26 站上 1.6 万+）；鸿蒙自 7/14 后中枢上移；安卓发布日冲高后温和抬升。当前占比约 iOS 45% / 安卓 35% / 鸿蒙 20%。</p>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h2>周均日活（5 月–7 月）</h2><span>人/周 · 可点击</span></div>
-        <canvas id="weekChart" height="160"></canvas>
+        <div class="card-head"><h3>各端窗口对比（vs 各自发布节点）</h3></div>
+        <table>
+          <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">发布后日均</th><th class="num">变化</th><th class="num">vs 前14天</th></tr></thead>
+          <tbody>
+            <tr><td>总体（7/14）</td><td class="num">33,695</td><td class="num">35,488</td><td class="num lift-hi">+5.3%</td><td class="num">+6.1%</td></tr>
+            <tr><td>安卓（7/14）</td><td class="num">12,482</td><td class="num">12,970</td><td class="num lift-hi">+3.9%</td><td class="num">+4.1%</td></tr>
+            <tr><td>鸿蒙（7/14）</td><td class="num">6,906</td><td class="num">7,470</td><td class="num lift-hi">+8.2%</td><td class="num">+10.2%</td></tr>
+            <tr><td>iOS（7/23）</td><td class="num">14,697</td><td class="num">15,826</td><td class="num lift-hi">+7.7%</td><td class="num">+8.9%</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">iOS 发布后窗口仅 7/23–7/26 共 4 天；总体/安卓/鸿蒙为 7/14–7/26 共 13 天。</p>
+      </div>
+      <div class="note-card">
+        <h3>解读</h3>
+        <ul>
+          <li>鸿蒙提升幅度最大（+8.2%），与 7/14 新版本投放和设备渗透同步抬升。</li>
+          <li>iOS 在 7/23 发布前已受整体热度带动，发布后 3 天连续站上 1.6 万，为近期新高区间。</li>
+          <li>安卓提升相对温和（+3.9%），发布日冲高后维持在略高于前期的中枢。</li>
+          <li>7/17 总日活 39,845 为异常冲高日，或与运营活动（节日活动埋点同期暴涨）相关，建议与运营日历核对。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>二、启动次数分析</h2>
+    <div class="stats">
+      <div class="stat"><div class="v plain">45,780</div><div class="l">Android 日均（7/14 后）</div></div>
+      <div class="stat"><div class="v warn">+1.2%</div><div class="l">Android vs 发布前 7 天</div></div>
+      <div class="stat"><div class="v">73,527</div><div class="l">iOS 日均（7/23 后）</div></div>
+      <div class="stat"><div class="v">+45.3%</div><div class="l">iOS vs 发布前 7 天</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>Android 启动次数</h3><span>次 · 发布日 7/14</span></div>
+        <canvas id="launchAndroidChart" height="150"></canvas>
+        <p class="hint">发布日冲至 51,688（WoW +10%）后逐步回落，7/21 起低于发布前中枢（WoW 转负，-5%～-18%）。整窗仅 +1.2%，且同比 -9%，需关注启动黏性。</p>
       </div>
       <div class="card">
-        <div class="card-head"><h2>发布后逐日周同比</h2><span>% · 可点击</span></div>
-        <canvas id="wowChart" height="160"></canvas>
+        <div class="card-head"><h3>iOS 启动次数</h3><span>次 · 发布日 7/23</span></div>
+        <canvas id="launchIosChart" height="150"></canvas>
+        <p class="hint">7/23 起跳升至 7.0–7.6 万/天（WoW +34%～+50%），而 iOS 日活仅 +7.7%——人均启动从约 3.4 升至 4.6 次/人。可能由新版功能带动高频打开，也需排除启动埋点口径变化。</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h2>发布后逐日明细（含上月同期）</h2></div>
+      <div class="card-head"><h3>启动次数窗口对比</h3></div>
       <table>
-        <thead>
-          <tr>
-            <th>日期</th><th class="num">日活</th><th class="num">周同比</th>
-            <th class="num">年同比</th><th class="num">上月同期</th><th>备注</th>
-          </tr>
-        </thead>
-        <tbody id="postTable"></tbody>
+        <thead><tr><th>端</th><th>发布节点</th><th class="num">发布前7日均</th><th class="num">发布后日均</th><th class="num">变化</th><th class="num">同比去年同期</th></tr></thead>
+        <tbody>
+          <tr><td>Android</td><td>7/14</td><td class="num">45,252</td><td class="num">45,780</td><td class="num">+1.2%</td><td class="num" style="color:var(--warn)">-9.0%</td></tr>
+          <tr><td>iOS</td><td>7/23</td><td class="num">50,617</td><td class="num">73,527</td><td class="num lift-hi">+45.3%</td><td class="num lift-hi">+49.6%</td></tr>
+          <tr><td>iOS（参考：自 7/14 起整窗）</td><td>7/14</td><td class="num">50,520</td><td class="num">57,767</td><td class="num lift-hi">+14.3%</td><td class="num lift-hi">+21.0%</td></tr>
+        </tbody>
       </table>
     </div>
 
-    <div class="grid2">
-      <div class="card">
-        <div class="card-head"><h2>窗口对比</h2></div>
-        <table>
-          <thead><tr><th>窗口</th><th class="num">日均</th><th class="num">相对发布后</th></tr></thead>
-          <tbody>
-            <tr><td>发布后 7/14–7/22</td><td class="num">35,430</td><td class="num">基准</td></tr>
-            <tr><td>发布前 7 天</td><td class="num">33,695</td><td class="num">+5.2%</td></tr>
-            <tr><td>发布前 14 天</td><td class="num">33,461</td><td class="num">+5.9%</td></tr>
-            <tr><td>上月同期 6/14–6/22</td><td class="num">33,986</td><td class="num">+4.2%</td></tr>
-            <tr><td>2026 年 6 月</td><td class="num">32,777</td><td class="num">+8.1%</td></tr>
-            <tr><td>去年同期同日均</td><td class="num">29,889</td><td class="num">+18.5%</td></tr>
-          </tbody>
+    <h2>三、功能使用分析（提升超 10% 的埋点，全部陈列）</h2>
+    <p class="hint">口径：按事件对比发布前后「日均独立用户数」。Android：发布前 6/27–7/13（17 天）vs 发布后 7/14–7/26（13 天）；iOS：发布前 6/27–7/22（26 天）vs 发布后 7/23–7/26（4 天）。发布前无数据的事件标记为「新增」。</p>
+
+    <div class="stats c3">
+      <div class="stat"><div class="v">24 个</div><div class="l">Android 提升&gt;10% 埋点</div></div>
+      <div class="stat"><div class="v">55 个</div><div class="l">iOS 提升&gt;10% 埋点</div></div>
+      <div class="stat"><div class="v info">导航路线页</div><div class="l">两端共同最大增量入口</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>Android（发布日 7/14）</h3><span>共 24 项 + 2 项新增 · 按提升幅度降序</span></div>
+      <div class="scrollbox">
+        <table id="androidEventTable">
+          <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
+          <tbody></tbody>
         </table>
-      </div>
-      <div class="card">
-        <div class="card-head"><h2>2026 年月均趋势</h2><span>7月*仅 1–22 日</span></div>
-        <canvas id="monthChart" height="160"></canvas>
       </div>
     </div>
 
-    <h2 style="margin-top:8px">解读与注意</h2>
+    <div class="card">
+      <div class="card-head"><h3>iOS（发布日 7/23，观测仅 4 天）</h3><span>共 55 项 + 1 项新增 · 按提升幅度降序</span></div>
+      <div class="scrollbox">
+        <table id="iosEventTable">
+          <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
     <div class="grid3">
       <div class="note-card">
-        <h3>正面信号</h3>
+        <h3>功能侧要点</h3>
         <ul>
-          <li>发布后日均高于前窗约 5–6%</li>
-          <li>7/14–7/20 周同比均值约 +6.8%</li>
-          <li>同比约 +18.8%；上月同期约 +4.2%</li>
+          <li>「导航路线页曝光/点击直播」为本次版本新主推功能，两端均从近零基数跃升为日常主入口（Android 581 人/日、iOS 1,729 人/日）。</li>
+          <li>iOS 直播链路全面走强：紧急时刻点直播 +482%、直播页播放 +182%、AR 开关 +247%。</li>
+          <li>停车/导航链路（停车记录、车辆位置导航、停车详情导航）两端一致上涨 14%～54%。</li>
         </ul>
       </div>
       <div class="note-card">
-        <h3>需观察</h3>
+        <h3>归因注意</h3>
         <ul>
-          <li>7/17 冲高至 39,845 后，7/21–7/22 回落</li>
-          <li>7/16 上月同期为负，因 6/16 异常高峰抬高基数</li>
-          <li>难剥离运营/季节等因素</li>
+          <li>「节日活动」系列（曝光/下单/支付）两端暴涨，更可能由运营活动驱动，不宜计入版本收益。</li>
+          <li>iOS 发布后仅 4 天且含周末，涨幅可能被放大，建议满 14 天复核。</li>
+          <li>iOS sys-run/sys-suspend 与启动次数同步上涨，需排查新版是否改变了启动/前台统计口径。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>建议下一步</h3>
         <ul>
-          <li>补齐发布后 14/28 日数据</li>
-          <li>叠版本渗透率与留存归因</li>
-          <li>核对 7/17 冲高是否含活动/异常流量</li>
+          <li>iOS 满 14 天后复算日活、启动与埋点提升，确认可持续性。</li>
+          <li>对导航路线页做留存与转化漏斗（曝光→点直播→播放）专项分析。</li>
+          <li>Android 启动次数同比 -9%，建议单独排查启动场景（推送、桌面组件）的变化。</li>
         </ul>
       </div>
     </div>
 
-    <p class="foot">方法说明：环比用等长日历窗；WoW/YoY/上月同期分别为同星期、同日历日、上月同日历日。7/21–7/22 WoW 未计入 +6.8% 均值。</p>
+    <p class="foot">方法说明：日活与启动次数环比均用「发布后整窗日均 vs 发布前 7/14 天日均」；同比为去年同日历日均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户。数据源：小万出行数据看板（日活）、友盟启动次数明细、事件列表 20260627–20260726。</p>
   </div>
 
   <script>
-    const RELEASE_IDX = 43;
-    const PRE7_MEAN = 33695;
-    const dailyLabels = ["6/1","6/2","6/3","6/4","6/5","6/6","6/7","6/8","6/9","6/10","6/11","6/12","6/13","6/14","6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2","7/3","7/4","7/5","7/6","7/7","7/8","7/9","7/10","7/11","7/12","7/13","7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"];
-    const dailyDau = [32282,30878,30835,31642,32376,33394,36599,34360,31012,31310,30343,31638,32837,30953,34306,39996,34028,34885,35171,32010,31516,33006,31852,31380,31599,32122,31360,30998,34671,33956,31735,31623,35309,33333,32496,34138,35298,32521,32655,35578,33784,32762,33265,35543,35637,35128,39845,35491,33453,36677,33575,33518];
-    const dailyMom = [32564,31113,32563,31009,30852,31645,31339,36106,33076,30542,33220,30890,29921,30223,32349,30418,30804,31643,30361,31845,31100,33384,30830,30570,31644,30307,35674,32056,32744,31326,32282,30878,30835,31642,32376,33394,36599,34360,31012,31310,30343,31638,32837,30953,34306,39996,34028,34885,35171,32010,31516,33006];
+    const dates = ["6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2","7/3","7/4","7/5","7/6","7/7","7/8","7/9","7/10","7/11","7/12","7/13","7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22","7/23","7/24","7/25","7/26"];
+    const IDX_REL_A = 29; // 7/14
+    const IDX_REL_I = 38; // 7/23
 
-    const postDetails = [
-      { label:"7/14", weekday:"周二", dau:35543, mom:30953, wow:"+0.7%", yoy:"+22.8%", momPct:"+14.8%", note:"发布日", tone:"info" },
-      { label:"7/15", weekday:"周三", dau:35637, mom:34306, wow:"+9.6%", yoy:"+15.5%", momPct:"+3.9%", note:"", tone:"" },
-      { label:"7/16", weekday:"周四", dau:35128, mom:39996, wow:"+7.6%", yoy:"+22.6%", momPct:"-12.2%", note:"上月基数含异常高峰", tone:"" },
-      { label:"7/17", weekday:"周五", dau:39845, mom:34028, wow:"+12.0%", yoy:"+40.6%", momPct:"+17.1%", note:"窗口峰值", tone:"ok" },
-      { label:"7/18", weekday:"周六", dau:35491, mom:34885, wow:"+5.1%", yoy:"+16.8%", momPct:"+1.7%", note:"", tone:"" },
-      { label:"7/19", weekday:"周日", dau:33453, mom:35171, wow:"+2.1%", yoy:"+14.5%", momPct:"-4.9%", note:"窗口低点", tone:"warn" },
-      { label:"7/20", weekday:"周一", dau:36677, mom:32010, wow:"+10.3%", yoy:"+12.4%", momPct:"+14.6%", note:"", tone:"" },
-      { label:"7/21", weekday:"周二", dau:33575, mom:31516, wow:"-5.5%", yoy:"+9.9%", momPct:"+6.5%", note:"回落", tone:"warn" },
-      { label:"7/22", weekday:"周三", dau:33518, mom:33006, wow:"-5.9%", yoy:"+14.0%", momPct:"+1.6%", note:"回落", tone:"warn" },
+    const dauTotal = [34306,39996,34028,34885,35171,32010,31516,33006,31852,31380,31599,32122,31360,30998,34671,33956,31735,31623,35309,33333,32496,34138,35298,32521,32655,35578,33784,32762,33265,35543,35637,35128,39845,35491,33453,36677,33575,33518,34333,36572,35928,35641];
+    const dauAndroid = [12833,13170,12211,13018,12440,12094,12059,12301,11740,11693,11895,12152,11894,11591,12975,12611,11771,11834,13380,12522,12274,12610,13009,11901,12131,13191,12576,12182,12381,13607,13659,13124,13672,13157,12720,13660,12389,12307,12385,12782,12710,12440];
+    const dauIos = [14856,18689,14652,15151,15776,13581,13247,14169,13711,13447,13563,13753,13302,13249,14845,14460,13603,13510,15044,14213,13673,14544,15117,13847,13882,15242,14293,13751,14016,14795,14641,14217,17621,14582,13514,15117,13928,13898,14721,16054,16287,16241];
+    const dauHarmony = [6617,8137,7165,6716,6955,6335,6210,6536,6401,6240,6141,6217,6164,6158,6851,6885,6361,6279,6885,6598,6549,6984,7172,6773,6642,7145,6915,6829,6868,7141,7337,7787,8552,7752,7219,7900,7258,7313,7227,7736,6931,6960];
+    const launchAndroid = [44594,46799,43822,50402,46327,44465,44233,43003,41743,41956,41786,43787,42871,40922,44533,44115,42516,42147,48941,45627,43890,45974,46935,42165,43694,48909,45998,44033,45029,51688,49578,46559,49301,47420,44922,46630,42197,42225,43680,43795,44976,42166];
+    const launchIos = [49900,59066,49069,54880,50616,46882,46441,50533,48585,46487,47860,49928,47270,45750,51350,50003,47135,47197,54660,49174,47476,50522,54648,48663,49374,54830,49430,46656,50042,51309,51228,48971,57104,49919,47366,52211,48189,50561,72593,76274,74679,70561];
+
+    const androidLifts = [
+      ["导航路线页曝光","nav-choose-show","+1411倍","0.4","581.7"],
+      ["导航路线页点击直播","nav-choose-live","+252倍","0.1","29.8"],
+      ["导航页面曝光","nav-show","+26倍","0.4","9.5"],
+      ["导航页面点击直播","nav-live","+13倍","0.1","0.8"],
+      ["节日活动--支付成功","Festivalactivities-Paymentsucceeded","+1203.0%","1.6","21.5"],
+      ["节日活动--提交订单","Festivalactivities-order","+834.2%","6.5","61.0"],
+      ["节日活动-曝光","Festivalactivities-show","+608.4%","97.0","687.2"],
+      ["车况页-点击通知","CK-notification","+465.7%","13.9","78.5"],
+      ["设备信息-点击违停提示","Device-NPR","+292.3%","0.1","0.2"],
+      ["云相册页-VIP入口点击","Cloudalbum-vipclick","+21.4%","1.6","2.0"],
+      ["服务页-点击安装教程","SP-insttutorial","+17.0%","31.8","37.2"],
+      ["车况页-功能区-点击ETC消费账单","CK-FA-ETCfee","+16.0%","4.2","4.8"],
+      ["车况页-点击停车记录","CK-parkingrecord","+15.5%","6.5","7.5"],
+      ["服务页-点击停车记录","SP-parkingrecord","+15.4%","159.9","184.5"],
+      ["车辆位置页-点击导航","Vehiclelocation-navigate","+15.3%","221.6","255.4"],
+      ["电子围栏页-曝光","Electronicfence-show","+15.1%","56.1","64.6"],
+      ["服务页-点击电子围栏","SP-electronicfence","+15.1%","56.1","64.6"],
+      ["门店洗车-点击门店","Carwash-goods","+14.6%","7.1","8.2"],
+      ["停车详情页-点击导航按钮","Parkdetails-nav","+14.3%","78.7","90.0"],
+      ["服务页-点击一键加油","SP-refuel","+14.3%","26.1","29.8"],
+      ["广告页-点击广告","ads-POPclick","+13.8%","147.0","167.3"],
+      ["车况页-点击小金条","CK-privilegebar","+13.3%","59.4","67.3"],
+      ["免流量看车页-直播页曝光","Freedatatraffic-live-show","+12.2%","76.8","86.2"],
+      ["服务页-点击驾驶数据","SP-drivingdata","+10.9%","133.4","147.8"],
+      ["车况页-下拉地图","CK-Pulldownthemap","新增","—","0.2"],
+      ["抓拍分享列表页面-AI总结次数上限弹窗","Snap-AI-popclick","新增","—","0.1"],
     ];
 
-    const fmt = (n) => n.toLocaleString("en-US");
+    const iosLifts = [
+      ["导航路线页曝光","nav-choose-show","+199倍","8.6","1729.0"],
+      ["导航路线页点击直播","nav-choose-live","+131倍","1.8","240.0"],
+      ["导航页面曝光","nav-show","+63倍","1.6","104.2"],
+      ["紧急时刻列表页-点击直播","EMoment-liveclick","+481.6%","471.2","2740.5"],
+      ["车况页-点击顶部跑马灯","CK-notification","+414.6%","34.5","177.8"],
+      ["导航页面点击直播","nav-live","+387.5%","0.6","3.0"],
+      ["节日活动--提交订单","Festivalactivities-order","+331.7%","20.3","87.5"],
+      ["节日活动-曝光","Festivalactivities-show","+299.3%","287.8","1149.5"],
+      ["节日活动--支付成功","Festivalactivities-Paymentsucceeded","+296.2%","13.0","51.5"],
+      ["直播页面-打开AR开关","live-open-AR","+246.8%","57.3","198.8"],
+      ["车辆直播页面-点击播放","Live-show-play","+181.9%","1155.7","3257.8"],
+      ["车辆直播页面-点击一键寻车","Live-nav","+146.0%","61.9","152.2"],
+      ["车辆直播页面-点击实时拍照","Live-photo","+100.5%","66.3","133.0"],
+      ["服务页-点击紧急救援","SP-emergencyrescue","+62.5%","4.6","7.5"],
+      ["云相册页-VIP入口点击","Cloudalbum-vipclick","+62.5%","0.8","1.2"],
+      ["车辆直播页面-点击实时录像","Live-video","+60.4%","115.7","185.5"],
+      ["车辆位置页-点击导航","Vehiclelocation-navigate","+60.1%","224.8","360.0"],
+      ["服务页-点击特惠洗车","SP-carwash","+58.5%","9.5","15.0"],
+      ["车况页-点击停车记录","CK-parkingrecord","+53.7%","3147.8","4837.0"],
+      ["电子围栏页-曝光","Electronicfence-show","+50.0%","29.5","44.2"],
+      ["服务页-点击电子围栏","SP-electronicfence","+45.9%","30.5","44.5"],
+      ["车况页--ETC账单-点击更多","CK-ETCfee-more","+43.9%","5.0","7.2"],
+      ["服务页-点击VIP专属权益","SP-VIPbenefits","+42.8%","38.0","54.2"],
+      ["车辆直播页面曝光","Live-show","+40.3%","3994.3","5603.8"],
+      ["系统-前台运行","sys-run","+39.0%","6056.2","8418.5"],
+      ["服务页-点击预约安装","SP-apptforinst","+39.0%","11.7","16.2"],
+      ["云相册页-VIP弹窗点击","Cloudalbum-POPclick","+36.7%","199.8","273.0"],
+      ["服务页-点击停车记录","SP-parkingrecord","+34.3%","106.8","143.5"],
+      ["服务页-点击驾驶数据","SP-drivingdata","+33.7%","88.3","118.0"],
+      ["停车记录页-曝光","Parkingrecord-show","+31.9%","4373.6","5770.2"],
+      ["服务页-点击VIP充值","SP-VIPrecharge","+29.3%","36.2","46.8"],
+      ["紧急救援页-曝光","Emergencyrescue-show","+26.1%","139.2","175.5"],
+      ["停车记录页-点击停车详情","Parkingrecord-parkdetails","+23.2%","1510.6","1860.5"],
+      ["停车详情页-点击查看照片","Parkdetails-picture","+21.8%","656.5","799.5"],
+      ["驾驶数据页-曝光","DDP-show","+21.1%","873.9","1058.8"],
+      ["车况页-功能区-点击VIP充值","CK-FA-VIPrecharge","+21.1%","67.9","82.2"],
+      ["停车详情页-点击导航按钮","Parkdetails-nav","+20.8%","38.5","46.5"],
+      ["服务页-点击ETC消费账单","SP-ETCfee","+20.7%","111.9","135.0"],
+      ["车况页-点击驾驶数据","CK-drivingdata","+20.6%","810.3","977.0"],
+      ["云相册页-VIP弹窗曝光","Cloudalbum-POPshow","+20.3%","17.0","20.5"],
+      ["驾驶数据页-点击历史轨迹","DDP-historicaltrajectory","+19.3%","115.7","138.0"],
+      ["系统-后台暂停","sys-suspend","+16.8%","9188.6","10731.8"],
+      ["车况页-功能区-点击特惠洗车","CK-FA-carwash","+16.4%","48.8","56.8"],
+      ["免流量看车页-点击链接WiFi","Freedatatraffic-wificlick","+16.3%","62.3","72.5"],
+      ["车况页-功能区-点击免流量看车","CK-FA-freedatatraffic","+15.8%","199.5","231.0"],
+      ["车况页-点击小金条","CK-privilegebar","+15.0%","47.8","55.0"],
+      ["抓拍分享列表页面-点击操作视频","Snap-show-opvideo","+15.0%","49.1","56.5"],
+      ["抓拍分享列表页面-点击生成AI内容","Snap-GAIclick","+14.8%","12.2","14.0"],
+      ["门店洗车-点击门店","Carwash-goods","+14.1%","5.0","5.8"],
+      ["抓拍分享列表页面-点击图片视频","Snap-picturevideo","+13.9%","144.2","164.2"],
+      ["紧急时刻列表页面-点击分享","EMoment-share","+12.1%","16.7","18.8"],
+      ["车况页-点击地图","CK-Expandthemap","+11.3%","4.3","4.8"],
+      ["抓拍分享列表页面-点击解说","Snap-Introductionclick","+11.1%","6.1","6.8"],
+      ["车况页-功能区-点击云相册","CK-FA-cloudalbum","+10.3%","274.3","302.5"],
+      ["云相册页-曝光","Cloudalbum-show","+10.2%","274.5","302.5"],
+      ["设备信息-点击违停提示","Device-NPR","新增","—","0.2"],
+    ];
+
     const tick = { color: "#94a3b8", font: { size: 10 } };
     Chart.defaults.color = "#94a3b8";
     Chart.defaults.borderColor = "rgba(148,163,184,.12)";
     Chart.defaults.font.family = '"PingFang SC","Helvetica Neue",Arial,sans-serif';
 
-    function renderDetail(idx) {
-      const label = dailyLabels[idx];
-      const dau = dailyDau[idx];
-      const mom = dailyMom[idx];
-      const momPct = ((dau - mom) / mom) * 100;
-      const post = postDetails.find((d) => d.label === label);
-      document.getElementById("detailTitle").textContent = `${label} 明细`;
-      document.getElementById("detailStats").innerHTML = `
-        <div class="stat"><div class="v">${fmt(dau)}</div><div class="l">当日日活</div></div>
-        <div class="stat"><div class="v info">${fmt(mom)}</div><div class="l">上月同日</div></div>
-        <div class="stat"><div class="v ${momPct >= 0 ? "" : ""}" style="color:${momPct >= 0 ? "var(--good)" : "var(--warn)"}">${momPct >= 0 ? "+" : ""}${momPct.toFixed(1)}%</div><div class="l">上月同期</div></div>
-        <div class="stat"><div class="v info">${idx >= RELEASE_IDX ? "发布后" : "发布前"}</div><div class="l">阶段</div></div>
-      `;
-      document.getElementById("detailNote").textContent = post
-        ? `周同比 ${post.wow} · 年同比 ${post.yoy}${post.note ? " · " + post.note : ""}`
-        : (label === "6/16" ? "异常高峰 39,996（与本次发布无关）" : "点击曲线任意日期查看明细；虚线为发布前 7 日均值。");
-
-      document.querySelectorAll("#postTable tr").forEach((tr) => {
-        tr.classList.toggle("active", tr.dataset.label === label);
-      });
+    function releaseLinesPlugin(marks, refValue, refLabel) {
+      return {
+        id: "marks" + Math.random(),
+        afterDraw(chart) {
+          const ctx = chart.ctx;
+          const { top, bottom, left, right } = chart.chartArea;
+          ctx.save();
+          ctx.setLineDash([4, 4]);
+          marks.forEach(({ idx, label }) => {
+            const x = chart.scales.x.getPixelForValue(idx);
+            ctx.strokeStyle = "rgba(148,163,184,.7)";
+            ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bottom); ctx.stroke();
+            ctx.fillStyle = "#cbd5e1"; ctx.font = "11px sans-serif";
+            ctx.fillText(label, x + 4, top + 12);
+          });
+          if (refValue) {
+            const y = chart.scales.y.getPixelForValue(refValue);
+            ctx.strokeStyle = "rgba(148,163,184,.5)";
+            ctx.beginPath(); ctx.moveTo(left, y); ctx.lineTo(right, y); ctx.stroke();
+            ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif";
+            ctx.fillText(refLabel, right - 130, y - 6);
+          }
+          ctx.restore();
+        },
+      };
     }
 
-    const dailyChart = new Chart(document.getElementById("dailyChart"), {
+    new Chart(document.getElementById("dauTotalChart"), {
       type: "line",
       data: {
-        labels: dailyLabels,
+        labels: dates,
+        datasets: [{
+          label: "总日活", data: dauTotal,
+          borderColor: "#3b82f6", backgroundColor: "rgba(59,130,246,.15)",
+          fill: true, tension: .25, pointRadius: 2, pointHoverRadius: 5, borderWidth: 2,
+        }],
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: "index", intersect: false },
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 14 }, grid: { display: false } },
+          y: { min: 29000, max: 41000, ticks: tick },
+        },
+      },
+      plugins: [releaseLinesPlugin(
+        [{ idx: IDX_REL_A, label: "7/14 双端发布" }, { idx: IDX_REL_I, label: "7/23 iOS发布" }],
+        33695, "7/14前7日均 33,695")],
+    });
+
+    new Chart(document.getElementById("dauPlatformChart"), {
+      type: "line",
+      data: {
+        labels: dates,
         datasets: [
-          {
-            label: "本期日活",
-            data: dailyDau,
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59,130,246,.15)",
-            fill: true,
-            tension: 0.25,
-            pointRadius: 3,
-            pointHoverRadius: 6,
-            borderWidth: 2,
-          },
-          {
-            label: "上月同期",
-            data: dailyMom,
-            borderColor: "#94a3b8",
-            backgroundColor: "transparent",
-            fill: false,
-            tension: 0.25,
-            pointRadius: 2,
-            pointHoverRadius: 5,
-            borderWidth: 1.5,
-          },
+          { label: "iOS", data: dauIos, borderColor: "#38bdf8", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
+          { label: "安卓", data: dauAndroid, borderColor: "#22c55e", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
+          { label: "鸿蒙", data: dauHarmony, borderColor: "#f59e0b", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
         ],
       },
       options: {
         responsive: true,
         interaction: { mode: "index", intersect: false },
-        onClick: (_evt, elements) => {
-          if (elements.length) renderDetail(elements[0].index);
-        },
-        plugins: {
-          legend: { display: true, labels: { boxWidth: 12, color: "#94a3b8" } },
-          tooltip: {
-            callbacks: {
-              footer: () => "点击查看明细",
-            },
-          },
-        },
+        plugins: { legend: { labels: { boxWidth: 12, color: "#94a3b8" } } },
         scales: {
-          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 16 }, grid: { display: false } },
-          y: { min: 29000, max: 41000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 14 }, grid: { display: false } },
+          y: { min: 5000, max: 20000, ticks: tick },
         },
       },
-      plugins: [{
-        id: "refLine",
-        afterDraw(chart) {
-          const y = chart.scales.y.getPixelForValue(PRE7_MEAN);
-          const xRel = chart.scales.x.getPixelForValue(RELEASE_IDX);
-          const { left, right, top, bottom } = chart.chartArea;
-          const ctx = chart.ctx;
-          ctx.save();
-          ctx.strokeStyle = "rgba(148,163,184,.7)";
-          ctx.setLineDash([4, 4]);
-          ctx.beginPath();
-          ctx.moveTo(left, y);
-          ctx.lineTo(right, y);
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.moveTo(xRel, top);
-          ctx.lineTo(xRel, bottom);
-          ctx.stroke();
-          ctx.setLineDash([]);
-          ctx.fillStyle = "#94a3b8";
-          ctx.font = "11px sans-serif";
-          ctx.fillText("发布前7日均 33,695", right - 120, y - 6);
-          ctx.fillText("7/14 发布", xRel + 4, top + 12);
-          ctx.restore();
-        },
-      }],
+      plugins: [releaseLinesPlugin(
+        [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }], null, "")],
     });
 
-    new Chart(document.getElementById("weekChart"), {
-      type: "bar",
+    new Chart(document.getElementById("launchAndroidChart"), {
+      type: "line",
       data: {
-        labels: ["5/4","5/11","5/18","5/25","6/1","6/8","6/15","6/22","6/29","7/6","7/13","7/20"],
+        labels: dates,
         datasets: [{
-          label: "周均 DAU",
-          data: [32081,31118,31390,32281,32572,31779,34559,31760,33303,33819,35480,34590],
-          backgroundColor: "rgba(56,189,248,.65)",
-          borderRadius: 4,
+          label: "Android 启动次数", data: launchAndroid,
+          borderColor: "#22c55e", backgroundColor: "rgba(34,197,94,.12)",
+          fill: true, tension: .25, pointRadius: 2, borderWidth: 2,
         }],
       },
       options: {
         responsive: true,
-        onClick: (_e, els) => {
-          if (!els.length) return;
-          const labels = ["5/4","5/11","5/18","5/25","6/1","6/8","6/15","6/22","6/29","7/6","7/13","7/20"];
-          const vals = [32081,31118,31390,32281,32572,31779,34559,31760,33303,33819,35480,34590];
-          const i = els[0].index;
-          alert(`${labels[i]} 周均日活：${vals[i].toLocaleString()}`);
-        },
+        interaction: { mode: "index", intersect: false },
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: tick, grid: { display: false } },
-          y: { min: 30000, max: 36000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }, grid: { display: false } },
+          y: { min: 38000, max: 54000, ticks: tick },
         },
       },
+      plugins: [releaseLinesPlugin([{ idx: IDX_REL_A, label: "7/14 发布" }], 45252, "发布前7日均 45,252")],
     });
 
-    new Chart(document.getElementById("wowChart"), {
-      type: "bar",
+    new Chart(document.getElementById("launchIosChart"), {
+      type: "line",
       data: {
-        labels: ["7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"],
+        labels: dates,
         datasets: [{
-          label: "WoW %",
-          data: [0.7, 9.6, 7.6, 12.0, 5.1, 2.1, 10.3, -5.5, -5.9],
-          backgroundColor: (ctx) => (ctx.raw >= 0 ? "rgba(34,197,94,.7)" : "rgba(245,158,11,.75)"),
-          borderRadius: 4,
+          label: "iOS 启动次数", data: launchIos,
+          borderColor: "#38bdf8", backgroundColor: "rgba(56,189,248,.12)",
+          fill: true, tension: .25, pointRadius: 2, borderWidth: 2,
         }],
       },
       options: {
         responsive: true,
-        onClick: (_e, els) => {
-          if (!els.length) return;
-          const i = els[0].index;
-          const label = ["7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22"][i];
-          const idx = dailyLabels.indexOf(label);
-          if (idx >= 0) renderDetail(idx);
-        },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: { label: (c) => `${c.parsed.y}%` } },
-        },
-        scales: {
-          x: { ticks: tick, grid: { display: false } },
-          y: { ticks: { ...tick, callback: (v) => v + "%" }, grid: { color: "rgba(148,163,184,.12)" } },
-        },
-      },
-    });
-
-    new Chart(document.getElementById("monthChart"), {
-      type: "bar",
-      data: {
-        labels: ["1月","2月","3月","4月","5月","6月","7月*"],
-        datasets: [{
-          label: "月均 DAU",
-          data: [31439,34817,32477,31976,31753,32777,34244],
-          backgroundColor: "rgba(59,130,246,.65)",
-          borderRadius: 4,
-        }],
-      },
-      options: {
-        responsive: true,
+        interaction: { mode: "index", intersect: false },
         plugins: { legend: { display: false } },
         scales: {
-          x: { ticks: tick, grid: { display: false } },
-          y: { min: 30000, max: 36000, ticks: tick, grid: { color: "rgba(148,163,184,.12)" } },
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 12 }, grid: { display: false } },
+          y: { min: 42000, max: 80000, ticks: tick },
         },
       },
+      plugins: [releaseLinesPlugin([{ idx: IDX_REL_I, label: "7/23 发布" }], 50617, "发布前7日均 50,617")],
     });
 
-    const tbody = document.getElementById("postTable");
-    postDetails.forEach((d) => {
-      const tr = document.createElement("tr");
-      tr.className = "clickable";
-      tr.dataset.label = d.label;
-      const tone = d.tone === "ok" ? "ok" : d.tone === "warn" ? "warn" : d.tone === "info" ? "info" : "";
-      tr.innerHTML = `
-        <td><span class="dot ${tone}"></span>${d.label} ${d.weekday}</td>
-        <td class="num">${fmt(d.dau)}</td>
-        <td class="num">${d.wow}</td>
-        <td class="num">${d.yoy}</td>
-        <td class="num">${d.momPct}</td>
-        <td>${d.note}</td>`;
-      tr.addEventListener("click", () => {
-        const idx = dailyLabels.indexOf(d.label);
-        renderDetail(idx);
-        dailyChart.setActiveElements([{ datasetIndex: 0, index: idx }]);
-        dailyChart.tooltip.setActiveElements([{ datasetIndex: 0, index: idx }], { x: 0, y: 0 });
-        dailyChart.update();
-        document.getElementById("dayDetail").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    function fillTable(id, rows) {
+      const tbody = document.querySelector(`#${id} tbody`);
+      rows.forEach(([name, eid, lift, pre, post]) => {
+        const tr = document.createElement("tr");
+        const cls = lift === "新增" ? "lift-new" : "lift-hi";
+        tr.innerHTML = `<td>${name}</td><td style="color:var(--muted)">${eid}</td><td class="num ${cls}">${lift}</td><td class="num">${pre}</td><td class="num">${post}</td>`;
+        tbody.appendChild(tr);
       });
-      tbody.appendChild(tr);
-    });
-
-    renderDetail(RELEASE_IDX);
+    }
+    fillTable("androidEventTable", androidLifts);
+    fillTable("iosEventTable", iosLifts);
   </script>
 </body>
 </html>
