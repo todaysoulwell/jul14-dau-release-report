@@ -122,13 +122,7 @@
     <div class="card">
       <div class="card-head"><h3>各端日活走势（6/15–8/2）</h3><span>人 · 图例可点击开关</span></div>
       <canvas id="dauPlatformChart" height="120"></canvas>
-      <p class="hint">iOS 自 7/23 起台阶式上移，7/30 后稳定在 1.75–1.85 万；安卓与鸿蒙 7/14 冲高后回到 1.25–1.35 万 / 0.72–0.75 万的原有区间。当前占比约 iOS 47% / 安卓 34% / 鸿蒙 19%。绝对值坐标下三端体量不同、涨幅难以直观比较，见下方指数化对比。</p>
-    </div>
-
-    <div class="card">
-      <div class="card-head"><h3>各端日活指数化对比（消除体量差，直接比涨幅）</h3><span>指数 · 各端 7/7–7/13 日均 = 100 · 6/15–8/2</span></div>
-      <canvas id="dauIndexChart" height="120"></canvas>
-      <p class="hint">把各端发布前一周（7/7–7/13）日均定为 100 后，分化一目了然：iOS 自 7/23 起脱离基线持续爬升，8/2 达 129（+29%）；安卓 7/14 冲到 109 后回落至 100 附近，8/2 为 107；鸿蒙冲到 114 后回落，8/2 为 109。7/17 尖峰为系统通知所致（不计入均值）。</p>
+      <p class="hint">iOS 自 7/23 起台阶式上移，7/30 后稳定在 1.75–1.85 万；安卓与鸿蒙 7/14 冲高后回到 1.25–1.35 万 / 0.72–0.75 万的原有区间。当前占比约 iOS 47% / 安卓 34% / 鸿蒙 19%。</p>
     </div>
 
     <div class="grid2">
@@ -494,37 +488,6 @@
       },
       plugins: [releaseLinesPlugin(
         [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }], null, "")],
-    });
-
-    const dauIdxIos = [103.8,130.6,102.4,105.9,110.3,94.9,92.6,99.0,95.8,94.0,94.8,96.1,93.0,92.6,103.8,101.1,95.1,94.4,105.2,99.3,95.6,101.7,105.7,96.8,97.0,106.5,99.9,96.1,98.0,103.4,102.3,99.4,123.2,101.9,94.5,105.7,97.4,97.1,102.9,112.2,113.8,113.5,120.0,127.6,122.2,125.0,126.7,123.1,129.3];
-    const dauIdxAndroid = [102.8,105.5,97.8,104.3,99.7,96.9,96.6,98.6,94.1,93.7,95.3,97.4,95.3,92.9,104.0,101.0,94.3,94.8,107.2,100.3,98.3,101.0,104.2,95.3,97.2,105.7,100.8,97.6,99.2,109.0,109.4,105.1,109.5,105.4,101.9,109.4,99.3,98.6,99.2,102.4,101.8,99.7,100.9,113.2,100.7,105.2,105.4,100.8,107.2];
-    const dauIdxHarmony = [95.8,117.8,103.7,97.2,100.7,91.7,89.9,94.6,92.7,90.4,88.9,90.0,89.3,89.2,99.2,99.7,92.1,90.9,99.7,95.5,94.8,101.1,103.8,98.1,96.2,103.5,100.1,98.9,99.4,103.4,106.2,112.8,123.8,112.2,104.5,114.4,105.1,105.9,104.6,112.0,100.4,100.8,103.8,110.4,105.2,105.4,108.9,104.1,108.7];
-
-    new Chart(document.getElementById("dauIndexChart"), {
-      type: "line",
-      data: {
-        labels: dates,
-        datasets: [
-          { label: "iOS", data: dauIdxIos, borderColor: "#38bdf8", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
-          { label: "安卓", data: dauIdxAndroid, borderColor: "#22c55e", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
-          { label: "鸿蒙", data: dauIdxHarmony, borderColor: "#f59e0b", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
-        ],
-      },
-      options: {
-        responsive: true,
-        interaction: { mode: "index", intersect: false },
-        plugins: {
-          legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
-          tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + "（基线=100）" } },
-        },
-        scales: {
-          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 14 }, grid: { display: false } },
-          y: { min: 85, max: 135, ticks: tick },
-        },
-      },
-      plugins: [releaseLinesPlugin(
-        [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }],
-        100, "发布前基线 = 100")],
     });
 
     new Chart(document.getElementById("launchAndroidChart"), {
