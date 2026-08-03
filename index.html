@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>小万出行 · 7 月新版本发布数据分析</title>
+  <title>小万出行 · 7 月版本发布数据分析（复盘至 8/2）</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
   <style>
     :root {
@@ -40,11 +40,11 @@
       color: #93c5fd; margin-left: 8px; vertical-align: middle;
     }
     .callout {
-      background: rgba(245,158,11,.08);
-      border: 1px solid rgba(245,158,11,.32);
+      background: rgba(34,197,94,.07);
+      border: 1px solid rgba(34,197,94,.3);
       border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;
     }
-    .callout strong { color: var(--warn); display: block; margin-bottom: 4px; }
+    .callout strong { color: var(--good); display: block; margin-bottom: 4px; }
     .callout p { margin: 0; color: #d1d5db; font-size: 14px; }
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
     .stats.c3 { grid-template-columns: repeat(3, 1fr); }
@@ -92,110 +92,177 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>小万出行 · 7 月新版本发布数据分析<span class="pill">日活 / 启动 / 功能埋点</span></h1>
-    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活数据至 7/26 · 启动次数剔除 7/27 非整日 · 埋点窗口 6/27–7/26 · 功能清单已按评审剔除运营活动及非版本相关埋点</p>
+    <h1>小万出行 · 7 月版本发布数据分析<span class="pill">复盘至 8/2 · 日活 / 启动 / 版本 / 留存 / 时长 / 埋点</span></h1>
+    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 数据截至 8/2 ｜ 除日活外，鸿蒙不参与分析 ｜ 功能清单已按评审剔除运营活动及非版本相关埋点</p>
 
     <div class="callout">
-      <strong>核心结论</strong>
-      <p>7/14 安卓与鸿蒙发布带来的日活提升是「脉冲式」的：首周（7/14–7/20）安卓 +7.1%、鸿蒙 +11.1%，但次周快速回落，至 7/25–7/26 两端均已基本回到发布前水平（安卓 +0.7%、鸿蒙 +0.6%），本次发布对安卓/鸿蒙日活<b>无可持续拉动</b>。总日活后段仍偏高，主要由 7/23 iOS 发布带动（iOS 末 2 日 +13.7%），iOS 效果是否可持续需观察满 14 天。启动次数侧：Android 同样脉冲后回落（次周已低于发布前 -4.6%），iOS 发布后跳升 +45%。功能侧经筛选后：Android 版本相关提升集中在导航路线页（4 项）；iOS 有 18 项，集中在导航与直播链路。</p>
+      <strong>核心结论（相比上次复盘的更新）</strong>
+      <p>两端走出了完全不同的曲线。<b>iOS 发布后不是脉冲而是持续抬升</b>：日活第 1 周 +13.0%、第 2 周升至 +22.7%，活跃用户次日留存从 48.3% 跳到 57.9%（+9.6pp）、新增用户次日留存 +10.2pp，留存改善支撑了增长的可持续性；8/2 新版渗透已达 88%（活跃口径）。<b>安卓/鸿蒙确认为「脉冲后回落」</b>：安卓第 2 周日活仅 +0.3%、启动次数 -4.7%，留存全线持平，第 3 周仅小幅企稳（+5.4%）；安卓新版渗透 70%，明显慢于 iOS，仍有 23.6% 活跃用户停留在 6.9.0。功能侧两端共同的确定性增量是「导航路线页 + 直播链路」，iOS 新版用户人均启动 4.14 次/天（安卓 3.37），均高于全端均值。</p>
     </div>
 
-    <h2>一、日活分析</h2>
+    <h2>一、日活分析（含鸿蒙）</h2>
     <div class="stats">
-      <div class="stat"><div class="v warn">+6.7% → +3.7%</div><div class="l">总日活 首周 → 次周（vs 发布前 7 天）</div></div>
-      <div class="stat"><div class="v warn">+7.1% → +0.7%</div><div class="l">安卓 首周 → 末 2 日（已回落）</div></div>
-      <div class="stat"><div class="v warn">+11.1% → +0.6%</div><div class="l">鸿蒙 首周 → 末 2 日（已回落）</div></div>
-      <div class="stat"><div class="v">+13.7%</div><div class="l">iOS 末 2 日（7/23 发布带动）</div></div>
+      <div class="stat"><div class="v">+13.0% → +22.7%</div><div class="l">iOS 第1周 → 第2周（vs 发布前 7 天）</div></div>
+      <div class="stat"><div class="v warn">+7.1% → +0.3%</div><div class="l">安卓 第1周 → 第2周（脉冲回落）</div></div>
+      <div class="stat"><div class="v warn">+11.1% → +4.7%</div><div class="l">鸿蒙 第1周 → 第2周（脉冲回落）</div></div>
+      <div class="stat"><div class="v info">+14.4%</div><div class="l">总日活 7/28–8/2（主要由 iOS 拉动）</div></div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>总日活走势（6/15–7/26）</h3><span>人 · 竖虚线=发布节点 · 横虚线=7/14 前 7 日均</span></div>
+      <div class="card-head"><h3>总日活走势（6/15–8/2）</h3><span>人 · 竖虚线=发布节点 · 横虚线=7/14 前 7 日均</span></div>
       <canvas id="dauTotalChart" height="110"></canvas>
-      <p class="hint">7/14–7/20 冲高后于 7/21–7/22 回落至 3.35 万，7/23 后再度抬升由 iOS 发布贡献。6/16 与 7/17 为异常高峰日。</p>
+      <p class="hint">7/14（Android+鸿蒙）后冲高回落；7/23（iOS）后再度抬升且未回落，7/28–8/2 日均 38,536（vs 发布前 +14.4%），8/2 报 39,386 接近区间高点。</p>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>各端日活走势（6/15–7/26）</h3><span>人 · 图例可点击开关</span></div>
+      <div class="card-head"><h3>各端日活走势（6/15–8/2）</h3><span>人 · 图例可点击开关</span></div>
       <canvas id="dauPlatformChart" height="120"></canvas>
-      <p class="hint">安卓与鸿蒙在 7/14 后冲高、7/21 起回落，7/25–7/26 基本回到发布前水平；iOS 自 7/23 发布后连续 3 天站上 1.6 万+。当前占比约 iOS 45% / 安卓 35% / 鸿蒙 20%。</p>
+      <p class="hint">iOS 自 7/23 起台阶式上移，7/30 后稳定在 1.75–1.85 万；安卓与鸿蒙 7/14 冲高后回到 1.25–1.35 万 / 0.72–0.75 万的原有区间。当前占比约 iOS 47% / 安卓 34% / 鸿蒙 19%。</p>
     </div>
 
     <div class="grid2">
       <div class="card">
         <div class="card-head"><h3>各端分周对比（vs 各自发布前 7 日均）</h3></div>
         <table>
-          <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">首周日均</th><th class="num">次周日均</th><th class="num">末2日(7/25-26)</th></tr></thead>
+          <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">第1周日均</th><th class="num">第2周日均</th><th class="num">第3周起日均</th></tr></thead>
           <tbody>
-            <tr><td>总体</td><td class="num">33,695</td><td class="num lift-hi">35,968 (+6.7%)</td><td class="num">34,928 (+3.7%)</td><td class="num">35,784 (+6.2%)</td></tr>
-            <tr><td>安卓</td><td class="num">12,482</td><td class="num lift-hi">13,371 (+7.1%)</td><td class="num lift-down">12,502 (+0.2%)</td><td class="num lift-down">12,575 (+0.7%)</td></tr>
-            <tr><td>鸿蒙</td><td class="num">6,906</td><td class="num lift-hi">7,670 (+11.1%)</td><td class="num lift-down">7,238 (+4.8%)</td><td class="num lift-down">6,946 (+0.6%)</td></tr>
-            <tr><td>iOS</td><td class="num">14,307</td><td class="num">14,927 (+4.3%)</td><td class="num lift-hi">15,188 (+6.2%)</td><td class="num lift-hi">16,264 (+13.7%)</td></tr>
+            <tr><td>总体</td><td class="num">33,695</td><td class="num lift-hi">35,968 (+6.7%)</td><td class="num">35,215 (+4.5%)</td><td class="num lift-hi">38,536 (+14.4%)</td></tr>
+            <tr><td>安卓</td><td class="num">12,482</td><td class="num lift-hi">13,371 (+7.1%)</td><td class="num lift-down">12,515 (+0.3%)</td><td class="num lift-down">13,161 (+5.4%)</td></tr>
+            <tr><td>鸿蒙</td><td class="num">6,906</td><td class="num lift-hi">7,670 (+11.1%)</td><td class="num lift-down">7,228 (+4.7%)</td><td class="num lift-down">7,400 (+7.1%)</td></tr>
+            <tr><td>iOS</td><td class="num">14,697</td><td class="num lift-hi">16,601 (+13.0%)</td><td class="num lift-hi">18,029 (+22.7%)</td><td class="num">—</td></tr>
           </tbody>
         </table>
-        <p class="hint">首周 = 7/14–7/20；次周 = 7/21–7/26。iOS 次周与末 2 日的抬升来自其自身 7/23 发布，与 7/14 版本无关。</p>
+        <p class="hint">安卓/鸿蒙按 7/14 对齐（第3周起 = 7/28–8/2）；iOS 按 7/23 对齐（第1周 = 7/23–7/29，第2周 = 7/30–8/2）。总体第 3 周的 +14.4% 主要由 iOS 贡献。</p>
       </div>
       <div class="note-card">
         <h3>解读</h3>
         <ul>
-          <li><b>安卓/鸿蒙：脉冲式提升，无持续性。</b>发布后首周冲高（合计 +8.5%），次周回落到 +1.8%，末 2 日仅 +0.7%，基本回到发布前水平。</li>
-          <li>总日活次周仍高于发布前，容易造成「有增长」的错觉——拆端后可见增量几乎全部来自 iOS 7/23 发布。</li>
-          <li>iOS 发布后 4 天 +7.7%（末 2 日 +13.7%），但参考安卓/鸿蒙的回落节奏，需满 14 天再判断可持续性。</li>
-          <li>7/17 总日活 39,845 为异常冲高日，或与运营活动相关，建议与运营日历核对。</li>
+          <li><b>iOS：增长可持续。</b>发布后 11 天日活未回落且逐周走高，配合次日留存 +9.6pp（见第四节），是留存驱动的结构性抬升，而非脉冲。</li>
+          <li><b>安卓/鸿蒙：确认脉冲后回落。</b>第 2 周基本回到基线；第 3 周安卓 +5.4%（其中 7/28 单日 14,134 异常冲高），仅能算低位企稳，远低于首周脉冲。</li>
+          <li>同一版本在两端结果分化，需结合渗透差（iOS 88% vs 安卓 70%）与端上功能体验差异归因，不宜简单归结为「版本无效」。</li>
         </ul>
       </div>
     </div>
 
     <h2>二、启动次数分析</h2>
     <div class="stats">
-      <div class="stat"><div class="v warn">+6.1% → -4.6%</div><div class="l">Android 首周 → 次周（vs 发布前 7 天）</div></div>
-      <div class="stat"><div class="v bad">-9.0%</div><div class="l">Android 同比去年同期</div></div>
-      <div class="stat"><div class="v">73,527</div><div class="l">iOS 日均（7/23 后）</div></div>
-      <div class="stat"><div class="v">+45.3%</div><div class="l">iOS vs 发布前 7 天</div></div>
+      <div class="stat"><div class="v warn">+6.1% → -4.7%</div><div class="l">Android 第1周 → 第2周（vs 发布前 7 天）</div></div>
+      <div class="stat"><div class="v plain">+0.1%</div><div class="l">Android 第3周起（7/28–8/2）已回基线</div></div>
+      <div class="stat"><div class="v">+45%</div><div class="l">iOS 发布后日启动（7.0–7.6 万/天）</div></div>
+      <div class="stat"><div class="v">75,198</div><div class="l">iOS 8/2 全天启动（快照，仍处高位）</div></div>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>Android 启动次数</h3><span>次 · 发布日 7/14</span></div>
+        <div class="card-head"><h3>Android 日启动次数（6/15–8/2）</h3><span>次 · 发布日 7/14</span></div>
         <canvas id="launchAndroidChart" height="150"></canvas>
-        <p class="hint">与日活同样呈脉冲：发布日冲至 51,688（WoW +10%）后回落，首周 +6.1%，次周 43,173 已低于发布前（-4.6%），同比 -9%。启动黏性问题比日活更明显。</p>
+        <p class="hint">发布日冲至 51,688 后逐步回落：第 1 周 +6.1%、第 2 周 -4.7%、第 3 周起 45,314（+0.1%），完整走完「脉冲—回落—回基线」。</p>
       </div>
       <div class="card">
-        <div class="card-head"><h3>iOS 启动次数</h3><span>次 · 发布日 7/23</span></div>
+        <div class="card-head"><h3>iOS 日启动次数（6/15–7/26）</h3><span>次 · 发布日 7/23</span></div>
         <canvas id="launchIosChart" height="150"></canvas>
-        <p class="hint">7/23 起跳升至 7.0–7.6 万/天（WoW +34%～+50%），而 iOS 日活仅 +7.7%——人均启动从约 3.4 升至 4.6 次/人。可能由新版功能带动高频打开，也需排除启动埋点口径变化。</p>
+        <p class="hint">7/23 起跳升至 7.0–7.6 万/天（约 +45%）。明细仅到 7/26，但 8/2 版本分布快照显示当天全端启动 75,198 次，确认高位未回落；新版 7.0.0 当日贡献 92.9% 启动。</p>
       </div>
+    </div>
+
+    <h2>三、版本分布与新版渗透（8/2 快照）</h2>
+    <div class="stats">
+      <div class="stat"><div class="v">88.4%</div><div class="l">iOS 7.0.0 活跃用户占比（发布 10 天）</div></div>
+      <div class="stat"><div class="v warn">70.1%</div><div class="l">Android 7.0.0 活跃用户占比（发布 19 天）</div></div>
+      <div class="stat"><div class="v info">4.14 vs 3.94</div><div class="l">iOS 新版 vs 全端 人均启动（次/天）</div></div>
+      <div class="stat"><div class="v info">3.37 vs 3.01</div><div class="l">Android 新版 vs 全端 人均启动（次/天）</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>Android 活跃用户版本构成</h3><span>8/2 当日活跃 15,745 人 · %</span></div>
+        <canvas id="verAndroidChart" height="170"></canvas>
+        <p class="hint">发布 19 天渗透 70.1%，仍有 23.6% 停留在 6.9.0；当日升级 2,809 人，新版累计装机 60,526。新版用户启动占全端 78.4%，人均启动比全端高 12%。</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>iOS 活跃用户版本构成</h3><span>8/2 当日活跃 19,103 人 · %</span></div>
+        <canvas id="verIosChart" height="170"></canvas>
+        <p class="hint">发布 10 天渗透即达 88.4%，快于安卓（19 天 70%）；当日升级 1,943 人，新版累计装机 43,936。新版用户启动占全端 92.9%，人均启动 4.14 次/天。</p>
+      </div>
+    </div>
+
+    <h2>四、留存分析（发布前后队列对比）</h2>
+    <div class="stats">
+      <div class="stat"><div class="v">+10.2pp</div><div class="l">iOS 新增用户次日留存（44.8% → 54.9%）</div></div>
+      <div class="stat"><div class="v">+9.6pp</div><div class="l">iOS 活跃用户次日留存（48.3% → 57.9%）</div></div>
+      <div class="stat"><div class="v plain">+0.8pp</div><div class="l">Android 新增用户次日留存（基本持平）</div></div>
+      <div class="stat"><div class="v plain">-0.1pp</div><div class="l">Android 活跃用户次日留存（持平）</div></div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>启动次数窗口对比</h3></div>
-      <table>
-        <thead><tr><th>端</th><th>发布节点</th><th class="num">发布前7日均</th><th class="num">首周日均</th><th class="num">次周日均</th><th class="num">同比去年同期</th></tr></thead>
-        <tbody>
-          <tr><td>Android</td><td>7/14</td><td class="num">45,252</td><td class="num lift-hi">48,014 (+6.1%)</td><td class="num lift-down">43,173 (-4.6%)</td><td class="num" style="color:var(--bad)">-9.0%</td></tr>
-          <tr><td>iOS</td><td>7/23</td><td class="num">50,617</td><td class="num lift-hi">73,527 (+45.3%)（仅4天）</td><td class="num">—</td><td class="num lift-hi">+49.6%</td></tr>
-        </tbody>
-      </table>
+      <div class="card-head"><h3>活跃用户次日留存率走势（队列日期 6/15–8/1）</h3><span>% · 竖虚线=发布节点</span></div>
+      <canvas id="retChart" height="120"></canvas>
+      <p class="hint">iOS 自 7/22–7/23 起出现清晰的台阶：由 45%–52% 区间跳升至 55%–59% 并保持 10 天，是日活持续增长的直接原因；Android 全程在 37%–43% 区间波动，发布前后无变化。</p>
     </div>
 
-    <h2>三、功能使用分析（提升超 10% 的埋点，经筛选后全部陈列）</h2>
-    <p class="hint">口径：按事件对比发布前后「日均独立用户数」。Android：发布前 6/27–7/13（17 天）vs 发布后 7/14–7/26（13 天）；iOS：发布前 6/27–7/22（26 天）vs 发布后 7/23–7/26（4 天）。已按评审剔除运营活动（节日活动系列）及与版本无关的埋点。</p>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>留存指标对比（发布前 6/2 起 vs 发布后队列均值）</h3></div>
+        <table>
+          <thead><tr><th>指标</th><th class="num">Android 前</th><th class="num">Android 后</th><th class="num">iOS 前</th><th class="num">iOS 后</th></tr></thead>
+          <tbody>
+            <tr><td>新增用户 D1</td><td class="num">32.7%</td><td class="num">33.6% (+0.8pp)</td><td class="num">44.8%</td><td class="num lift-hi">54.9% (+10.2pp)</td></tr>
+            <tr><td>新增用户 D7</td><td class="num">14.7%</td><td class="num">15.0% (+0.3pp)</td><td class="num">24.8%</td><td class="num lift-hi">28.3% (+3.5pp)</td></tr>
+            <tr><td>新增用户 D14</td><td class="num">12.2%</td><td class="num lift-down">9.3% (-2.9pp)</td><td class="num">21.4%</td><td class="num">队列未满</td></tr>
+            <tr><td>活跃用户 D1</td><td class="num">39.9%</td><td class="num">39.8% (-0.1pp)</td><td class="num">48.3%</td><td class="num lift-hi">57.9% (+9.6pp)</td></tr>
+            <tr><td>活跃用户 D7</td><td class="num">33.0%</td><td class="num">32.0% (-1.0pp)</td><td class="num">44.1%</td><td class="num lift-hi">47.7% (+3.6pp)</td></tr>
+            <tr><td>活跃用户 D14</td><td class="num">31.1%</td><td class="num">29.7% (-1.4pp)</td><td class="num">42.8%</td><td class="num">队列未满</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">D7 仅统计已满 7 天的队列（≤7/26），D14 仅统计 ≤7/19 的队列；iOS 发布后（7/23 起）尚无满 14 天队列。</p>
+      </div>
+      <div class="note-card">
+        <h3>解读</h3>
+        <ul>
+          <li><b>iOS 新版显著改善黏性：</b>新增/活跃次日留存各 +10pp 左右，D7 也有 +3.5pp，且新增用户 7/27 后单日 D1 多次超过 55%（峰值 62.7%）。</li>
+          <li>Android 留存无改善，甚至新增用户 D14 略降（-2.9pp，样本仅 6 个队列，噪声较大），与日活「脉冲后回落」互相印证——版本没有改变安卓用户的回访行为。</li>
+          <li>iOS 发布后新增用户队列规模日均 126（+9.4%）、活跃队列 +18.6%，量与质同升。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>五、单次使用时长分布（iOS · 8/2 快照）</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>iOS 单次使用时长分布</h3><span>占当日启动次数 % · 8/2 · 共 57,207 次采样</span></div>
+        <canvas id="durationChart" height="170"></canvas>
+      </div>
+      <div class="note-card">
+        <h3>解读</h3>
+        <ul>
+          <li>65.4% 的启动在 30 秒内结束、37.1% 不超过 10 秒——「秒开秒走」是主流用法，与查车况、看车位、瞄一眼直播的工具型场景吻合。</li>
+          <li>结合 iOS 人均启动升至 4.14 次/天：新版把使用模式推向「更高频、单次更短」，启动次数 +45% 而日活 +23%，即人均打开更勤。</li>
+          <li>3 分钟以上的长会话合计仅 9.2%（其中 30 分+ 占 3.7%，多为直播/导航常驻场景）。该数据仅有 8/2 单日快照且无发布前对照、无 Android 明细，建议后续按周导出以观察版本对时长结构的影响。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>六、功能使用分析（提升超 10% 的埋点，经筛选后全部陈列）</h2>
+    <p class="hint">口径：按事件对比发布前后「日均独立用户数」。Android：发布前 6/2–7/13（42 天）vs 发布后 7/14–8/2（20 天）；iOS：发布前 6/2–7/22（51 天）vs 发布后 7/23–8/2（11 天）。已按评审剔除运营活动（节日活动系列）及与版本无关的埋点；相比上次复盘窗口拉长，部分事件涨幅收敛、亦有新事件跨过 10% 阈值。</p>
 
     <div class="stats c3">
-      <div class="stat"><div class="v">4 个</div><div class="l">Android 版本相关提升埋点</div></div>
-      <div class="stat"><div class="v">18 个</div><div class="l">iOS 版本相关提升埋点</div></div>
+      <div class="stat"><div class="v">18 个</div><div class="l">Android 提升埋点（4 个为新功能）</div></div>
+      <div class="stat"><div class="v">24 个</div><div class="l">iOS 提升埋点</div></div>
       <div class="stat"><div class="v info">导航 + 直播</div><div class="l">两端共同增量方向</div></div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>Android（发布日 7/14）</h3><span>共 4 项 · 按提升幅度降序</span></div>
-      <table id="androidEventTable">
-        <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <div class="card-head"><h3>Android（发布日 7/14）</h3><span>共 18 项 · 按提升幅度降序 · 观测 20 天</span></div>
+      <div class="scrollbox">
+        <table id="androidEventTable">
+          <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
 
     <div class="card">
-      <div class="card-head"><h3>iOS（发布日 7/23，观测仅 4 天）</h3><span>共 18 项 · 按提升幅度降序</span></div>
+      <div class="card-head"><h3>iOS（发布日 7/23）</h3><span>共 24 项 · 按提升幅度降序 · 观测 11 天</span></div>
       <div class="scrollbox">
         <table id="iosEventTable">
           <thead><tr><th>事件名称</th><th>事件Id</th><th class="num">提升幅度</th><th class="num">发布前日均用户</th><th class="num">发布后日均用户</th></tr></thead>
@@ -208,70 +275,94 @@
       <div class="note-card">
         <h3>功能侧要点</h3>
         <ul>
-          <li>「导航路线页」为本次版本核心新功能，两端均从近零基数跃升（Android 581 人/日、iOS 1,729 人/日），是版本最确定的增量。</li>
-          <li>iOS 直播链路全面走强：紧急时刻点直播 +482%、直播页播放 +182%、AR 开关 +247%、一键寻车 +146%。</li>
-          <li>iOS 停车链路（车况页停车记录 +54%、停车记录页曝光 +32%）与前台活跃（sys-run +39%）同步上涨。</li>
+          <li>「导航路线页」仍是版本最确定的增量：Android 日均 762 人、iOS 1,654 人，均从近零基数起量且 20 天 / 11 天未衰减。</li>
+          <li>iOS 直播链路持续走强且窗口拉长后依然坚挺：紧急时刻点直播 +469%、直播页播放 +177%、AR 开关 +201%、一键寻车 +132%。</li>
+          <li>Android 版本相关提升集中在停车链路（停车记录曝光/点击更多 +16%）与直播工具（寻车 +15%、拍照 +13%），幅度远小于 iOS。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>归因注意</h3>
         <ul>
-          <li>运营活动类（节日活动系列）及非版本相关埋点已按评审从清单剔除，不计入版本收益。</li>
-          <li>iOS 发布后仅 4 天且含周末，涨幅可能被放大，建议满 14 天复核。</li>
-          <li>iOS sys-run 与启动次数同步上涨，需排查新版是否改变了启动/前台统计口径。</li>
+          <li>Android 清单中服务页 VIP/ETC/预约安装等商业化入口涨幅 10%–16%，与版本功能关联弱，建议结合运营日历复核后决定是否计入版本收益。</li>
+          <li>iOS sys-run（+45%）与启动次数同步上涨，仍需排查新版是否改变了启动/前台统计口径。</li>
+          <li>iOS 观测 11 天已跨两个完整周末，涨幅可信度高于上次 4 天复盘。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>建议下一步</h3>
         <ul>
-          <li>安卓/鸿蒙日活脉冲后回落，建议排查新功能触达与留存：导航页有曝光但是否形成复访。</li>
-          <li>iOS 满 14 天后复算日活、启动与埋点提升，警惕同样的脉冲回落。</li>
-          <li>Android 启动次数次周已低于发布前且同比 -9%，优先排查启动场景（推送、桌面组件）变化。</li>
+          <li>把 iOS 的留存增益拆到功能：对使用过导航路线页/直播的用户单独算留存，验证是哪个功能带来 +10pp。</li>
+          <li>安卓渗透仅 70%，优先推动 6.9.0 存量升级（升级引导、灰度放量），再评估功能在安卓端是否同样能拉留存。</li>
+          <li>补充 iOS 7/27 后启动明细与发布前的时长分布基线、以及 Android 时长分布，完善时长维度对照。</li>
         </ul>
       </div>
     </div>
 
-    <p class="foot">方法说明：首周 = 发布后第 1–7 天，次周 = 第 8 天起至 7/26；环比基准为发布前 7 天日均；同比为去年同日历日均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户。数据源：小万出行数据看板（日活）、启动次数明细、事件列表 20260627–20260726。</p>
+    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。留存对比：发布前 = 6/2 至发布前一日的全部队列均值，发布后 = 发布日起的已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户，剔除清单沿用 7 月评审结论。数据源：整体活跃数据看板（日活至 8/2）、Android 启动次数明细 6/2–8/2、iOS 启动次数明细至 7/26、版本分布快照 8/2、新增/活跃用户留存 6/2–8/2、事件列表 6/2–8/2、iOS 单次使用时长分布 8/2。</p>
   </div>
 
   <script>
-    const dates = ["6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2","7/3","7/4","7/5","7/6","7/7","7/8","7/9","7/10","7/11","7/12","7/13","7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22","7/23","7/24","7/25","7/26"];
+    const dates = ["6/15","6/16","6/17","6/18","6/19","6/20","6/21","6/22","6/23","6/24","6/25","6/26","6/27","6/28","6/29","6/30","7/1","7/2","7/3","7/4","7/5","7/6","7/7","7/8","7/9","7/10","7/11","7/12","7/13","7/14","7/15","7/16","7/17","7/18","7/19","7/20","7/21","7/22","7/23","7/24","7/25","7/26","7/27","7/28","7/29","7/30","7/31","8/1","8/2"];
     const IDX_REL_A = 29; // 7/14
     const IDX_REL_I = 38; // 7/23
 
-    const dauTotal = [34306,39996,34028,34885,35171,32010,31516,33006,31852,31380,31599,32122,31360,30998,34671,33956,31735,31623,35309,33333,32496,34138,35298,32521,32655,35578,33784,32762,33265,35543,35637,35128,39845,35491,33453,36677,33575,33518,34333,36572,35928,35641];
-    const dauAndroid = [12833,13170,12211,13018,12440,12094,12059,12301,11740,11693,11895,12152,11894,11591,12975,12611,11771,11834,13380,12522,12274,12610,13009,11901,12131,13191,12576,12182,12381,13607,13659,13124,13672,13157,12720,13660,12389,12307,12385,12782,12710,12440];
-    const dauIos = [14856,18689,14652,15151,15776,13581,13247,14169,13711,13447,13563,13753,13302,13249,14845,14460,13603,13510,15044,14213,13673,14544,15117,13847,13882,15242,14293,13751,14016,14795,14641,14217,17621,14582,13514,15117,13928,13898,14721,16054,16287,16241];
-    const dauHarmony = [6617,8137,7165,6716,6955,6335,6210,6536,6401,6240,6141,6217,6164,6158,6851,6885,6361,6279,6885,6598,6549,6984,7172,6773,6642,7145,6915,6829,6868,7141,7337,7787,8552,7752,7219,7900,7258,7313,7227,7736,6931,6960];
-    const launchAndroid = [44594,46799,43822,50402,46327,44465,44233,43003,41743,41956,41786,43787,42871,40922,44533,44115,42516,42147,48941,45627,43890,45974,46935,42165,43694,48909,45998,44033,45029,51688,49578,46559,49301,47420,44922,46630,42197,42225,43680,43795,44976,42166];
+    const dauTotal = [34306,39996,34028,34885,35171,32010,31516,33006,31852,31380,31599,32122,31360,30998,34671,33956,31735,31623,35309,33333,32496,34138,35298,32521,32655,35578,33784,32762,33265,35543,35637,35128,39845,35491,33453,36677,33575,33518,34333,36572,35928,35641,36936,40019,37320,38289,38811,37390,39386];
+    const dauAndroid = [12833,13170,12211,13018,12440,12094,12059,12301,11740,11693,11895,12152,11894,11591,12975,12611,11771,11834,13380,12522,12274,12610,13009,11901,12131,13191,12576,12182,12381,13607,13659,13124,13672,13157,12720,13660,12389,12307,12385,12782,12710,12440,12593,14134,12575,13129,13161,12583,13384];
+    const dauIos = [14856,18689,14652,15151,15776,13581,13247,14169,13711,13447,13563,13753,13302,13249,14845,14460,13603,13510,15044,14213,13673,14544,15117,13847,13882,15242,14293,13751,14016,14795,14641,14217,17621,14582,13514,15117,13928,13898,14721,16054,16287,16241,17171,18258,17478,17880,18126,17615,18495];
+    const dauHarmony = [6617,8137,7165,6716,6955,6335,6210,6536,6401,6240,6141,6217,6164,6158,6851,6885,6361,6279,6885,6598,6549,6984,7172,6773,6642,7145,6915,6829,6868,7141,7337,7787,8552,7752,7219,7900,7258,7313,7227,7736,6931,6960,7172,7627,7267,7280,7524,7192,7507];
+    const launchAndroid = [44594,46799,43822,50402,46327,44465,44233,43003,41743,41956,41786,43787,42871,40922,44533,44115,42516,42147,48941,45627,43890,45974,46935,42165,43694,48909,45998,44033,45029,51688,49578,46559,49301,47420,44922,46630,42197,42225,43680,43795,44976,42166,42780,46435,42538,44467,46184,44836,47426];
+    // iOS 启动次数明细仅到 7/26
     const launchIos = [49900,59066,49069,54880,50616,46882,46441,50533,48585,46487,47860,49928,47270,45750,51350,50003,47135,47197,54660,49174,47476,50522,54648,48663,49374,54830,49430,46656,50042,51309,51228,48971,57104,49919,47366,52211,48189,50561,72593,76274,74679,70561];
+    // 活跃用户次日留存率（%），队列日期 6/15–8/1
+    const retD1Android = [41.11,39.97,42.63,36.72,37.9,39.45,37.03,40.12,41.21,42.18,41.41,37.9,38.44,38.56,40.25,39.08,41.14,43.15,38.02,38.98,36.88,41.64,38.85,41.9,41.79,38.64,39.9,37.58,42.88,41.18,40.6,41.48,37.76,38.47,39.47,38.85,40.87,41.46,41.53,37.96,39.7,37.81,41.44,37.57,40.8,40.6,37.54,40.95];
+    const retD1Ios = [56.09,43.69,49.5,47.1,42.49,45.14,47.14,48.52,48.98,49.72,49.9,45.17,46.68,49.18,49.86,46.94,48.64,51.53,46.06,46.13,48.12,51.85,48.12,49.77,51.33,47.13,47.96,45.82,50.32,47.81,48.69,54.67,42.42,45.0,48.2,46.81,48.93,54.46,58.62,55.92,56.3,57.25,59.08,57.66,59.35,59.33,56.34,58.77];
 
     const androidLifts = [
-      ["导航路线页曝光","nav-choose-show","+1411倍","0.4","581.7"],
-      ["导航路线页点击直播","nav-choose-live","+252倍","0.1","29.8"],
-      ["导航页面曝光","nav-show","+26倍","0.4","9.5"],
-      ["导航页面点击直播","nav-live","+13倍","0.1","0.8"],
+      ["导航路线页曝光","nav-choose-show","新功能","0.2","761.8"],
+      ["导航路线页点击直播","nav-choose-live","新功能","0.0","38.1"],
+      ["导航页面曝光","nav-show","新功能","0.1","13.3"],
+      ["导航页面点击直播","nav-live","新功能","0.0","0.9"],
+      ["车况页--停车记录-点击更多","CK-parkingrecord-more","+16.4%","3,269.7","3,805.4"],
+      ["停车记录页-曝光","Parkingrecord-show","+16.2%","3,347.7","3,889.6"],
+      ["服务页-点击预约安装","SP-apptforinst","+16.0%","15.9","18.4"],
+      ["服务页-点击VIP专属权益","SP-VIPbenefits","+15.6%","53.2","61.5"],
+      ["车辆直播页面-点击一键寻车","Live-nav","+15.3%","139.5","160.9"],
+      ["服务页-点击ETC消费账单","SP-ETCfee","+15.1%","150.4","173.1"],
+      ["服务页-点击VIP充值","SP-VIPrecharge","+12.9%","50.9","57.5"],
+      ["车辆直播页面-点击实时拍照","Live-photo","+12.6%","138.4","155.9"],
+      ["车况页-功能区-点击免流量看车","CK-FA-freedatatraffic","+11.9%","309.1","345.9"],
+      ["ETC账单-曝光","ETCfee-show","+11.4%","797.9","888.9"],
+      ["停车记录页-点击停车详情","Parkingrecord-parkdetails","+11.1%","1,993.2","2,213.8"],
+      ["直播页面-打开AR开关","live-open-AR","+11.0%","102.1","113.3"],
+      ["驾驶数据页-点击驾驶报告","DDP-drivingreport","+10.2%","285.7","314.9"],
+      ["车况页--ETC账单-点击更多","CK-ETCfee-more","+10.0%","274.4","301.9"],
     ];
 
     const iosLifts = [
-      ["导航路线页曝光","nav-choose-show","+199倍","8.6","1729.0"],
-      ["导航路线页点击直播","nav-choose-live","+131倍","1.8","240.0"],
-      ["导航页面曝光","nav-show","+63倍","1.6","104.2"],
-      ["紧急时刻列表页-点击直播","EMoment-liveclick","+481.6%","471.2","2740.5"],
-      ["导航页面点击直播","nav-live","+387.5%","0.6","3.0"],
-      ["直播页面-打开AR开关","live-open-AR","+246.8%","57.3","198.8"],
-      ["车辆直播页面-点击播放","Live-show-play","+181.9%","1155.7","3257.8"],
-      ["车辆直播页面-点击一键寻车","Live-nav","+146.0%","61.9","152.2"],
-      ["车辆直播页面-点击实时拍照","Live-photo","+100.5%","66.3","133.0"],
-      ["车辆直播页面-点击实时录像","Live-video","+60.4%","115.7","185.5"],
-      ["车辆位置页-点击导航","Vehiclelocation-navigate","+60.1%","224.8","360.0"],
-      ["车况页-点击停车记录","CK-parkingrecord","+53.7%","3147.8","4837.0"],
-      ["车辆直播页面曝光","Live-show","+40.3%","3994.3","5603.8"],
-      ["系统-前台运行","sys-run","+39.0%","6056.2","8418.5"],
-      ["停车记录页-曝光","Parkingrecord-show","+31.9%","4373.6","5770.2"],
-      ["停车记录页-点击停车详情","Parkingrecord-parkdetails","+23.2%","1510.6","1860.5"],
-      ["停车详情页-点击查看照片","Parkdetails-picture","+21.8%","656.5","799.5"],
-      ["驾驶数据页-曝光","DDP-show","+21.1%","873.9","1058.8"],
+      ["导航路线页曝光","nav-choose-show","+376倍","4.4","1,654.1"],
+      ["导航路线页点击直播","nav-choose-live","+195倍","0.9","180.8"],
+      ["导航页面曝光","nav-show","+112倍","0.8","93.1"],
+      ["紧急时刻列表页-点击直播","EMoment-liveclick","+469.2%","451.0","2,566.9"],
+      ["直播页面-打开AR开关","live-open-AR","+201.4%","55.0","165.8"],
+      ["车辆直播页面-点击播放","Live-show-play","+177.1%","1,133.0","3,139.3"],
+      ["车辆直播页面-点击一键寻车","Live-nav","+131.7%","61.2","141.8"],
+      ["车辆直播页面-点击实时拍照","Live-photo","+85.6%","66.5","123.5"],
+      ["车况页-点击停车记录","CK-parkingrecord","+66.9%","3,095.9","5,167.2"],
+      ["车辆位置页-点击导航","Vehiclelocation-navigate","+52.0%","224.3","341.0"],
+      ["车辆直播页面-点击实时录像","Live-video","+50.7%","115.2","173.5"],
+      ["系统-前台运行","sys-run","+45.1%","6,030.0","8,748.5"],
+      ["车辆直播页面曝光","Live-show","+44.1%","3,909.8","5,634.6"],
+      ["停车记录页-曝光","Parkingrecord-show","+40.2%","4,341.0","6,086.0"],
+      ["服务页-点击一键加油","SP-refuel","+31.1%","17.2","22.5"],
+      ["停车记录页-点击停车详情","Parkingrecord-parkdetails","+28.2%","1,503.1","1,927.5"],
+      ["停车详情页-点击查看照片","Parkdetails-picture","+24.3%","660.9","821.7"],
+      ["驾驶数据页-曝光","DDP-show","+20.1%","876.9","1,053.1"],
+      ["ETC账单-曝光","ETCfee-show","+13.6%","597.9","679.3"],
+      ["系统-点击打开","sys-open","+13.2%","12,917.7","14,629.1"],
+      ["服务页-点击安装教程","SP-insttutorial","+11.4%","20.3","22.6"],
+      ["驾驶数据页-点击驾驶报告","DDP-drivingreport","+11.3%","52.0","57.9"],
+      ["首页-点击直播弹窗","home-poplive","+10.7%","11.0","12.2"],
+      ["车况页-直播模块-点击全屏按钮","CK-live-fullscreen","+10.1%","716.7","789.1"],
     ];
 
     const tick = { color: "#94a3b8", font: { size: 10 } };
@@ -288,6 +379,7 @@
           ctx.save();
           ctx.setLineDash([4, 4]);
           marks.forEach(({ idx, label }) => {
+            if (idx >= chart.data.labels.length) return;
             const x = chart.scales.x.getPixelForValue(idx);
             ctx.strokeStyle = "rgba(148,163,184,.7)";
             ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bottom); ctx.stroke();
@@ -378,7 +470,7 @@
     new Chart(document.getElementById("launchIosChart"), {
       type: "line",
       data: {
-        labels: dates,
+        labels: dates.slice(0, 42),
         datasets: [{
           label: "iOS 启动次数", data: launchIos,
           borderColor: "#38bdf8", backgroundColor: "rgba(56,189,248,.12)",
@@ -395,6 +487,81 @@
         },
       },
       plugins: [releaseLinesPlugin([{ idx: IDX_REL_I, label: "7/23 发布" }], 50617, "发布前7日均 50,617")],
+    });
+
+    new Chart(document.getElementById("verAndroidChart"), {
+      type: "bar",
+      data: {
+        labels: ["7.0.0（新版）", "6.9.0", "6.7.8", "6.7.0", "其他"],
+        datasets: [{ label: "活跃用户占比", data: [70.1, 23.6, 3.0, 2.3, 1.0], backgroundColor: ["#22c55e","#64748b","#64748b","#64748b","#64748b"], borderRadius: 4 }],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + "%" } } },
+        scales: {
+          x: { max: 100, ticks: { ...tick, callback: v => v + "%" } },
+          y: { ticks: tick, grid: { display: false } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("verIosChart"), {
+      type: "bar",
+      data: {
+        labels: ["7.0.0（新版）", "6.9.0", "6.7.0", "6.7.7", "其他"],
+        datasets: [{ label: "活跃用户占比", data: [88.4, 8.7, 1.1, 0.9, 0.9], backgroundColor: ["#38bdf8","#64748b","#64748b","#64748b","#64748b"], borderRadius: 4 }],
+      },
+      options: {
+        indexAxis: "y",
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + "%" } } },
+        scales: {
+          x: { max: 100, ticks: { ...tick, callback: v => v + "%" } },
+          y: { ticks: tick, grid: { display: false } },
+        },
+      },
+    });
+
+    new Chart(document.getElementById("retChart"), {
+      type: "line",
+      data: {
+        labels: dates.slice(0, 48),
+        datasets: [
+          { label: "iOS 次日留存", data: retD1Ios, borderColor: "#38bdf8", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
+          { label: "Android 次日留存", data: retD1Android, borderColor: "#22c55e", backgroundColor: "transparent", tension: .25, pointRadius: 2, borderWidth: 2 },
+        ],
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + "%" } },
+        },
+        scales: {
+          x: { ticks: { ...tick, maxRotation: 0, autoSkip: true, maxTicksLimit: 14 }, grid: { display: false } },
+          y: { min: 35, max: 62, ticks: { ...tick, callback: v => v + "%" } },
+        },
+      },
+      plugins: [releaseLinesPlugin(
+        [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }], null, "")],
+    });
+
+    new Chart(document.getElementById("durationChart"), {
+      type: "bar",
+      data: {
+        labels: ["1-3秒","4-10秒","11-30秒","31秒-1分","1-3分","3-10分","10-30分","30分+"],
+        datasets: [{ label: "启动次数占比", data: [16.43,20.67,28.27,14.46,10.97,3.79,1.7,3.72], backgroundColor: "#38bdf8", borderRadius: 4 }],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + "%" } } },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { ticks: { ...tick, callback: v => v + "%" } },
+        },
+      },
     });
 
     function fillTable(id, rows) {
