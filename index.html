@@ -97,7 +97,7 @@
 
     <div class="callout">
       <strong>核心结论（相比上次复盘的更新）</strong>
-      <p>两端走出了完全不同的曲线。<b>iOS 发布后不是脉冲而是持续抬升</b>：日活第 1 周 +13.0%、第 2 周升至 +22.7%，活跃用户次日留存从 48.3% 跳到 57.9%（+9.6pp）、新增用户次日留存 +10.2pp，留存改善支撑了增长的可持续性；8/2 新版渗透已达 88%（活跃口径）。<b>安卓/鸿蒙确认为「脉冲后回落」</b>：安卓第 2 周日活仅 +0.3%、启动次数 -4.7%，留存全线持平，第 3 周仅小幅企稳（+5.4%）；安卓新版渗透 70%，明显慢于 iOS，仍有 23.6% 活跃用户停留在 6.9.0。功能侧两端共同的确定性增量是「导航路线页 + 直播链路」，iOS 新版用户人均启动 4.14 次/天（安卓 3.37），均高于全端均值。</p>
+      <p>两端走出了完全不同的曲线。<b>iOS 发布后不是脉冲而是持续抬升</b>：日活第 1 周 +13.0%、第 2 周升至 +22.7%，活跃用户次日留存从 48.3% 跳到 57.9%（+9.6pp）、新增用户次日留存 +10.2pp，留存改善支撑了增长的可持续性；8/2 新版渗透已达 88%（活跃口径）。<b>安卓/鸿蒙确认为「脉冲后回落」</b>：安卓第 2 周日活仅 +0.3%、启动次数 -4.7%，留存全线持平，第 3 周仅小幅企稳（+5.4%）；安卓新版渗透 70%，明显慢于 iOS，仍有 23.6% 活跃用户停留在 6.9.0。功能侧两端共同的确定性增量是「导航路线页 + 直播链路」，并直接反映在使用深度上：iOS 人均日使用时长从 2.5 分钟升至 8.4 分钟（×3.3，反超安卓），安卓 +24%。</p>
     </div>
 
     <h2>一、日活分析（含鸿蒙）</h2>
@@ -167,22 +167,40 @@
 
     <h2>三、版本分布与新版渗透（8/2 快照）</h2>
     <div class="stats">
-      <div class="stat"><div class="v">88.4%</div><div class="l">iOS 7.0.0 活跃用户占比（发布 10 天）</div></div>
-      <div class="stat"><div class="v warn">70.1%</div><div class="l">Android 7.0.0 活跃用户占比（发布 19 天）</div></div>
+      <div class="stat"><div class="v">88.4% / 26.9%</div><div class="l">iOS 7.0.0 渗透：活跃用户 / 累计用户</div></div>
+      <div class="stat"><div class="v warn">70.1% / 18.0%</div><div class="l">Android 7.0.0 渗透：活跃用户 / 累计用户</div></div>
       <div class="stat"><div class="v info">4.14 vs 3.94</div><div class="l">iOS 新版 vs 全端 人均启动（次/天）</div></div>
       <div class="stat"><div class="v info">3.37 vs 3.01</div><div class="l">Android 新版 vs 全端 人均启动（次/天）</div></div>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>Android 活跃用户版本构成</h3><span>8/2 当日活跃 15,745 人 · %</span></div>
-        <canvas id="verAndroidChart" height="170"></canvas>
-        <p class="hint">发布 19 天渗透 70.1%，仍有 23.6% 停留在 6.9.0；当日升级 2,809 人，新版累计装机 60,526。新版用户启动占全端 78.4%，人均启动比全端高 12%。</p>
+        <div class="card-head"><h3>Android 版本构成：活跃用户 vs 累计用户</h3><span>8/2 · 当日活跃 15,745 / 累计装机 335,980</span></div>
+        <canvas id="verAndroidChart" height="200"></canvas>
+        <p class="hint">活跃口径渗透 70.1%（发布 19 天），但累计装机口径仅 18.0%——累计 33.6 万装机中当日活跃仅 4.7%，6.9.0（35.8%）和 6.6.1（17.8%）沉淀着大量沉默用户。当日升级 2,809 人，新版累计装机 60,526。</p>
       </div>
       <div class="card">
-        <div class="card-head"><h3>iOS 活跃用户版本构成</h3><span>8/2 当日活跃 19,103 人 · %</span></div>
-        <canvas id="verIosChart" height="170"></canvas>
-        <p class="hint">发布 10 天渗透即达 88.4%，快于安卓（19 天 70%）；当日升级 1,943 人，新版累计装机 43,936。新版用户启动占全端 92.9%，人均启动 4.14 次/天。</p>
+        <div class="card-head"><h3>iOS 版本构成：活跃用户 vs 累计用户</h3><span>8/2 · 当日活跃 19,103 / 累计装机 163,465</span></div>
+        <canvas id="verIosChart" height="200"></canvas>
+        <p class="hint">活跃口径渗透 88.4%（发布仅 10 天），累计装机口径 26.9%——累计 16.3 万装机中当日活跃 11.7%，活跃率是安卓（4.7%）的 2.5 倍。当日升级 1,943 人，新版累计装机 43,936。</p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="note-card">
+        <h3>活跃 vs 累计口径的含义</h3>
+        <ul>
+          <li><b>两个口径的巨大差值（iOS 88% vs 27%、安卓 70% vs 18%）说明：还在活跃的用户升级得很快，旧版本里沉淀的主要是流失/沉默用户。</b></li>
+          <li>安卓的存量问题更突出：33.6 万累计装机中约 12 万停留在 6.9.0、近 6 万停留在 6.6.1，这批用户若能通过推送/换机召回，新版功能（导航、直播）是现成的召回抓手。</li>
+          <li>iOS 累计装机 16.3 万小于安卓，但活跃率高一倍以上（11.7% vs 4.7%），大盘质量更好。</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>口径说明</h3>
+        <ul>
+          <li>累计用户 = 该版本历史累计装机（截止 8/2），同一用户升级后会计入多个版本，因此累计口径反映的是「最后停留版本」的分布。</li>
+          <li>活跃率 = 8/2 当日活跃用户 ÷ 累计用户，衡量历史装机盘子的存活质量。</li>
+        </ul>
       </div>
     </div>
 
@@ -226,24 +244,24 @@
       </div>
     </div>
 
-    <h2>五、单次使用时长分布（发布前 7/5 vs 发布后 8/2）</h2>
+    <h2>五、使用时长分析（发布前 7/5 vs 发布后 8/2）</h2>
     <div class="stats">
-      <div class="stat"><div class="v">0.08% → 3.72%</div><div class="l">iOS 30分+ 会话占比（35 → 2,126 次，×61）</div></div>
-      <div class="stat"><div class="v">3.7% → 9.2%</div><div class="l">iOS 3分以上会话合计占比</div></div>
-      <div class="stat"><div class="v info">0.18% → 0.81%</div><div class="l">Android 30分+ 会话占比（77 → 369 次）</div></div>
-      <div class="stat"><div class="v info">70.6% → 65.4%</div><div class="l">iOS 30秒内会话占比（短会话占比下降）</div></div>
+      <div class="stat"><div class="v">48秒 → 2分43秒</div><div class="l">iOS 平均单次使用时长（×3.4）</div></div>
+      <div class="stat"><div class="v">2.5 → 8.4 分钟</div><div class="l">iOS 人均日使用时长（×3.3）</div></div>
+      <div class="stat"><div class="v info">78秒 → 99秒</div><div class="l">Android 平均单次使用时长（+27%）</div></div>
+      <div class="stat"><div class="v info">4.6 → 5.6 分钟</div><div class="l">Android 人均日使用时长（+24%）</div></div>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>Android 单次使用时长分布（发布日 7/14）</h3><span>占当日启动次数 % · 7/5 共 42,924 次 / 8/2 共 45,568 次</span></div>
-        <canvas id="durationAndroidChart" height="170"></canvas>
-        <p class="hint">结构小幅右移：10 秒内短会话占比 24.1% → 21.2%（-2.9pp），31 秒以上各档均升，30 分+ 从 77 次增至 369 次（×4.8）。方向与 iOS 一致但幅度小得多。</p>
+        <div class="card-head"><h3>平均单次使用时长</h3><span>秒 · 由时长分布按区间中点折算 · 7/5 vs 8/2 快照</span></div>
+        <canvas id="avgSessionChart" height="170"></canvas>
+        <p class="hint">发布前 iOS 单次仅 48 秒、不到安卓（78 秒）的 2/3；发布后 iOS 冲到 163 秒反超安卓（99 秒）。</p>
       </div>
       <div class="card">
-        <div class="card-head"><h3>iOS 单次使用时长分布（发布日 7/23）</h3><span>占当日启动次数 % · 7/5 共 43,057 次 / 8/2 共 57,207 次</span></div>
-        <canvas id="durationIosChart" height="170"></canvas>
-        <p class="hint">长尾显著变长：10-30 分会话 0.45% → 1.7%（192 → 975 次），30 分+ 从 0.08% 跳到 3.72%（35 → 2,126 次，×61），3 分以上合计 3.7% → 9.2%。与直播/导航常驻场景吻合。</p>
+        <div class="card-head"><h3>人均日使用时长</h3><span>分钟 · 当日总使用时长 ÷ 当日日活 · 7/5 vs 8/2 快照</span></div>
+        <canvas id="dailyDurationChart" height="170"></canvas>
+        <p class="hint">iOS 人均每天使用从 2.5 分钟升到 8.4 分钟（×3.3）；安卓从 4.6 到 5.6 分钟（+24%）。iOS 完成了对安卓的反超。</p>
       </div>
     </div>
 
@@ -251,16 +269,16 @@
       <div class="note-card">
         <h3>解读</h3>
         <ul>
-          <li><b>修正此前判断：新版不是「更高频、单次更短」，而是「更高频 + 长会话显著增多」。</b>iOS 启动次数 +33%（43,057 → 57,207）的同时，长会话占比同步上升，两头都在涨。</li>
-          <li>iOS 30 分+ 会话从 35 次/天暴增到 2,126 次/天，量级上与新增的直播观看（车辆直播播放 +177%、紧急时刻点直播 +469%）和导航路线页常驻场景对应——新功能创造了此前不存在的长时使用场景。</li>
-          <li>「秒开秒走」仍是两端主流（iOS 30 秒内 65%、Android 51%），工具属性未变；变化发生在长尾。</li>
+          <li><b>发布前 iOS 是「用得最浅」的端（单次 48 秒、日均 2.5 分钟），发布后变成「用得最深」的端（单次 163 秒、日均 8.4 分钟）——版本对 iOS 使用深度的改变是数量级的。</b></li>
+          <li>iOS 时长增量几乎全部来自长会话：30 分钟以上会话从 35 次/天增至 2,126 次/天、10–30 分钟从 192 增至 975 次，对应直播观看与导航常驻两个新场景；短会话占比反而在降。</li>
+          <li>安卓同方向但温和（单次 +27%、日均 +24%），且人均启动次数基本没变（3.50 → 3.40 次/天）——安卓的时长增长全部来自「单次变长」，而 iOS 是「单次变长」和「日活里更多人打开」共同作用。</li>
         </ul>
       </div>
       <div class="note-card">
         <h3>口径说明</h3>
         <ul>
-          <li>7/5 为两端发布前的共同基线（周日），8/2 为发布后快照（周日），同为周日可排除周内效应。</li>
-          <li>Android 8/2 时已发布 19 天（渗透 70%），iOS 已发布 10 天（渗透 88%）；仍为单日快照对比，建议按周导出观察趋势稳定性。</li>
+          <li>平均单次时长 = Σ(各档启动次数 × 档位中点) ÷ 总启动次数；30 分+ 档按 45 分钟计。若保守按 30 分钟计，iOS 8/2 为 130 秒 / 日均 6.7 分钟，结论方向不变。</li>
+          <li>人均日使用时长 = 当日总使用时长 ÷ 当日日活（日活取活跃数据看板口径）。7/5 与 8/2 均为周日，可排除周内效应；仍为单日快照，建议按周导出复核。</li>
         </ul>
       </div>
     </div>
@@ -512,38 +530,41 @@
       plugins: [releaseLinesPlugin([{ idx: IDX_REL_I, label: "7/23 发布" }], 50617, "发布前7日均 50,617")],
     });
 
+    const verOpts = {
+      indexAxis: "y",
+      responsive: true,
+      plugins: {
+        legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.x + "%" } },
+      },
+      scales: {
+        x: { max: 100, ticks: { ...tick, callback: v => v + "%" } },
+        y: { ticks: tick, grid: { display: false } },
+      },
+    };
+
     new Chart(document.getElementById("verAndroidChart"), {
       type: "bar",
       data: {
-        labels: ["7.0.0（新版）", "6.9.0", "6.7.8", "6.7.0", "其他"],
-        datasets: [{ label: "活跃用户占比", data: [70.1, 23.6, 3.0, 2.3, 1.0], backgroundColor: ["#22c55e","#64748b","#64748b","#64748b","#64748b"], borderRadius: 4 }],
+        labels: ["7.0.0（新版）", "6.9.0", "6.7.8", "6.7.0", "6.6.1", "6.4.1", "其他"],
+        datasets: [
+          { label: "活跃用户占比", data: [70.1, 23.6, 3.0, 2.3, 0.4, 0.1, 0.5], backgroundColor: "#22c55e", borderRadius: 4 },
+          { label: "累计用户占比", data: [18.0, 35.8, 8.4, 6.8, 17.8, 5.6, 7.6], backgroundColor: "#64748b", borderRadius: 4 },
+        ],
       },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + "%" } } },
-        scales: {
-          x: { max: 100, ticks: { ...tick, callback: v => v + "%" } },
-          y: { ticks: tick, grid: { display: false } },
-        },
-      },
+      options: verOpts,
     });
 
     new Chart(document.getElementById("verIosChart"), {
       type: "bar",
       data: {
-        labels: ["7.0.0（新版）", "6.9.0", "6.7.0", "6.7.7", "其他"],
-        datasets: [{ label: "活跃用户占比", data: [88.4, 8.7, 1.1, 0.9, 0.9], backgroundColor: ["#38bdf8","#64748b","#64748b","#64748b","#64748b"], borderRadius: 4 }],
+        labels: ["7.0.0（新版）", "6.9.0", "6.7.7", "6.7.0", "6.6.1", "其他"],
+        datasets: [
+          { label: "活跃用户占比", data: [88.4, 8.7, 0.9, 1.1, 0.3, 0.6], backgroundColor: "#38bdf8", borderRadius: 4 },
+          { label: "累计用户占比", data: [26.9, 32.1, 7.6, 3.9, 13.8, 15.7], backgroundColor: "#64748b", borderRadius: 4 },
+        ],
       },
-      options: {
-        indexAxis: "y",
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.x + "%" } } },
-        scales: {
-          x: { max: 100, ticks: { ...tick, callback: v => v + "%" } },
-          y: { ticks: tick, grid: { display: false } },
-        },
-      },
+      options: verOpts,
     });
 
     new Chart(document.getElementById("retChart"), {
@@ -571,41 +592,42 @@
         [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }], null, "")],
     });
 
-    const durationLabels = ["1-3秒","4-10秒","11-30秒","31秒-1分","1-3分","3-10分","10-30分","30分+"];
-    const durationOpts = {
-      responsive: true,
-      plugins: {
-        legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
-        tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + "%" } },
-      },
-      scales: {
-        x: { ticks: tick, grid: { display: false } },
-        y: { ticks: { ...tick, callback: v => v + "%" } },
-      },
-    };
+    function durationOpts(unit) {
+      return {
+        responsive: true,
+        plugins: {
+          legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + " " + unit } },
+        },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { ticks: { ...tick, callback: v => v + " " + unit } },
+        },
+      };
+    }
 
-    new Chart(document.getElementById("durationAndroidChart"), {
+    new Chart(document.getElementById("avgSessionChart"), {
       type: "bar",
       data: {
-        labels: durationLabels,
+        labels: ["Android", "iOS"],
         datasets: [
-          { label: "7/5 发布前", data: [7.97,16.13,30.81,19.67,18.41,5.84,0.98,0.18], backgroundColor: "#64748b", borderRadius: 4 },
-          { label: "8/2 发布后", data: [7.03,14.2,30.16,20.93,19.5,6.34,1.03,0.81], backgroundColor: "#22c55e", borderRadius: 4 },
+          { label: "7/5 发布前", data: [78.0, 48.1], backgroundColor: "#64748b", borderRadius: 4 },
+          { label: "8/2 发布后", data: [99.2, 162.9], backgroundColor: "#38bdf8", borderRadius: 4 },
         ],
       },
-      options: durationOpts,
+      options: durationOpts("秒"),
     });
 
-    new Chart(document.getElementById("durationIosChart"), {
+    new Chart(document.getElementById("dailyDurationChart"), {
       type: "bar",
       data: {
-        labels: durationLabels,
+        labels: ["Android", "iOS"],
         datasets: [
-          { label: "7/5 发布前", data: [17.24,23.31,30.05,14.39,11.33,3.16,0.45,0.08], backgroundColor: "#64748b", borderRadius: 4 },
-          { label: "8/2 发布后", data: [16.43,20.67,28.27,14.46,10.97,3.79,1.7,3.72], backgroundColor: "#38bdf8", borderRadius: 4 },
+          { label: "7/5 发布前", data: [4.6, 2.5], backgroundColor: "#64748b", borderRadius: 4 },
+          { label: "8/2 发布后", data: [5.6, 8.4], backgroundColor: "#38bdf8", borderRadius: 4 },
         ],
       },
-      options: durationOpts,
+      options: durationOpts("分钟"),
     });
 
     function fillTable(id, rows) {
