@@ -92,7 +92,7 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>小万出行 · 7 月版本发布数据分析<span class="pill">复盘至 8/2 · 日活 / 启动 / 版本 / 留存 / 时长 / 埋点 / 订单</span></h1>
+    <h1>小万出行 · 7 月版本发布数据分析<span class="pill">复盘至 8/2 · 日活 / 启动 / 版本 / 留存 / 时长 / 埋点 / 订单 / 通知开启率</span></h1>
     <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 数据截至 8/2 ｜ 除日活外，鸿蒙不参与分析 ｜ 功能清单已按评审剔除运营活动及非版本相关埋点</p>
 
     <div class="callout">
@@ -102,6 +102,7 @@
         <li style="margin-bottom:6px;"><b>安卓/鸿蒙：脉冲后回落。</b>安卓第 2 周日活仅 +0.3%、启动次数 -4.7%（第 3 周回到基线），留存全线持平；鸿蒙第 2 周 +4.7%。安卓发布 19 天渗透仅 70%，仍有 23.6% 活跃用户停留在 6.9.0。</li>
         <li style="margin-bottom:6px;"><b>功能与使用深度：</b>两端共同的确定性增量是「导航路线页 + 直播链路」，并直接反映在使用深度上——iOS 人均日使用时长从 2.5 分钟升至 8.4 分钟（×3.3，反超安卓），安卓 +24%。</li>
         <li style="margin-bottom:6px;"><b>订单与日活：</b>剔除活动与短信影响后，iOS 订单 +17.2%，几乎完全由日活 +18.8% 解释；每千日活下单率 3.39 → 3.35（持平）。版本带动了订单量，但没有抬高转化率。</li>
+        <li style="margin-bottom:6px;"><b>系统通知开启率：</b>全端 78.08%，但 7.0.0 全面低于各端整体——iOS 新版仅 58.55%（低于 iOS 整体 14.4pp），是触达缺口最大的一端。</li>
       </ol>
       <p style="margin-top:8px; font-size:12px; color:#9aa3b2;">注：计算剔除 7/17（系统通知）与 7/28–7/29（短信通知及滞后），曲线保留这些点。</p>
     </div>
@@ -397,7 +398,43 @@
       </div>
     </div>
 
-    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。计算剔除 7/17（系统通知）、7/28–7/29（短信及滞后），曲线保留。留存对比：发布前 = 6/2 至发布前一日队列均值，发布后 = 发布日起已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均）/ 发布前日均。订单双重差分 = 活动期内 iOS 涨幅 − 安卓同窗口涨幅。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。数据源：整体活跃数据看板、启动/版本/留存/事件/时长明细、订单信息明细。</p>
+    <h2>八、系统通知开启率分析</h2>
+    <div class="callout" style="background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.32);">
+      <strong style="color:var(--warn);">明确结论</strong>
+      <p>全端通知开启率 78.08%，但 7.0.0 在三端全面低于该端整体水平。缺口最大的是 iOS：新版仅 58.55%，比 iOS 整体低 14.4pp，比安卓新版（74.53%）低 16pp。新版用户触达能力明显弱于老版本，会削弱推送/运营对日活与订单的拉动效率。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v info">78.08%</div><div class="l">全端 · 全部版本</div></div>
+      <div class="stat"><div class="v bad">58.55%</div><div class="l">iOS 7.0.0（缺口最大）</div></div>
+      <div class="stat"><div class="v warn">74.53%</div><div class="l">Android 7.0.0</div></div>
+      <div class="stat"><div class="v warn">69.77%</div><div class="l">鸿蒙 7.0.0</div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>各端系统通知开启率对比</h3><span>开启率 % · 全部版本 vs 7.0.0</span></div>
+        <canvas id="notifChart" height="170"></canvas>
+        <p class="hint">全端全部版本开启率 78.08%。三端 7.0.0 均低于该端全部版本，iOS 缺口最大。</p>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>分端明细</h3></div>
+        <table>
+          <thead><tr><th>端</th><th class="num">全部版本</th><th class="num">7.0.0</th><th class="num">差值</th></tr></thead>
+          <tbody>
+            <tr><td>全端</td><td class="num">78.08%</td><td class="num">—</td><td class="num">—</td></tr>
+            <tr><td>iOS</td><td class="num">72.99%</td><td class="num" style="color:var(--bad)">58.55%</td><td class="num" style="color:var(--bad)">-14.44pp</td></tr>
+            <tr><td>Android</td><td class="num">82.34%</td><td class="num">74.53%</td><td class="num lift-down">-7.81pp</td></tr>
+            <tr><td>鸿蒙</td><td class="num">80.30%</td><td class="num">69.77%</td><td class="num lift-down">-10.53pp</td></tr>
+          </tbody>
+        </table>
+        <ul style="margin-top:12px; padding-left:18px; color:#cbd5e1; font-size:13px;">
+          <li><b>iOS 新版通知开启率最低，且掉幅最大（-14.4pp）</b>，与 iOS 日活/留存改善形成反差——用户更活跃了，但系统推送触达面反而变窄。</li>
+          <li>安卓整体开启率最高（82.34%），新版也相对最好（74.53%）；鸿蒙居中。若依赖系统通知召回/促活，应优先排查 iOS 7.0.0 的授权引导与权限弹窗体验。</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。计算剔除 7/17（系统通知）、7/28–7/29（短信及滞后），曲线保留。留存对比：发布前 = 6/2 至发布前一日队列均值，发布后 = 发布日起已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均）/ 发布前日均。订单双重差分 = 活动期内 iOS 涨幅 − 安卓同窗口涨幅。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。系统通知开启率为当前快照口径。数据源：整体活跃数据看板、启动/版本/留存/事件/时长明细、订单信息明细、系统通知开启率快照。</p>
   </div>
 
   <script>
@@ -701,6 +738,28 @@
     }
     fillTable("androidEventTable", androidLifts);
     fillTable("iosEventTable", iosLifts);
+
+    new Chart(document.getElementById("notifChart"), {
+      type: "bar",
+      data: {
+        labels: ["iOS", "Android", "鸿蒙"],
+        datasets: [
+          { label: "全部版本", data: [72.99, 82.34, 80.3], backgroundColor: "#64748b", borderRadius: 4 },
+          { label: "7.0.0", data: [58.55, 74.53, 69.77], backgroundColor: "#38bdf8", borderRadius: 4 },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + "%" } },
+        },
+        scales: {
+          x: { ticks: tick, grid: { display: false } },
+          y: { min: 0, max: 100, ticks: { ...tick, callback: v => v + "%" } },
+        },
+      },
+    });
 
     new Chart(document.getElementById("ordersChart"), {
       type: "line",
