@@ -98,26 +98,26 @@
     <div class="callout">
       <strong>核心结论（相比上次复盘的更新）</strong>
       <ol style="margin:0; padding-left:20px; color:#d1d5db; font-size:14px;">
-        <li style="margin-bottom:6px;"><b>iOS：持续增长，非脉冲。</b>日活第 1 周 +16.8%、第 2 周升至 +26.9%，11 天无回落；启动次数第 1 周 +46.8%、第 2 周 +49.7%；新增/活跃用户次日留存各提升约 10pp，留存改善支撑增长的可持续性；发布 10 天新版渗透已达 88%（活跃口径）。</li>
+        <li style="margin-bottom:6px;"><b>iOS：持续增长，非脉冲。</b>日活第 1 周 +13.3%、第 2 周升至 +26.9%，无回落；启动次数第 1 周 +46.8%、第 2 周 +49.7%；新增/活跃用户次日留存各提升约 10pp；发布 10 天新版渗透已达 88%（活跃口径）。</li>
         <li style="margin-bottom:6px;"><b>安卓/鸿蒙：脉冲后回落。</b>安卓第 2 周日活仅 +0.3%、启动次数 -4.7%（第 3 周回到基线），留存全线持平；鸿蒙第 2 周 +4.7%。安卓发布 19 天渗透仅 70%，仍有 23.6% 活跃用户停留在 6.9.0。</li>
         <li style="margin-bottom:6px;"><b>功能与使用深度：</b>两端共同的确定性增量是「导航路线页 + 直播链路」，并直接反映在使用深度上——iOS 人均日使用时长从 2.5 分钟升至 8.4 分钟（×3.3，反超安卓），安卓 +24%。</li>
-        <li style="margin-bottom:6px;"><b>订单（已剥离 7/15 起活动影响）：</b>活动期内相对安卓，iOS 订单量多涨约 14pp（靠日活），但转化率相对安卓低了约 9pp——版本把人拉活了，没把人拉成付费。</li>
+        <li style="margin-bottom:6px;"><b>订单与日活：</b>剔除活动与短信影响后，iOS 订单 +17.2%，几乎完全由日活 +18.8% 解释；每千日活下单率 3.39 → 3.35（持平）。版本带动了订单量，但没有抬高转化率。</li>
       </ol>
-      <p style="margin-top:8px; font-size:12px; color:#9aa3b2;">注：日活计算已剔除 7/17 系统通知冲高日（曲线保留该点）。</p>
+      <p style="margin-top:8px; font-size:12px; color:#9aa3b2;">注：计算剔除 7/17（系统通知）与 7/28–7/29（短信通知及滞后），曲线保留这些点。</p>
     </div>
 
-    <h2>一、日活分析（含鸿蒙 · 计算剔除 7/17 系统通知冲高日，曲线保留）</h2>
+    <h2>一、日活分析（含鸿蒙 · 计算剔除 7/17、7/28–7/29，曲线保留）</h2>
     <div class="stats">
-      <div class="stat"><div class="v">+16.8% → +26.9%</div><div class="l">iOS 第1周 → 第2周（vs 发布前 7 天）</div></div>
+      <div class="stat"><div class="v">+13.3% → +26.9%</div><div class="l">iOS 第1周 → 第2周（vs 发布前 7 天）</div></div>
       <div class="stat"><div class="v warn">+6.7% → +0.3%</div><div class="l">安卓 第1周 → 第2周（脉冲回落）</div></div>
       <div class="stat"><div class="v warn">+8.9% → +4.7%</div><div class="l">鸿蒙 第1周 → 第2周（脉冲回落）</div></div>
-      <div class="stat"><div class="v info">+14.4%</div><div class="l">总日活 7/28–8/2（主要由 iOS 拉动）</div></div>
+      <div class="stat"><div class="v info">+14.2%</div><div class="l">总日活 7/30–8/2（主要由 iOS 拉动）</div></div>
     </div>
 
     <div class="card">
       <div class="card-head"><h3>总日活走势（6/15–8/2）</h3><span>人 · 竖虚线=发布节点 · 横虚线=7/14 前 7 日均</span></div>
       <canvas id="dauTotalChart" height="110"></canvas>
-      <p class="hint">7/14（Android+鸿蒙）后冲高回落；7/23（iOS）后再度抬升且未回落，7/28–8/2 日均 38,536（vs 发布前 +14.4%），8/2 报 39,386 接近区间高点。7/17 尖峰（39,845）为当日系统通知推送所致，曲线保留该点，但不计入任何均值计算。</p>
+      <p class="hint">7/14（Android+鸿蒙）后冲高回落；7/23（iOS）后再度抬升且未回落。7/17 为系统通知尖峰，7/28–7/29 为短信通知及滞后尖峰——曲线保留，计算均剔除。</p>
     </div>
 
     <div class="card">
@@ -128,22 +128,22 @@
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>各端分周对比（vs 各自发布前 7 日均，均剔除 7/17）</h3></div>
+        <div class="card-head"><h3>各端分周对比（vs 各自发布前 7 日均；剔除 7/17、7/28–7/29）</h3></div>
         <table>
           <thead><tr><th>端</th><th class="num">发布前7日均</th><th class="num">第1周日均</th><th class="num">第2周日均</th><th class="num">第3周起日均</th></tr></thead>
           <tbody>
-            <tr><td>总体</td><td class="num">33,695</td><td class="num lift-hi">35,322 (+4.8%)</td><td class="num">35,215 (+4.5%)</td><td class="num lift-hi">38,536 (+14.4%)</td></tr>
-            <tr><td>安卓</td><td class="num">12,482</td><td class="num lift-hi">13,321 (+6.7%)</td><td class="num lift-down">12,515 (+0.3%)</td><td class="num lift-down">13,161 (+5.4%)</td></tr>
-            <tr><td>鸿蒙</td><td class="num">6,906</td><td class="num lift-hi">7,523 (+8.9%)</td><td class="num lift-down">7,228 (+4.7%)</td><td class="num lift-down">7,400 (+7.1%)</td></tr>
-            <tr><td>iOS</td><td class="num">14,209</td><td class="num lift-hi">16,601 (+16.8%)</td><td class="num lift-hi">18,029 (+26.9%)</td><td class="num">—</td></tr>
+            <tr><td>总体</td><td class="num">33,695</td><td class="num lift-hi">35,322 (+4.8%)</td><td class="num">35,215 (+4.5%)</td><td class="num lift-hi">38,469 (+14.2%)</td></tr>
+            <tr><td>安卓</td><td class="num">12,482</td><td class="num lift-hi">13,321 (+6.7%)</td><td class="num lift-down">12,515 (+0.3%)</td><td class="num lift-down">13,064 (+4.7%)</td></tr>
+            <tr><td>鸿蒙</td><td class="num">6,906</td><td class="num lift-hi">7,523 (+8.9%)</td><td class="num lift-down">7,228 (+4.7%)</td><td class="num lift-down">7,376 (+6.8%)</td></tr>
+            <tr><td>iOS</td><td class="num">14,209</td><td class="num lift-hi">16,095 (+13.3%)</td><td class="num lift-hi">18,029 (+26.9%)</td><td class="num">—</td></tr>
           </tbody>
         </table>
-        <p class="hint">安卓/鸿蒙按 7/14 对齐（第1周为 6 天均值，7/17 剔除；第3周起 = 7/28–8/2）；iOS 按 7/23 对齐（发布前 7 日均剔除 7/17 后为 6 天；第1周 = 7/23–7/29，第2周 = 7/30–8/2）。总体第 3 周的 +14.4% 主要由 iOS 贡献。</p>
+        <p class="hint">安卓/鸿蒙按 7/14 对齐（第1周剔除 7/17；第3周起 = 7/30–8/2，剔除短信日）；iOS 按 7/23 对齐（发布前剔除 7/17；第1周 = 7/23–7/27，剔除 7/28–7/29；第2周 = 7/30–8/2）。总体第 3 周 +14.2% 主要由 iOS 贡献。</p>
       </div>
       <div class="note-card">
         <h3>解读</h3>
         <ul>
-          <li><b>iOS：增长可持续。</b>剔除 7/17 后基线更干净，发布后 11 天日活未回落且逐周走高（+16.8% → +26.9%），配合次日留存 +9.6pp（见第四节），是留存驱动的结构性抬升，而非脉冲。</li>
+          <li><b>iOS：增长可持续。</b>剔除系统通知与短信日后，发布后日活仍逐周走高（+13.3% → +26.9%），配合次日留存 +9.6pp（见第四节），是留存驱动的结构性抬升，而非脉冲。</li>
           <li><b>安卓/鸿蒙：确认脉冲后回落。</b>第 2 周基本回到基线；第 3 周安卓 +5.4%（其中 7/28 单日 14,134 异常冲高），仅能算低位企稳，远低于首周脉冲。</li>
           <li>同一版本在两端结果分化，需结合渗透差（iOS 88% vs 安卓 70%）与端上功能体验差异归因，不宜简单归结为「版本无效」。</li>
         </ul>
@@ -347,57 +347,57 @@
 
     <h2>七、订单分析（iOS 日活增长有没有带动订单？）</h2>
     <div class="callout" style="background:rgba(56,189,248,.08); border-color:rgba(56,189,248,.32);">
-      <strong style="color:var(--info);">如何剥离 7/15 起活动影响</strong>
-      <p>7/15 起两端同时进入「暑期出行+周年庆」，不能拿活动前和活动后直接比。正确做法：只在活动期内比较——「活动已开、版本未发」（7/15–7/22）vs「活动开着、版本已发」（7/23–8/2），再用安卓同窗口涨幅作对照（双重差分）。两端都吃了活动红利，多出来的部分才更接近版本贡献。</p>
+      <strong style="color:var(--info);">如何剥离活动与短信影响</strong>
+      <p>1）活动：只在活动期内比（7/15–7/22 vs 7/23–8/2），用安卓同窗口作对照。2）短信：7/28 发短信、考虑滞后把 7/29 一并剔除（曲线保留）。两端活动红利与短信冲量去掉后，剩下的才更接近版本对「日活→订单」的真实影响。</p>
     </div>
     <div class="callout" style="background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.32);">
-      <strong style="color:var(--warn);">明确结论（已剥离活动）</strong>
-      <p>剥离活动后：iOS 版本仍然带动了订单量（相对安卓多涨约 14pp），但完全没有提升下单转化率（相对安卓还少涨约 9pp）。订单增量来自日活变多，不是用户更爱买。<b>一句话：版本把人拉活了，没把人拉成付费。</b></p>
+      <strong style="color:var(--warn);">明确结论</strong>
+      <p>剔除活动与短信后：iOS 订单 +17.2%，几乎完全由日活 +18.8% 解释；每千日活下单率 3.39 → 3.35（持平，相对安卓 -2.0pp）。安卓同窗口订单几乎不动（-0.9%）。<b>一句话：日活涨多少，订单就涨多少；版本没有让人更爱买。</b></p>
     </div>
     <div class="stats">
-      <div class="stat"><div class="v">+32.4%</div><div class="l">活动期内 iOS 订单（48.4 → 64.1）</div></div>
-      <div class="stat"><div class="v info">+13.9pp</div><div class="l">相对安卓多出来的订单涨幅（版本贡献）</div></div>
-      <div class="stat"><div class="v bad">-9.2pp</div><div class="l">相对安卓的转化率涨幅（版本未提升）</div></div>
-      <div class="stat"><div class="v info">+20%</div><div class="l">同期 iOS 日活涨幅（订单增量主因）</div></div>
+      <div class="stat"><div class="v">+17.2%</div><div class="l">iOS 订单（48.4 → 56.8 单/天）</div></div>
+      <div class="stat"><div class="v info">+18.8%</div><div class="l">同期 iOS 日活（订单增量几乎等量）</div></div>
+      <div class="stat"><div class="v warn">3.39 → 3.35</div><div class="l">iOS 每千日活订单（持平）</div></div>
+      <div class="stat"><div class="v plain">-0.9%</div><div class="l">安卓对照订单（短信剔除后几乎不动）</div></div>
     </div>
 
     <div class="grid2">
       <div class="card">
         <div class="card-head"><h3>每日订单数</h3><span>单/天 · App 内已完成购买单 · 6/15–8/2</span></div>
         <canvas id="ordersChart" height="150"></canvas>
-        <p class="hint">iOS 订单自 7/23 后中枢从 40–60 单/天抬到 50–70 单/天；7/28–7/29 两端同时尖峰（安卓 242 / iOS 110 单）为「暑期出行+周年庆」活动冲量日，非版本效应。</p>
+        <p class="hint">7/28–7/29 两端尖峰（安卓 242 / iOS 110 单）为短信通知及滞后，曲线保留、计算剔除。剔除后 iOS 订单中枢从约 48 抬到约 57 单/天，与日活抬升同步。</p>
       </div>
       <div class="card">
         <div class="card-head"><h3>每千日活订单数（转化率视角）</h3><span>单/千日活 · 当日订单 ÷ 当日日活 × 1000 · 6/15–8/2</span></div>
         <canvas id="orderRateChart" height="150"></canvas>
-        <p class="hint">活动期内：iOS 每千日活订单 3.39 → 3.74（+10.3%），安卓 7.46 → 8.92（+19.6%）。安卓日活没涨、转化率却涨更多，说明活动本身在抬转化；iOS 转化率涨幅低于安卓，版本没有额外贡献。</p>
+        <p class="hint">剔除短信日后：iOS 每千日活订单 3.39 → 3.35（-1.3%），安卓 7.46 → 7.51（+0.7%）。先前看到的转化率上涨几乎全是 7/28–7/29 短信冲量，去掉后两端转化率都回到持平。</p>
       </div>
     </div>
 
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>证据拆解（活动期内双重差分）</h3></div>
+        <div class="card-head"><h3>证据拆解（活动期内 · 剔除短信日）</h3></div>
         <table>
-          <thead><tr><th>指标</th><th class="num">iOS 7/15–7/22</th><th class="num">iOS 7/23–8/2</th><th class="num">iOS 涨幅</th><th class="num">安卓同窗口涨幅</th><th class="num">版本净贡献</th></tr></thead>
+          <thead><tr><th>指标</th><th class="num">iOS 7/15–7/22</th><th class="num">iOS 7/23–8/2</th><th class="num">iOS 涨幅</th><th class="num">安卓同窗口</th><th class="num">版本净贡献</th></tr></thead>
           <tbody>
-            <tr><td>日均订单</td><td class="num">48.4</td><td class="num">64.1</td><td class="num lift-hi">+32.4%</td><td class="num">+18.6%</td><td class="num lift-hi">+13.9pp</td></tr>
-            <tr><td>每千日活订单</td><td class="num">3.39</td><td class="num">3.74</td><td class="num">+10.3%</td><td class="num">+19.6%</td><td class="num" style="color:var(--bad)">-9.2pp</td></tr>
-            <tr><td>日活</td><td class="num">14,271</td><td class="num">17,121</td><td class="num lift-hi">+20.0%</td><td class="num">持平</td><td class="num lift-hi">+20pp</td></tr>
+            <tr><td>日均订单</td><td class="num">48.4</td><td class="num">56.8</td><td class="num lift-hi">+17.2%</td><td class="num">-0.9%</td><td class="num lift-hi">+18.2pp</td></tr>
+            <tr><td>每千日活订单</td><td class="num">3.39</td><td class="num">3.35</td><td class="num">-1.3%</td><td class="num">+0.7%</td><td class="num" style="color:var(--bad)">-2.0pp</td></tr>
+            <tr><td>日活</td><td class="num">14,271</td><td class="num">16,954</td><td class="num lift-hi">+18.8%</td><td class="num">-1.6%</td><td class="num lift-hi">+20.4pp</td></tr>
           </tbody>
         </table>
-        <p class="hint">版本净贡献 = iOS 涨幅 − 安卓同窗口涨幅。订单量有净正贡献（靠日活），转化率净贡献为负（版本没抬、活动红利还不如安卓吃得足）。</p>
+        <p class="hint">日活 +18.8%、订单 +17.2%，两者几乎等量；转化率持平。安卓订单在剔除短信日后从「+18.6%」变成「-0.9%」，说明此前安卓订单冲高主要是短信造成的假象。</p>
       </div>
       <div class="note-card">
         <h3>口径说明</h3>
         <ul>
-          <li>订单 = App 内 iOS/Android 已完成购买单（剔除 WXPUB/Wap）；按创建时间归日；均值剔除 7/17。</li>
-          <li>为何不用活动前作基线：活动前（6/19–7/14）与发布后不可比——中间隔着 7/15 开活动。活动期内两端都在活动中，安卓日活又未因版本持续抬升，是更干净的对照。</li>
-          <li>局限：无法完全排除「活动对 iOS/安卓效果不同」；若要更严，需活动结束后再复盘一版。</li>
+          <li>订单 = App 内 iOS/Android 已完成购买单（剔除 WXPUB/Wap）；按创建时间归日。</li>
+          <li>剔除：7/17（系统通知）、7/28（短信）、7/29（短信滞后）；曲线保留这些点。</li>
+          <li>对照窗口：活动期内 7/15–7/22 vs 7/23–8/2（已剔短信日）。活动前基线不可用——中间隔着 7/15 开活动。</li>
         </ul>
       </div>
     </div>
 
-    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。日活计算剔除 7/17（当日系统通知推送导致全端异常冲高，曲线保留该点），涉及该日的窗口按实际剩余天数取均值。留存对比：发布前 = 6/2 至发布前一日的全部队列均值，发布后 = 发布日起的已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户，剔除清单沿用 7 月评审结论。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。数据源：整体活跃数据看板（日活至 8/2）、Android/iOS 启动次数明细至 8/2、版本分布快照 8/2、新增/活跃用户留存 6/2–8/2、事件列表 6/2–8/2、Android/iOS 单次使用时长分布（7/5、8/2 快照）、订单信息明细（App 内已完成购买单 6/3–8/2）。</p>
+    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。计算剔除 7/17（系统通知）、7/28–7/29（短信及滞后），曲线保留。留存对比：发布前 = 6/2 至发布前一日队列均值，发布后 = 发布日起已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均）/ 发布前日均。订单双重差分 = 活动期内 iOS 涨幅 − 安卓同窗口涨幅。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。数据源：整体活跃数据看板、启动/版本/留存/事件/时长明细、订单信息明细。</p>
   </div>
 
   <script>
