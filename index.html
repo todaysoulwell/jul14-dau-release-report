@@ -226,18 +226,41 @@
       </div>
     </div>
 
-    <h2>五、单次使用时长分布（iOS · 8/2 快照）</h2>
+    <h2>五、单次使用时长分布（发布前 7/5 vs 发布后 8/2）</h2>
+    <div class="stats">
+      <div class="stat"><div class="v">0.08% → 3.72%</div><div class="l">iOS 30分+ 会话占比（35 → 2,126 次，×61）</div></div>
+      <div class="stat"><div class="v">3.7% → 9.2%</div><div class="l">iOS 3分以上会话合计占比</div></div>
+      <div class="stat"><div class="v info">0.18% → 0.81%</div><div class="l">Android 30分+ 会话占比（77 → 369 次）</div></div>
+      <div class="stat"><div class="v info">70.6% → 65.4%</div><div class="l">iOS 30秒内会话占比（短会话占比下降）</div></div>
+    </div>
+
     <div class="grid2">
       <div class="card">
-        <div class="card-head"><h3>iOS 单次使用时长分布</h3><span>占当日启动次数 % · 8/2 · 共 57,207 次采样</span></div>
-        <canvas id="durationChart" height="170"></canvas>
+        <div class="card-head"><h3>Android 单次使用时长分布（发布日 7/14）</h3><span>占当日启动次数 % · 7/5 共 42,924 次 / 8/2 共 45,568 次</span></div>
+        <canvas id="durationAndroidChart" height="170"></canvas>
+        <p class="hint">结构小幅右移：10 秒内短会话占比 24.1% → 21.2%（-2.9pp），31 秒以上各档均升，30 分+ 从 77 次增至 369 次（×4.8）。方向与 iOS 一致但幅度小得多。</p>
       </div>
+      <div class="card">
+        <div class="card-head"><h3>iOS 单次使用时长分布（发布日 7/23）</h3><span>占当日启动次数 % · 7/5 共 43,057 次 / 8/2 共 57,207 次</span></div>
+        <canvas id="durationIosChart" height="170"></canvas>
+        <p class="hint">长尾显著变长：10-30 分会话 0.45% → 1.7%（192 → 975 次），30 分+ 从 0.08% 跳到 3.72%（35 → 2,126 次，×61），3 分以上合计 3.7% → 9.2%。与直播/导航常驻场景吻合。</p>
+      </div>
+    </div>
+
+    <div class="grid2">
       <div class="note-card">
         <h3>解读</h3>
         <ul>
-          <li>65.4% 的启动在 30 秒内结束、37.1% 不超过 10 秒——「秒开秒走」是主流用法，与查车况、看车位、瞄一眼直播的工具型场景吻合。</li>
-          <li>结合 iOS 人均启动升至 4.14 次/天：新版把使用模式推向「更高频、单次更短」，启动次数 +45% 而日活 +23%，即人均打开更勤。</li>
-          <li>3 分钟以上的长会话合计仅 9.2%（其中 30 分+ 占 3.7%，多为直播/导航常驻场景）。该数据仅有 8/2 单日快照且无发布前对照、无 Android 明细，建议后续按周导出以观察版本对时长结构的影响。</li>
+          <li><b>修正此前判断：新版不是「更高频、单次更短」，而是「更高频 + 长会话显著增多」。</b>iOS 启动次数 +33%（43,057 → 57,207）的同时，长会话占比同步上升，两头都在涨。</li>
+          <li>iOS 30 分+ 会话从 35 次/天暴增到 2,126 次/天，量级上与新增的直播观看（车辆直播播放 +177%、紧急时刻点直播 +469%）和导航路线页常驻场景对应——新功能创造了此前不存在的长时使用场景。</li>
+          <li>「秒开秒走」仍是两端主流（iOS 30 秒内 65%、Android 51%），工具属性未变；变化发生在长尾。</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>口径说明</h3>
+        <ul>
+          <li>7/5 为两端发布前的共同基线（周日），8/2 为发布后快照（周日），同为周日可排除周内效应。</li>
+          <li>Android 8/2 时已发布 19 天（渗透 70%），iOS 已发布 10 天（渗透 88%）；仍为单日快照对比，建议按周导出观察趋势稳定性。</li>
         </ul>
       </div>
     </div>
@@ -293,12 +316,12 @@
         <ul>
           <li>把 iOS 的留存增益拆到功能：对使用过导航路线页/直播的用户单独算留存，验证是哪个功能带来 +10pp。</li>
           <li>安卓渗透仅 70%，优先推动 6.9.0 存量升级（升级引导、灰度放量），再评估功能在安卓端是否同样能拉留存。</li>
-          <li>补充 iOS 7/27 后启动明细与发布前的时长分布基线、以及 Android 时长分布，完善时长维度对照。</li>
+          <li>补充 iOS 7/27 后启动明细；时长分布已有 7/5 vs 8/2 对照，建议按周导出确认长会话增长的稳定性。</li>
         </ul>
       </div>
     </div>
 
-    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。留存对比：发布前 = 6/2 至发布前一日的全部队列均值，发布后 = 发布日起的已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户，剔除清单沿用 7 月评审结论。数据源：整体活跃数据看板（日活至 8/2）、Android 启动次数明细 6/2–8/2、iOS 启动次数明细至 7/26、版本分布快照 8/2、新增/活跃用户留存 6/2–8/2、事件列表 6/2–8/2、iOS 单次使用时长分布 8/2。</p>
+    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。留存对比：发布前 = 6/2 至发布前一日的全部队列均值，发布后 = 发布日起的已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均独立用户）/ 发布前日均独立用户，剔除清单沿用 7 月评审结论。数据源：整体活跃数据看板（日活至 8/2）、Android 启动次数明细 6/2–8/2、iOS 启动次数明细至 7/26、版本分布快照 8/2、新增/活跃用户留存 6/2–8/2、事件列表 6/2–8/2、Android/iOS 单次使用时长分布（7/5、8/2 快照）。</p>
   </div>
 
   <script>
@@ -548,20 +571,41 @@
         [{ idx: IDX_REL_A, label: "7/14" }, { idx: IDX_REL_I, label: "7/23" }], null, "")],
     });
 
-    new Chart(document.getElementById("durationChart"), {
+    const durationLabels = ["1-3秒","4-10秒","11-30秒","31秒-1分","1-3分","3-10分","10-30分","30分+"];
+    const durationOpts = {
+      responsive: true,
+      plugins: {
+        legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+        tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + "%" } },
+      },
+      scales: {
+        x: { ticks: tick, grid: { display: false } },
+        y: { ticks: { ...tick, callback: v => v + "%" } },
+      },
+    };
+
+    new Chart(document.getElementById("durationAndroidChart"), {
       type: "bar",
       data: {
-        labels: ["1-3秒","4-10秒","11-30秒","31秒-1分","1-3分","3-10分","10-30分","30分+"],
-        datasets: [{ label: "启动次数占比", data: [16.43,20.67,28.27,14.46,10.97,3.79,1.7,3.72], backgroundColor: "#38bdf8", borderRadius: 4 }],
+        labels: durationLabels,
+        datasets: [
+          { label: "7/5 发布前", data: [7.97,16.13,30.81,19.67,18.41,5.84,0.98,0.18], backgroundColor: "#64748b", borderRadius: 4 },
+          { label: "8/2 发布后", data: [7.03,14.2,30.16,20.93,19.5,6.34,1.03,0.81], backgroundColor: "#22c55e", borderRadius: 4 },
+        ],
       },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => c.parsed.y + "%" } } },
-        scales: {
-          x: { ticks: tick, grid: { display: false } },
-          y: { ticks: { ...tick, callback: v => v + "%" } },
-        },
+      options: durationOpts,
+    });
+
+    new Chart(document.getElementById("durationIosChart"), {
+      type: "bar",
+      data: {
+        labels: durationLabels,
+        datasets: [
+          { label: "7/5 发布前", data: [17.24,23.31,30.05,14.39,11.33,3.16,0.45,0.08], backgroundColor: "#64748b", borderRadius: 4 },
+          { label: "8/2 发布后", data: [16.43,20.67,28.27,14.46,10.97,3.79,1.7,3.72], backgroundColor: "#38bdf8", borderRadius: 4 },
+        ],
       },
+      options: durationOpts,
     });
 
     function fillTable(id, rows) {
