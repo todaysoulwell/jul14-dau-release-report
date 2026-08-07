@@ -80,6 +80,7 @@
     .scrollbox { max-height: 520px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; }
     .lift-hi { color: var(--good); font-weight: 600; }
     .lift-down { color: var(--warn); font-weight: 600; }
+    .bad { color: var(--bad); font-weight: 600; }
     .note-card {
       background: var(--panel); border: 1px solid var(--line);
       border-radius: 10px; padding: 14px;
@@ -92,19 +93,20 @@
 </head>
 <body>
   <div class="wrap">
-    <h1>小万出行 · 7 月版本发布数据分析<span class="pill">复盘至 8/5 · 日活 / 启动 / 版本 / 留存 / 时长 / 埋点 / 订单 / 通知开启率</span></h1>
-    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活/订单截至 8/5，其余模块截至 8/2 ｜ 除日活外，鸿蒙不参与分析 ｜ 功能清单已按评审剔除运营活动及非版本相关埋点</p>
+    <h1>小万出行 · 7 月版本发布数据分析<span class="pill">复盘至 8/5 · 日活 / 启动 / 版本 / 留存 / 时长 / 埋点 / 订单 / VIP转化 / 通知</span></h1>
+    <p class="sub">发布节点：7/14 Android + 鸿蒙 · 7/23 iOS ｜ 日活/订单/埋点渗透截至 8/5，其余模块截至 8/2 ｜ 除日活外，鸿蒙不参与分析 ｜ 功能清单已按评审剔除运营活动及非版本相关埋点</p>
 
     <div class="callout">
       <strong>核心结论（相比上次复盘的更新）</strong>
       <ol style="margin:0; padding-left:20px; color:#d1d5db; font-size:14px;">
         <li style="margin-bottom:6px;"><b>iOS：持续增长，非脉冲。</b>日活第 1 周 +13.3%、第 2 周升至 +27.7%，无回落；启动次数第 1 周 +46.8%、第 2 周 +49.7%；新增/活跃用户次日留存各提升约 10pp；发布 10 天新版渗透已达 88%（活跃口径）。</li>
         <li style="margin-bottom:6px;"><b>安卓/鸿蒙：脉冲后回落。</b>安卓第 2 周日活仅 +0.3%、启动次数 -4.7%（第 3 周起 +2.5%，近基线），留存全线持平；鸿蒙第 2 周 +4.7%。安卓发布 19 天渗透仅 70%，仍有 23.6% 用户停留在 6.9.0。</li>
-        <li style="margin-bottom:6px;"><b>功能与使用深度：</b>两端共同的确定性增量是「导航路线页 + 直播链路」，并直接反映在使用深度上——iOS 人均日使用时长从 2.5 分钟升至 8.4 分钟（×3.3，反超安卓），安卓 +24%。</li>
-        <li style="margin-bottom:6px;"><b>订单与日活：</b>剔除活动、短信与 8/3 尖峰后，iOS 订单 +15.3%，同期日活 +20.6%；每千日活下单率 3.39 → 3.25（略降）。版本主要靠日活带量，没有抬高转化率。</li>
+        <li style="margin-bottom:6px;"><b>功能结构分化：</b>iOS 更偏「看内容」（直播播放 2,717 人/14.8%，紧急时刻点直播 2,143 人/11.7%）；安卓更偏「管车工具」（驾驶数据 1,344 人/11.0%，直播起播 5,139 人/41.9%，云相册/ETC 渗透约为 iOS 的 2 倍）。</li>
+        <li style="margin-bottom:6px;"><b>VIP 转化低的根因：</b>iOS VIP 入口渗透只有安卓约一半（车况 VIP 充值 86 人/0.47% vs 121 人/0.98%），原生充值页日均仅 3 人；不是日活低，是商业漏斗断在入口和充值页。</li>
+        <li style="margin-bottom:6px;"><b>订单与日活：</b>剔除异常日后 iOS 订单 +15.3%、日活 +20.6%；每千日活订单 3.39 → 3.25。8/4–8/5 窗口：iOS 2.80 单/千日活 vs 安卓 7.42（约 38%）。</li>
         <li style="margin-bottom:6px;"><b>系统通知开启率：</b>全端 78.08%，但 7.0.0 全面低于各端整体——iOS 新版仅 58.55%（低于 iOS 整体 14.4pp），是触达缺口最大的一端。</li>
       </ol>
-      <p style="margin-top:8px; font-size:12px; color:#9aa3b2;">注：日活计算剔除 7/17（系统通知）、7/28–7/29（短信及滞后）、8/3（全端尖峰，原因待确认），曲线保留这些点。</p>
+      <p style="margin-top:8px; font-size:12px; color:#9aa3b2;">注：日活/订单计算剔除 7/17、7/28–7/29、8/3；功能渗透对比窗口为 8/4–8/5（剔除 8/3）。曲线保留异常日。</p>
     </div>
 
     <h2>一、日活分析（含鸿蒙 · 计算剔除 7/17、7/28–7/29、8/3，曲线保留）</h2>
@@ -346,7 +348,87 @@
       </div>
     </div>
 
-    <h2>七、订单分析（iOS 日活增长有没有带动订单？）</h2>
+    <h2>七、两端功能渗透与 VIP 转化对比（8/4–8/5 · 含点击人数）</h2>
+    <div class="callout" style="background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.32);">
+      <strong style="color:var(--warn);">明确结论</strong>
+      <p>iOS 日活是安卓的 <b>1.50 倍</b>（18,372 vs 12,260），但每千日活订单只有安卓的 <b>38%</b>（2.80 vs 7.42）。根因不是「功能都没人用」，而是结构分化：iOS 强在直播/紧急时刻「看内容」，安卓强在驾驶数据/云相册/ETC/VIP「管车+付费」。VIP 入口渗透 iOS 约只有安卓一半，原生充值页日均仅 <b>3 人</b>——商业漏斗在入口和充值页就断了。</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">1.50x</div><div class="l">iOS / 安卓 日活（18,372 vs 12,260）</div></div>
+      <div class="stat"><div class="v bad">0.38x</div><div class="l">iOS / 安卓 每千日活订单（2.80 vs 7.42）</div></div>
+      <div class="stat"><div class="v warn">~0.45x</div><div class="l">iOS VIP 入口渗透约为安卓一半</div></div>
+      <div class="stat"><div class="v bad">3 人</div><div class="l">iOS 原生充值页日均点击（安卓充值页 14 人）</div></div>
+    </div>
+    <p class="hint">口径：日均独立用户数（点击人数）÷ 日均日活 = 渗透率。窗口 8/4–8/5（剔除 8/3 全端尖峰）。渗透比 = iOS渗透 ÷ 安卓渗透；&lt;0.7 标红，&gt;1.3 标绿。停车入口已按埋点差异归一（安卓「点更多」≈ iOS「点停车记录」）。</p>
+
+    <div class="grid2">
+      <div class="card">
+        <div class="card-head"><h3>核心功能渗透率对比</h3><span>% 日活 · 绿=iOS更强 · 琥珀=安卓更强</span></div>
+        <canvas id="corePenChart" height="220"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-head"><h3>VIP / 付费漏斗渗透率对比</h3><span>% 日活 · 入口差约一半，充值页近乎断裂</span></div>
+        <canvas id="vipPenChart" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>核心功能：点击人数 + 日活渗透</h3><span>日均 UV · 8/4–8/5 · 按对比强度排列</span></div>
+      <div class="scrollbox" style="max-height:none; overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>功能</th>
+              <th class="num">安卓点击人数</th><th class="num">安卓占日活</th>
+              <th class="num">iOS 点击人数</th><th class="num">iOS 占日活</th>
+              <th class="num">渗透比 i/A</th>
+            </tr>
+          </thead>
+          <tbody id="coreCompareBody"></tbody>
+        </table>
+      </div>
+      <p class="hint">读表：iOS 日活更大，所以「点击人数」有时更高但「占日活」更低（如直播页曝光 5,262 vs 5,503，渗透 28.6% vs 44.9%）。真正说明强度的是渗透率和渗透比。</p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h3>VIP / 付费漏斗：点击人数 + 日活渗透</h3><span>日均 UV · 8/4–8/5</span></div>
+      <div class="scrollbox" style="max-height:none; overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>漏斗步骤</th>
+              <th class="num">安卓点击人数</th><th class="num">安卓占日活</th>
+              <th class="num">iOS 点击人数</th><th class="num">iOS 占日活</th>
+              <th class="num">渗透比 i/A</th>
+            </tr>
+          </thead>
+          <tbody id="vipCompareBody"></tbody>
+        </table>
+      </div>
+      <p class="hint">节日活动支付成功两端接近（安卓 26 人/0.21%，iOS 49 人/0.27%）——活动能买；VIP 常规路径买不动。云相册 VIP 弹窗点击 iOS 异常高（302 人）但充值页仍几乎无人，疑似弹窗误触/埋点未闭环。</p>
+    </div>
+
+    <div class="grid2">
+      <div class="note-card">
+        <h3>功能侧怎么读</h3>
+        <ul>
+          <li><b>iOS 更强（看内容）：</b>直播播放 2,717 人（14.8%）、紧急时刻点直播 2,143 人（11.7%），渗透显著高于安卓。</li>
+          <li><b>安卓更强（管车工具）：</b>直播起播 5,139 人（41.9%）、驾驶数据 1,344 人（11.0%）、驾驶报告 324 人（2.6% vs iOS 60 人/0.3%）、云相册/ETC 渗透约 2 倍。</li>
+          <li><b>停车入口两端齐平</b>（约 30%），但点进详情安卓 16.1% vs iOS 10.5%——列表到详情仍有差距。</li>
+        </ul>
+      </div>
+      <div class="note-card">
+        <h3>改善优先级</h3>
+        <ul>
+          <li><b>P0 修 iOS 充值闭环：</b>VIP 入口 → 原生充值页（现日均仅 3 人）→ 支付成功，排查路径/IAP/埋点。</li>
+          <li><b>P0 把 VIP 挂到高活场景：</b>直播播放、紧急时刻、停车记录——iOS 人最多的三块。</li>
+          <li><b>P1 补齐管车深度：</b>驾驶数据/云相册/ETC 渗透翻倍空间大，更接近付费卖点。</li>
+          <li><b>考核改口径：</b>别只看启动绝对次数；盯 VIP 入口人数、充值页人数、每千日活订单。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>八、订单分析（iOS 日活增长有没有带动订单？）</h2>
     <div class="callout" style="background:rgba(56,189,248,.08); border-color:rgba(56,189,248,.32);">
       <strong style="color:var(--info);">如何剥离活动与异常日影响</strong>
       <p>1）活动：只在活动期内比（7/15–7/22 vs 7/23–8/5），用安卓同窗口作对照。2）异常日：7/28–7/29 短信及滞后、8/3 全端日活尖峰——曲线保留、计算剔除。两端活动红利与异常冲量去掉后，剩下的才更接近版本对「日活→订单」的真实影响。</p>
@@ -430,7 +512,7 @@
       </div>
     </div>
 
-    <h2>八、系统通知开启率分析</h2>
+    <h2>九、系统通知开启率分析</h2>
     <div class="callout" style="background:rgba(245,158,11,.08); border-color:rgba(245,158,11,.32);">
       <strong style="color:var(--warn);">明确结论</strong>
       <p>全端通知开启率 78.08%，但 7.0.0 在三端全面低于该端整体水平。缺口最大的是 iOS：新版仅 58.55%，比 iOS 整体低 14.4pp，比安卓新版（74.53%）低 16pp。新版用户触达能力明显弱于老版本，会削弱推送/运营对日活与订单的拉动效率。</p>
@@ -466,7 +548,7 @@
       </div>
     </div>
 
-    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。日活/订单计算剔除 7/17（系统通知）、7/28–7/29（短信及滞后）、8/3（全端日活尖峰），曲线保留。留存对比：发布前 = 6/2 至发布前一日队列均值，发布后 = 发布日起已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均）/ 发布前日均。订单双重差分 = 活动期内 iOS 涨幅 − 安卓同窗口涨幅。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。系统通知开启率为当前快照口径。数据源：整体活跃数据看板、启动/版本/留存/事件/时长明细、订单信息明细、系统通知开启率快照。</p>
+    <p class="foot">方法说明：第 1/2 周 = 发布后第 1–7 / 8–14 天；环比基准为各自发布前 7 天日均。日活/订单计算剔除 7/17、7/28–7/29、8/3，曲线保留。功能渗透对比窗口 8/4–8/5：渗透率 = 日均独立用户 ÷ 日均日活；渗透比 = iOS渗透 ÷ 安卓渗透。留存对比：发布前 = 6/2 至发布前一日队列均值，发布后 = 发布日起已满期队列均值。埋点提升 =（发布后日均独立用户 − 发布前日均）/ 发布前日均。订单双重差分 = 活动期内 iOS 涨幅 − 安卓同窗口涨幅。每千日活订单 = 当日订单 ÷ 当日日活 × 1000。系统通知开启率为当前快照口径。数据源：整体活跃数据看板、启动/版本/留存/事件/时长明细、订单信息明细（含 8/3–8/5 增量）、8/3–8/5 事件列表、系统通知开启率快照。</p>
   </div>
 
   <script>
@@ -535,6 +617,42 @@
       ["驾驶数据页-点击驾驶报告","DDP-drivingreport","+11.3%","52.0","57.9"],
       ["首页-点击直播弹窗","home-poplive","+10.7%","11.0","12.2"],
       ["车况页-直播模块-点击全屏按钮","CK-live-fullscreen","+10.1%","716.7","789.1"],
+    ];
+
+    // 8/4–8/5 两端对比：[名称, 安卓UV, 安卓%DAU, iOS UV, iOS%DAU, 渗透比]
+    // 日活：安卓 12,260 · iOS 18,372
+    const coreCompare = [
+      ["系统-点击打开", 10973, 89.5, 15153, 82.5, 0.92],
+      ["停车入口（安卓点更多 / iOS点停车记录）", 3759, 30.7, 5522, 30.1, 0.98],
+      ["停车记录页-曝光", 3831, 31.3, 6411, 34.9, 1.12],
+      ["停车记录页-点击停车详情", 1973, 16.1, 1930, 10.5, 0.65],
+      ["车辆直播页面曝光", 5503, 44.9, 5262, 28.6, 0.64],
+      ["车况页-直播模块-点击起播", 5139, 41.9, 4288, 23.3, 0.56],
+      ["车辆直播页面-点击播放", 1128, 9.2, 2717, 14.8, 1.61],
+      ["车况页-直播模块-点击全屏", 1128, 9.2, 678, 3.7, 0.40],
+      ["车辆直播-一键寻车", 171, 1.4, 117, 0.6, 0.46],
+      ["车辆直播-实时拍照", 151, 1.2, 110, 0.6, 0.49],
+      ["车辆直播-实时录像", 201, 1.6, 156, 0.8, 0.52],
+      ["紧急时刻列表页-点击直播", 638, 5.2, 2143, 11.7, 2.24],
+      ["导航路线页曝光", 1107, 9.0, 1466, 8.0, 0.88],
+      ["车况页-点击驾驶数据", 1344, 11.0, 909, 4.9, 0.45],
+      ["驾驶数据页-点击驾驶报告", 324, 2.6, 60, 0.3, 0.12],
+      ["云相册页-曝光", 386, 3.2, 296, 1.6, 0.51],
+      ["ETC账单-曝光", 811, 6.6, 643, 3.5, 0.53],
+      ["车况页-点击小金条", 68, 0.6, 40, 0.2, 0.40],
+    ];
+    const vipCompare = [
+      ["车况页-功能区-点击VIP充值", 121, 0.98, 86, 0.47, 0.47],
+      ["服务页-点击VIP充值", 55, 0.45, 37, 0.20, 0.44],
+      ["服务页-点击VIP专属权益", 66, 0.53, 45, 0.24, 0.45],
+      ["车况页-点击小金条", 68, 0.55, 40, 0.22, 0.40],
+      ["云相册页-VIP弹窗曝光", 35, 0.28, 15, 0.08, 0.29],
+      ["云相册页-VIP弹窗点击", 4, 0.03, 302, 1.64, 50.3],
+      ["充值页面曝光（安卓Recharge / iOS原生）", 14, 0.11, 3, 0.02, 0.15],
+      ["节日活动-曝光", 766, 6.25, 1043, 5.67, 0.91],
+      ["节日活动--提交订单", 71, 0.58, 89, 0.48, 0.84],
+      ["节日活动--支付成功", 26, 0.21, 49, 0.27, 1.28],
+      ["每千日活订单（转化结果）", 91, 7.42, 52, 2.80, 0.38],
     ];
 
     const tick = { color: "#94a3b8", font: { size: 10 } };
@@ -771,6 +889,82 @@
     }
     fillTable("androidEventTable", androidLifts);
     fillTable("iosEventTable", iosLifts);
+
+    function fmtNum(n) {
+      return n >= 1000 ? n.toLocaleString("en-US") : String(n);
+    }
+    function ratioClass(r) {
+      if (r >= 1.3) return "lift-hi";
+      if (r < 0.7) return "bad";
+      return "";
+    }
+    function fillCompare(tbodyId, rows, isRateRow) {
+      const tbody = document.getElementById(tbodyId);
+      rows.forEach(([name, aUv, aPct, iUv, iPct, ratio], idx) => {
+        const tr = document.createElement("tr");
+        const last = idx === rows.length - 1 && isRateRow;
+        const aPctTxt = last ? aPct.toFixed(2) + " 单/千" : aPct.toFixed(1) + "%";
+        const iPctTxt = last ? iPct.toFixed(2) + " 单/千" : iPct.toFixed(1) + "%";
+        const aUvTxt = last ? aUv + " 单/天" : fmtNum(aUv) + " 人";
+        const iUvTxt = last ? iUv + " 单/天" : fmtNum(iUv) + " 人";
+        const rc = ratioClass(ratio);
+        const ratioTxt = ratio >= 10 ? ratio.toFixed(1) + "x" : ratio.toFixed(2) + "x";
+        tr.innerHTML = `<td>${name}</td>
+          <td class="num">${aUvTxt}</td><td class="num">${aPctTxt}</td>
+          <td class="num">${iUvTxt}</td><td class="num">${iPctTxt}</td>
+          <td class="num ${rc}">${ratioTxt}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+    fillCompare("coreCompareBody", coreCompare, false);
+    fillCompare("vipCompareBody", vipCompare, true);
+
+    const coreChartLabels = ["停车入口", "停车详情", "直播曝光", "直播起播", "直播播放", "紧急时刻直播", "导航路线", "驾驶数据", "驾驶报告", "云相册", "ETC"];
+    const coreChartA = [30.7, 16.1, 44.9, 41.9, 9.2, 5.2, 9.0, 11.0, 2.6, 3.2, 6.6];
+    const coreChartI = [30.1, 10.5, 28.6, 23.3, 14.8, 11.7, 8.0, 4.9, 0.3, 1.6, 3.5];
+    new Chart(document.getElementById("corePenChart"), {
+      type: "bar",
+      data: {
+        labels: coreChartLabels,
+        datasets: [
+          { label: "安卓 %日活", data: coreChartA, backgroundColor: "#22c55e", borderRadius: 3 },
+          { label: "iOS %日活", data: coreChartI, backgroundColor: "#38bdf8", borderRadius: 3 },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { labels: { boxWidth: 12, color: "#94a3b8" } } },
+        scales: {
+          x: { ticks: { ...tick, maxRotation: 45, minRotation: 30 }, grid: { display: false } },
+          y: { ticks: { ...tick, callback: v => v + "%" }, grid: { color: "rgba(148,163,184,.08)" } },
+        },
+      },
+    });
+
+    const vipChartLabels = ["车况VIP充值", "服务VIP充值", "VIP权益", "小金条", "充值页曝光", "活动支付成功", "订单/千日活"];
+    const vipChartA = [0.98, 0.45, 0.53, 0.55, 0.11, 0.21, 7.42];
+    const vipChartI = [0.47, 0.20, 0.24, 0.22, 0.02, 0.27, 2.80];
+    new Chart(document.getElementById("vipPenChart"), {
+      type: "bar",
+      data: {
+        labels: vipChartLabels,
+        datasets: [
+          { label: "安卓", data: vipChartA, backgroundColor: "#22c55e", borderRadius: 3 },
+          { label: "iOS", data: vipChartI, backgroundColor: "#38bdf8", borderRadius: 3 },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { boxWidth: 12, color: "#94a3b8" } },
+          tooltip: { callbacks: { label: c => c.dataset.label + ": " + c.parsed.y + (c.dataIndex === 6 ? " 单/千" : "%") } },
+        },
+        scales: {
+          x: { ticks: { ...tick, maxRotation: 45, minRotation: 30 }, grid: { display: false } },
+          y: { ticks: { ...tick, callback: v => v + (v >= 1 ? "" : "") }, grid: { color: "rgba(148,163,184,.08)" } },
+        },
+      },
+    });
 
     new Chart(document.getElementById("notifChart"), {
       type: "bar",
